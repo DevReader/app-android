@@ -162,7 +162,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 				public void onReceivedTitle(WebView webView, String pageTitle) {
 					super.onReceivedTitle(webView, pageTitle);
 					if (!TextUtils.isEmpty(pageTitle)) {
-						mToolbar.setSubtitle(pageTitle);
+						mToolbar.setTitle(pageTitle);
 					}
 				}
 

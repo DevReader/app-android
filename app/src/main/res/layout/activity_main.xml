@@ -4,15 +4,16 @@
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
 	android:orientation="vertical">
+
 	<include
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		layout="@layout/ui_toolbar"/>
+
 	<WebView
 		android:scrollbars="none"
 		android:id="@+id/el_webView"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"/>
-	
-</LinearLayout>
 
+</LinearLayout>

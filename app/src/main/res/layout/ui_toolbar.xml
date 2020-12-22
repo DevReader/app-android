@@ -12,14 +12,21 @@
 		android:layout_height="?attr/actionBarSize"
 		android:background="?attr/colorPrimary"
 		app:layout_scrollFlags="enterAlways"
-		app:popupTheme="@style/ThemeOverlay.AppCompat">
+		app:popupTheme="@style/ThemeOverlay.AppCompat"
+		android:contentInsetLeft="@dimen/ui_toolbar_contentInsetLeft"
+		android:contentInsetStart="@dimen/ui_toolbar_contentInsetLeft"
+		android:contentInsetRight="@dimen/ui_toolbar_contentInsetRight"
+		android:contentInsetEnd="@dimen/ui_toolbar_contentInsetRight"
+		app:contentInsetLeft="@dimen/ui_toolbar_contentInsetLeft"
+		app:contentInsetStart="@dimen/ui_toolbar_contentInsetLeft"
+		app:contentInsetRight="@dimen/ui_toolbar_contentInsetRight"
+		app:contentInsetEnd="@dimen/ui_toolbar_contentInsetRight">
 
 	</android.support.v7.widget.Toolbar>
 
 	<View
 		android:background="?android:attr/dividerVertical"
 		android:layout_width="match_parent"
-		android:layout_height="2dp"/>
+		android:layout_height="@dimen/ui_dividerHeight"/>
 
 </android.support.design.widget.AppBarLayout>
-
