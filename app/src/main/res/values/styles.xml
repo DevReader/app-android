@@ -31,8 +31,8 @@
 	
 	<style name="AppTheme.Intro" parent="AppTheme.NoActionBar">
 		<item name="android:windowBackground">@drawable/layer_background_intro</item>
-		<item name="android:navigationBarColor">?colorAccent</item>
-		<item name="colorPrimaryDark">?colorAccent</item>
+		<item name="android:navigationBarColor">@color/colorWindow</item>
+		<item name="colorPrimaryDark">@color/colorWindow</item>
     </style>
 
 	<style name="AppTheme.TextAppearanceBody2">

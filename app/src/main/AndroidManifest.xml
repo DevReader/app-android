@@ -44,6 +44,11 @@
 
 		</activity>
 		
+		<activity
+			android:label="activity_main" 
+			android:theme="@style/AppTheme.NoActionBar"
+			android:name=".activity.MainActivity"/>
+		
 	</application>
 	 
 </manifest>
