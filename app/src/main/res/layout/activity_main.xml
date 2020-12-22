@@ -8,10 +8,11 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		layout="@layout/ui_toolbar"/>
-	<EditText
-		android:layout_width="wrap_content"
-		android:ems="10"
-		android:layout_height="wrap_content"/>
-
+	<WebView
+		android:scrollbars="none"
+		android:id="@+id/el_webView"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"/>
+	
 </LinearLayout>
 
