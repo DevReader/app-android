@@ -1,0 +1,41 @@
+apply plugin: 'com.android.application'
+
+android {
+	
+    compileSdkVersion 29
+    
+    defaultConfig {
+		
+        applicationId "ru.devreader.app"
+		
+        minSdkVersion 14
+        targetSdkVersion 29
+		
+        versionCode 1
+        versionName "alpha"
+		
+    }
+	
+    buildTypes {
+		
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+		
+    }
+	
+}
+
+dependencies {
+	
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+	
+	implementation 'android.arch.core:common:+'
+	implementation 'android.arch.core:runtime:+'
+	
+	implementation 'com.android.support:support-v4:27.+'
+	implementation 'com.android.support:design:27.+'
+	implementation 'com.android.support:appcompat-v7:27.+'
+	
+}

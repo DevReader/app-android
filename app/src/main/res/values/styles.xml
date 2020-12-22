@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+	<dimen name="abc_control_corner_material">8.0dip</dimen>
+	<dimen name="compat_control_corner_material">8.0dip</dimen>
+	
+	<style name="AppTheme" parent="Theme.AppCompat">
+		
+	    <item name="colorAccent">@color/colorAccent</item>
+		<item name="colorPrimary">@color/colorPrimary</item>
+		<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+		
+		<item name="colorButtonNormal">@color/colorAccent</item>
+		<item name="colorControlHighlight">@color/colorAccent</item>
+		
+		<item name="android:navigationBarColor">@color/colorWindow</item>
+		<item name="android:windowBackground">@color/colorWindow</item>
+		<item name="android:colorBackgroundCacheHint">@null</item>
+		<item name="android:displayOptions">showCustom</item>
+		<item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+		<item name="android:buttonStyle">@style/Widget.AppCompat.Button.Borderless.Colored</item>
+		<item name="android:colorButtonNormal">@color/colorAccent</item>
+		
+    </style>
+
+	<style name="AppTheme.NoActionBar" parent="AppTheme">
+		<item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+	</style>
+	
+	<style name="AppTheme.Intro" parent="AppTheme.NoActionBar">
+		<item name="android:windowBackground">@drawable/layer_background_intro</item>
+		<item name="android:navigationBarColor">?colorAccent</item>
+		<item name="colorPrimaryDark">?colorAccent</item>
+    </style>
+
+	<style name="AppTheme.TextAppearanceBody2">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+    </style>
+
+</resources>
