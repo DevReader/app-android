@@ -9,21 +9,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-
-import android.view.Display;
-import android.view.KeyEvent;
 import android.view.View;
 
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import ru.devreader.app.R;
 import ru.devreader.app.activity.MainActivity;
@@ -34,7 +26,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 	// ? Страница, которая будет загружена в WebView
 	final String loadUrl = "https://" + "devreader.github.io" + "/";
 	
-	Toolbar mToolbar;
 	WebView mWebView;
 	
 	boolean dbg_javaScript = true, dbg_appCache = true;
@@ -49,20 +40,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		
 		mSharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
 		mSharedPrefsEditor = mSharedPrefs.edit();
-
-		initToolbar();
+		
 		initWebView();
 		
-	}
-	
-	void initToolbar() {
-
-		AppUtils.Log(this, "d", "Init Toolbar");
-
-		mToolbar = findViewById(R.id.uiToolbar);
-
-		setSupportActionBar(mToolbar); 
-
 	}
 	
 	@Override
@@ -162,7 +142,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 				public void onReceivedTitle(WebView webView, String pageTitle) {
 					super.onReceivedTitle(webView, pageTitle);
 					if (!TextUtils.isEmpty(pageTitle)) {
-						mToolbar.setTitle(pageTitle);
+						//setTitle(pageTitle);
 					}
 				}
 
