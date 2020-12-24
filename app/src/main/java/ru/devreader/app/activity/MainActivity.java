@@ -28,13 +28,15 @@ import ru.devreader.app.util.AppUtils;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 	
 	// ? Страница, которая будет загружена в WebView
-	final String loadUrl = "https://" + "devreader.github.io" + "/";
+	final String loadUrl = "file:///android_asset/" + "intro.html";
+	//final String loadUrl = "https://" + "devreader.github.io" + "/";
 	
 	WebView mWebView;
 	FloatingActionButton mFabMenu;
 	BottomSheetDialog mDialogMenu;
 	
-	boolean dbg_javaScript = true, dbg_appCache = true;
+	boolean dbg_javaScript = true, dbg_appCache = false;
+	boolean isPageLoadError = false;
 	
 	SharedPreferences mSharedPrefs;
 	SharedPreferences.Editor mSharedPrefsEditor;
@@ -145,6 +147,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 				// ? Скроем WebView при ошибке
 				mWebView.setVisibility(View.GONE);
 				
+				isPageLoadError = true;
+				
+				// ? Отобразим иконку Refresh в FabMenu
+				mFabMenu.setImageResource(R.drawable.ic_page_refresh);
+				
 			}
 
 		});
@@ -178,10 +185,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		});
 
 		// ? Указываем WebView какую стр. загружать
-		//mWebView.loadUrl("file:///android_asset/" + "index.html");
 		mWebView.loadUrl(loadUrl);
 		AppUtils.Log(MainActivity.this, "i", "WebView load url: " + loadUrl);
 
+	}
+	
+	public void mFabAction(View mView) {
+		if (isPageLoadError) {
+			//AppUtils.showToast(this, "Reload");
+			mWebViewPageReload(mView);
+		} else {
+			// AppUtils.showToast(this, "Back");
+			mWebViewPageBack(mView);
+		}
 	}
 	
 	// ? Переход к пред. странице

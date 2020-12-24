@@ -23,7 +23,7 @@
 			android:src="@drawable/ic_page_back"
 			android:layout_gravity="bottom|right"
 			android:layout_margin="14dp"
-			android:onClick="mWebViewPageBack"
+			android:onClick="mFabAction"
 			android:tint="#FFFFFFFF"
 			android:alpha="0.6"
 			app:fabSize="normal"
