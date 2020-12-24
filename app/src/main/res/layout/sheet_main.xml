@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical">
+
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/sheet_main"
+		style="@style/AppTheme.SheetDialog.Title"/>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		style="@style/AppTheme.SheetDialog.Item"
+		android:onClick="mWebViewPageReload">
+
+		<ImageView
+			android:src="@drawable/test_ic"
+			style="@style/AppTheme.SheetDialog.ItemIcon"/>
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/sheet_main_page_reload"
+			style="@style/AppTheme.SheetDialog.ItemTitle"/>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		style="@style/AppTheme.SheetDialog.Item"
+		android:onClick="mWebViewPageHome">
+
+		<ImageView
+			android:src="@drawable/test_ic"
+			style="@style/AppTheme.SheetDialog.ItemIcon"/>
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/sheet_main_page_home"
+			style="@style/AppTheme.SheetDialog.ItemTitle"/>
+
+	</LinearLayout>
+
+	<View
+		android:background="?android:attr/dividerVertical"
+		android:layout_width="match_parent"
+		android:layout_height="1dp"/>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		style="@style/AppTheme.SheetDialog.Item"
+		android:onClick="mAppSetting">
+
+		<ImageView
+			android:src="@drawable/test_ic"
+			style="@style/AppTheme.SheetDialog.ItemIcon"/>
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/sheet_main_app_settings"
+			style="@style/AppTheme.SheetDialog.ItemTitle"/>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		style="@style/AppTheme.SheetDialog.Item"
+		android:id="@+id/appExit">
+
+		<ImageView
+			android:src="@drawable/test_ic"
+			style="@style/AppTheme.SheetDialog.ItemIcon"/>
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/sheet_main_app_exit"
+			style="@style/AppTheme.SheetDialog.ItemTitle"/>
+
+	</LinearLayout>
+
+</LinearLayout>
+

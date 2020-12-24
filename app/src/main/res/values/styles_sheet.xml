@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	
+	<style name="AppTheme.SheetDialog" parent="Theme.Design.BottomSheetDialog">
+		<item name="android:windowCloseOnTouchOutside">true</item>
+		<item name="android:windowContentOverlay">@null</item>
+		<item name="android:colorBackground">@drawable/background_bottom_sheet</item>
+		<item name="android:backgroundDimEnabled">true</item>
+		<item name="android:backgroundDimAmount">0.5</item>
+		<item name="android:windowIsFloating">true</item>
+	</style>
+
+	<style name="AppTheme.SheetDialog.Title">
+		<item name="android:textColor">?colorAccent</item>
+		<item name="android:paddingBottom">@dimen/ui_sheet_title_paddingBottom</item>
+		<item name="android:paddingLeft">?android:attr/listPreferredItemPaddingStart</item>
+		<item name="android:paddingRight">?android:attr/listPreferredItemPaddingEnd</item>
+		<item name="android:paddingTop">@dimen/ui_sheet_title_paddingTop</item>
+		<item name="android:gravity">left|center</item>
+		<item name="android:textStyle">bold</item>
+	</style>
+
+	<style name="AppTheme.SheetDialog.Item">
+		<item name="android:clickable">true</item>
+		<item name="android:foreground">?attr/selectableItemBackground</item>
+		<item name="android:orientation">horizontal</item>
+		<item name="android:paddingBottom">@dimen/ui_sheet_item_paddingBottom</item>
+		<item name="android:paddingLeft">?android:attr/listPreferredItemPaddingStart</item>
+		<item name="android:paddingRight">?android:attr/listPreferredItemPaddingEnd</item>
+		<item name="android:paddingTop">@dimen/ui_sheet_item_paddingTop</item>
+		<item name="android:gravity">left|center</item>
+	</style>
+
+	<style name="AppTheme.SheetDialog.ItemIcon">
+		<item name="android:layout_width">@dimen/ui_sheet_item_icon_layoutWidth</item>
+		<item name="android:layout_height">@dimen/ui_sheet_item_icon_layoutHeight</item>
+		<item name="android:layout_marginRight">@dimen/ui_sheet_item_icon_marginRight</item>
+		<item name="android:tint">#FFFFFFFF</item>
+	</style>
+
+	<style name="AppTheme.SheetDialog.ItemTitle">
+		<item name="android:textColor">?android:attr/textColorPrimary</item>
+	</style>
+	
+</resources>

@@ -1,4 +1,4 @@
-// ! rx1310 <rx1310@inbox.ru> | Copyright (c) rx1310, 2020 | MIT License
+// ! rx1310 <rx1310@inbox.ru> | Copyright (c) DevReader, 2020 | MIT License
 
 package ru.devreader.app;
 

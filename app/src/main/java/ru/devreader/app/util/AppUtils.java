@@ -1,4 +1,4 @@
-// ! rx1310 <rx1310@inbox.ru> | Copyright (c) rx1310, 2020 | MIT License
+// ! rx1310 <rx1310@inbox.ru> | Copyright (c) DevReader, 2020 | MIT License
 
 package ru.devreader.app.util;
 
@@ -23,13 +23,13 @@ public class AppUtils {
 	public static void Log(Context context, String logType, String logMessage) {
 		
 		if (logType == "e") {
-			Log.e("[ERROR] DevReader Compat", context.getClass().getName() + "\n" + logMessage);
+			Log.e("[E] DevReader (rx1310)", context.getClass().getName() + "\n" + logMessage);
 		} else if (logType == "d") {
-			Log.d("[DEBUG] DevReader Compat", context.getClass().getName() + "\n" + logMessage);
+			Log.d("[D] DevReader (rx1310)", context.getClass().getName() + "\n" + logMessage);
 		} else if (logType == "i") {
-			Log.i("[INFO] DevReader Compat", context.getClass().getName() + "\n" + logMessage);
+			Log.i("[I] DevReader (rx1310)", context.getClass().getName() + "\n" + logMessage);
 		} else if (logType == "w") {
-			Log.w("[WARN] DevReader Compat", context.getClass().getName() + "\n" + logMessage);
+			Log.w("[W] DevReader (rx1310)", context.getClass().getName() + "\n" + logMessage);
 		} else {
 			return ;
 		}

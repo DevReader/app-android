@@ -5,11 +5,35 @@
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
 	android:orientation="vertical">
-	
-	<WebView
-		android:scrollbars="none"
-		android:id="@+id/el_webView"
+
+	<FrameLayout
 		android:layout_width="match_parent"
-		android:layout_height="match_parent"/>
+		android:layout_height="match_parent">
+
+		<WebView
+			android:scrollbars="none"
+			android:id="@+id/el_webView"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"/>
+
+		<android.support.design.widget.FloatingActionButton
+			android:id="@+id/el_fabMenu"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:src="@drawable/test_ic"
+			android:layout_gravity="bottom|right"
+			android:layout_margin="14dp"
+			android:onClick="mWebViewPageBack"
+			android:tint="#FFFFFFFF"
+			android:alpha="0.6"
+			app:fabSize="normal"
+			app:borderWidth="0dp"
+			app:elevation="6dp"
+			app:pressedTranslationZ="12dp"
+			app:rippleColor="?colorAccent"
+			app:backgroundTint="@color/colorWindow"/>
+
+	</FrameLayout>
 
 </LinearLayout>
+

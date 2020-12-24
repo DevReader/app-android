@@ -8,7 +8,11 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+
+import android.support.design.widget.BottomSheetDialog;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+
 import android.text.TextUtils;
 import android.view.View;
 
@@ -27,6 +31,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 	final String loadUrl = "https://" + "devreader.github.io" + "/";
 	
 	WebView mWebView;
+	FloatingActionButton mFabMenu;
+	BottomSheetDialog mDialogMenu;
 	
 	boolean dbg_javaScript = true, dbg_appCache = true;
 	
@@ -41,18 +47,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		mSharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
 		mSharedPrefsEditor = mSharedPrefs.edit();
 		
+		// ? Запуск WebView
 		initWebView();
 		
-	}
+		// ? Настройка FAB-меню
+		mFabMenu = findViewById(R.id.el_fabMenu);
+		// ? Вызов Sheet-диалога меню долгим нажатием
+		mFabMenu.setOnLongClickListener(new View.OnLongClickListener() {
+			public boolean onLongClick(View mView) {
+				mDialogMenu = new BottomSheetDialog(MainActivity.this);
+				View mDialogView = getLayoutInflater().inflate(R.layout.sheet_main, null);
+				mDialogMenu.setContentView(mDialogView);
+				mDialogMenu.show();
+				return true;
+			}
+		});
 	
-	@Override
-	public void onClick(View v) {
+	}
 
-		switch (v.getId()) {
+	@Override
+	public void onClick(View mView) {
+
+		switch (mView.getId()) {
 			
-			//case R.id.*:
-				//
-				//break;
+			case R.id.appExit:
+				finish();
+				break;
 
 			default: break;
 
@@ -60,98 +80,135 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 	}
 	
+	// ? Настройка WebView
 	void initWebView() {
 
 		AppUtils.Log(this, "d", "Init WebView");
 
+		// ? Поиск элемента
 		mWebView = findViewById(R.id.el_webView);
 
+		// ? Получение доступа к настройке
 		WebSettings WebViewSettings = mWebView.getSettings();
-		WebViewSettings.setDefaultTextEncodingName("utf-8");
+		WebViewSettings.setDefaultTextEncodingName("utf-8"); // ? Кодировка докум-тов
 
+		// ? Если настройка "JavaScript support" активна
 		if (dbg_javaScript) {
 			AppUtils.Log(this, "d", "dbg.javaScript: " + dbg_javaScript);
-			mWebView.getSettings().setJavaScriptEnabled(true);
+			mWebView.getSettings().setJavaScriptEnabled(true); // ? Разрешаю запуск js-скриптов
 			mWebView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
 		}
 
+		// ? Если настройка "Page caching" активна
 		if (dbg_appCache) {
 			AppUtils.Log(this, "d", "dbg.appCache: " + dbg_appCache);
-			mWebView.getSettings().setAppCacheEnabled(true);
-			mWebView.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
+			mWebView.getSettings().setAppCacheEnabled(true); // ? Разрешаю кеширование страниц
+			mWebView.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT); // ? Режим кеширования
+			// TODO: Нужно почитать о режиме кеширования страниц в WebView в документации
 		}
 
+		// ? Цвет фона WebView
 		mWebView.setBackgroundColor(Color.parseColor("#121212"));
+		// TODO: Почитать о "getSettings().setDomStorageEnabled(boolean)"
 		mWebView.getSettings().setDomStorageEnabled(true);
+		mWebView.getSettings().setUseWideViewPort(true);
+		// ? Скрываю скроллбар
 		mWebView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
 
 		mWebView.setWebViewClient(new WebViewClient() {
+			
+			// ? Настраиваю переход по ссылкам
+			public boolean shouldOverrideUrlLoading(WebView webView, String url) {
 
-				public boolean shouldOverrideUrlLoading(WebView webView, String url) {
+				String urlPrefix = loadUrl;
 
-					String urlPrefix = loadUrl;
-
-					if (url != null && url.startsWith(urlPrefix)){
-						return false;
-					} else {
-						webView.getContext().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
-						return true;
-					}
-
+				/* ? Если начало ссылки, на которую нажал пользователь, соответствует
+				     значению из urlPrefix, то открываем ссылку прямо в нашем приложении */
+				if (url != null && url.startsWith(urlPrefix)){
+					return false;
+				} else {
+					// .., а если нет, то отправляем пользователя в браузер
+					webView.getContext().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+					return true;
 				}
 
-				@SuppressWarnings("deprecation")
-				@Override
-				public void onReceivedError(WebView webView, int errCode, String errDesc, String failingUrl) {
+			}
 
-					String log = "code: " + errCode + "\ndesc: " + errDesc + "\nurl: " + failingUrl;
-					AppUtils.Log(MainActivity.this, "e", log);
+			// ? Отлов ошибок
+			@SuppressWarnings("deprecation")
+			@Override
+			public void onReceivedError(WebView webView, int errCode, String errDesc, String failingUrl) {
 
-				}
+				String log = "code: " + errCode + "\ndesc: " + errDesc + "\nurl: " + failingUrl;
+				AppUtils.Log(MainActivity.this, "e", log);
 
-			});
+				// ? Скроем WebView при ошибке
+				mWebView.setVisibility(View.GONE);
+				
+			}
+
+		});
 
 		mWebView.setWebChromeClient(new WebChromeClient() {
 
-				public void onProgressChanged(WebView webView, int nProgress) {
+			// Отлов статуса загрузки страницы
+			public void onProgressChanged(WebView webView, int nProgress) {
 
-					AppUtils.Log(MainActivity.this, "i", "onProgressChanged");
+				AppUtils.Log(MainActivity.this, "i", "onProgressChanged");
 
-					if (nProgress < 100) {
-
-						AppUtils.Log(MainActivity.this, "i", "nProgress < 100");
-						mWebView.setVisibility(View.GONE);
-
-					} else if (nProgress == 100) {
-
-						AppUtils.Log(MainActivity.this, "i", "nProgress == 100");
-
-						mWebView.setVisibility(View.VISIBLE);
-
-					} else {
-
-						AppUtils.Log(MainActivity.this, "i", "nProgress / else");
-						mWebView.setVisibility(View.GONE);
-
-					}
-
+				if (nProgress < 100) {
+					AppUtils.Log(MainActivity.this, "i", "nProgress < 100");
+				} else if (nProgress == 100) {
+					AppUtils.Log(MainActivity.this, "i", "nProgress == 100");
+				} else {
+					AppUtils.Log(MainActivity.this, "i", "nProgress / else");
 				}
 
+			}
 
-				@Override
-				public void onReceivedTitle(WebView webView, String pageTitle) {
-					super.onReceivedTitle(webView, pageTitle);
-					if (!TextUtils.isEmpty(pageTitle)) {
-						//setTitle(pageTitle);
-					}
+			// ? Получаем заголовок страницы
+			@Override
+			public void onReceivedTitle(WebView webView, String pageTitle) {
+				super.onReceivedTitle(webView, pageTitle);
+				if (!TextUtils.isEmpty(pageTitle)) {
+					//setTitle(pageTitle);
 				}
+			}
 
-			});
+		});
 
+		// ? Указываем WebView какую стр. загружать
 		//mWebView.loadUrl("file:///android_asset/" + "index.html");
 		mWebView.loadUrl(loadUrl);
 		AppUtils.Log(MainActivity.this, "i", "WebView load url: " + loadUrl);
 
+	}
+	
+	// ? Переход к пред. странице
+	public void mWebViewPageBack(View mView) {
+		if (mWebView.isFocused() && mWebView.canGoBack()) {
+			mWebView.goBack();
+			AppUtils.Log(MainActivity.this, "d", "mWebViewPageBack");
+		} else {
+			// ? Если это посл. страница, то выход из приложения
+			super.onBackPressed();
+			AppUtils.Log(MainActivity.this, "d", "mWebViewPageBack [edit app]");
+			finish();
+		}
+	}
+	
+	// ? Перезагрузка страницы
+	public void mWebViewPageReload(View mView) {
+		mWebView.reload();
+		AppUtils.Log(MainActivity.this, "d", "mWebViewPageReload");
+		mDialogMenu.dismiss();
+	}
+	
+	// ? Переход на начальную страницу
+	public void mWebViewPageHome(View mView) {
+		mWebView.loadUrl(loadUrl);
+		AppUtils.Log(MainActivity.this, "d", "mWebViewPageHome (homepage: " + loadUrl + ")");
+		mDialogMenu.dismiss();
 	}
 	
 }

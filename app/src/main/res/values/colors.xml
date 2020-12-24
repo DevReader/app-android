@@ -2,10 +2,11 @@
 <resources>
 	
 	<color name="colorAccent">#FFFFC68A</color>
-	<color name="colorPrimary">#FF2E2E2E</color>
+	<color name="colorPrimary">@color/colorSurface</color> <!-- OLD VALUE: #FF2E2E2E --> 
 	<color name="colorPrimaryDark">@color/colorPrimary</color>
-	<color name="colorWindow">#FF121212</color>
+	<color name="colorSurface">#FF121212</color>
+	<color name="colorWindow">#FF2E2E2E</color>
 	
-	<color name="colorAppAdaptiveIcon">@color/colorWindow</color>
+	<color name="colorAppAdaptiveIcon">@color/colorSurface</color>
 	
 </resources>
