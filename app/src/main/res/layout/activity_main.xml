@@ -20,7 +20,7 @@
 			android:id="@+id/el_fabMenu"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:src="@drawable/test_ic"
+			android:src="@drawable/ic_page_back"
 			android:layout_gravity="bottom|right"
 			android:layout_margin="14dp"
 			android:onClick="mWebViewPageBack"
