@@ -7,6 +7,8 @@
 	<string name="ota_msg_used_latest_release">Вы используете последнюю версию приложения!</string>
 	<string name="ota_msg_no_network">Для проверки необходимо наличие интернет-соединения!</string>
 	<string name="ota_msg_url_copied">Ссылка на файл скопирована в буфер обмена!</string>
+	<string name="ota_msg_update_installation_completed">Обновление успешно установлено!</string>
+	<string name="ota_msg_update_not_found">Обновлений не найдено.</string>
 	
 	<string name="ota_action_download">Скачать</string>
 	<string name="ota_action_changelog">Список изменений</string>

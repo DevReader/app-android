@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical"
+	android:gravity="top|center">
+
+	<ImageView
+		android:src="@drawable/ic_app_logo"
+		android:layout_width="100dp"
+		android:layout_height="100dp"
+		android:layout_marginTop="30dp"/>
+
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/sheet_welcome_title"
+		android:textAppearance="?android:attr/textAppearanceLarge"
+		android:layout_marginTop="16dp"
+		android:textStyle="bold"/>
+
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/sheet_welcome_title_second"
+		android:textAppearance="?android:attr/textAppearanceSmall"/>
+
+	<LinearLayout
+		android:clickable="false"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		style="@style/AppTheme.SheetDialog.Item"
+		android:orientation="vertical">
+
+		<TextView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="@string/sheet_welcome_msg_1"
+			style="@style/AppTheme.SheetDialog.ItemTitle"
+			android:layout_marginBottom="10dp"/>
+
+		<TextView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="@string/sheet_welcome_msg_2"
+			style="@style/AppTheme.SheetDialog.ItemTitle"/>
+
+	</LinearLayout>
+
+	<View
+		android:background="?android:attr/dividerVertical"
+		android:layout_width="match_parent"
+		android:layout_height="2dp"/>
+
+	<LinearLayout
+		android:clickable="false"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		style="@style/AppTheme.SheetDialog.Item">
+
+		<ImageView
+			android:src="@drawable/ic_page_back"
+			style="@style/AppTheme.SheetDialog.ItemIcon"
+			android:alpha="0.6"/>
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/sheet_welcome_tip"
+			style="@style/AppTheme.SheetDialog.ItemTitle"
+			android:alpha="0.6"
+			android:textStyle="italic"/>
+
+	</LinearLayout>
+
+	<View
+		android:background="?android:attr/dividerVertical"
+		android:layout_width="match_parent"
+		android:layout_height="2dp"/>
+
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="👨‍💻 with ❤️ by @rx1310"
+		android:textStyle="bold"
+		android:layout_marginBottom="20dp"
+		android:layout_marginTop="16dp"/>
+
+</LinearLayout>
+

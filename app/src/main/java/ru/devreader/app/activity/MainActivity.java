@@ -24,11 +24,13 @@ import android.webkit.WebViewClient;
 import ru.devreader.app.R;
 import ru.devreader.app.activity.MainActivity;
 import ru.devreader.app.util.AppUtils;
+import android.support.v7.app.AlertDialog;
+import android.content.DialogInterface;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 	
 	// ? Страница, которая будет загружена в WebView
-	final String loadUrl = "file:///android_asset/" + "intro.html";
+	final String loadUrl = "file:///android_asset/" + "test2.html";
 	//final String loadUrl = "https://" + "devreader.github.io" + "/";
 	
 	WebView mWebView;
@@ -37,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 	
 	boolean dbg_javaScript = true, dbg_appCache = false;
 	boolean isPageLoadError = false;
+	boolean isFirstStart;
 	
 	SharedPreferences mSharedPrefs;
 	SharedPreferences.Editor mSharedPrefsEditor;
@@ -49,8 +52,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		mSharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
 		mSharedPrefsEditor = mSharedPrefs.edit();
 		
+		isFirstStart = mSharedPrefs.getBoolean("isFirstStart", true);
+		
 		// ? Запуск WebView
 		initWebView();
+		
+		// ? Отображаю приветствие при первом запуске
+		if (isFirstStart) {
+			initFirstStartMessage();
+		}
 		
 		// ? Настройка FAB-меню
 		mFabMenu = findViewById(R.id.el_fabMenu);
@@ -72,14 +82,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 		switch (mView.getId()) {
 			
-			case R.id.appExit:
-				finish();
+			case R.id.home:
+				
 				break;
 
 			default: break;
 
 		}
 
+	}
+	
+	// ? Сообщение при первом запуске
+	void initFirstStartMessage() {
+		
+		// ? Сохраняю настройку, которая теперь знает,
+		// что первый запуск уже был
+		mSharedPrefsEditor.putBoolean("isFirstStart", false);
+		mSharedPrefsEditor.commit();
+		
+		// ? Отображаю диалог
+		mDialogMenu = new BottomSheetDialog(MainActivity.this);
+		View mDialogView = getLayoutInflater().inflate(R.layout.sheet_welcome, null);
+		mDialogMenu.setContentView(mDialogView);
+		mDialogMenu.show(); // ? Ну и показываю. Нмче нового не открыл бл.
+		
 	}
 	
 	// ? Настройка WebView
@@ -143,7 +169,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 				String log = "code: " + errCode + "\ndesc: " + errDesc + "\nurl: " + failingUrl;
 				AppUtils.Log(MainActivity.this, "e", log);
-
+				
 				// ? Скроем WebView при ошибке
 				mWebView.setVisibility(View.GONE);
 				
@@ -225,6 +251,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		mWebView.loadUrl(loadUrl);
 		AppUtils.Log(MainActivity.this, "d", "mWebViewPageHome (homepage: " + loadUrl + ")");
 		mDialogMenu.dismiss();
+	}
+	
+	// ? Закрытие приложения
+	public void mAppExit(View mView) {
+		finish();
 	}
 	
 }
