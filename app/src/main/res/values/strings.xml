@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	
+	<!-- Activity -->
+	<string name="activity_main">@string/app_name</string>
+	<string name="activity_settings">Настройки приложения</string>
+	
+	<!-- Promt titles -->
+	<string name="promt_tip">Подсказка</string>
+	
+</resources>

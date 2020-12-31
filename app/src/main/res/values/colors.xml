@@ -8,5 +8,6 @@
 	<color name="colorWindow">#FF2E2E2E</color>
 	
 	<color name="colorAppAdaptiveIcon">@color/colorSurface</color>
+	<color name="colorPromtPreferenceBackground">#FF443626</color>
 	
 </resources>

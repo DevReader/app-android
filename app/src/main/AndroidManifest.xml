@@ -48,6 +48,32 @@
 			android:theme="@style/AppTheme.NoActionBar"
 			android:name=".activity.MainActivity"/>
 		
+		<activity
+			android:label="@string/activity_settings"
+			android:theme="@style/AppTheme.Preferences"
+			android:name=".activity.SettingsActivity">
+
+			<intent-filter>
+
+				<action android:name="android.intent.action.APPLICATION_PREFERENCES"/>
+				<action android:name="android.intent.action.VIEW"/>
+
+				<category android:name="com.cyanogenmod.category.LAUNCHER_PREFERENCES"/>
+				<category android:name="android.intent.category.DEFAULT"/>
+				<category android:name="android.intent.category.BROWSABLE"/>
+
+				<data
+					android:host="app.settings"
+					android:scheme="devreader"/>
+
+			</intent-filter>
+
+			<meta-data
+				android:name="android.support.PARENT_ACTIVITY"
+				android:value="ru.devreader.app.activity.MainActivity"/>
+
+		</activity>
+		
 	</application>
 	 
 </manifest>

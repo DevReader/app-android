@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		mFabHome.setOnClickListener(this);
 		mFabHome.setOnLongClickListener(new View.OnLongClickListener() {
 			public boolean onLongClick(View mView) {
+				startActivity(new Intent(MainActivity.this, SettingsActivity.class));
 				return true;
 			}
 		});

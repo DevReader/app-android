@@ -2,7 +2,9 @@
 
 package ru.devreader.app.util;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -10,10 +12,10 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.support.annotation.ColorInt;
 import android.util.Log;
 import android.widget.Toast;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -173,5 +175,14 @@ public class AppUtils {
         return installDateString;
 
     }
+
+	public static void openURL(Context context, String link) {
+
+		Intent i = new Intent(Intent.ACTION_VIEW);
+		i.setData(Uri.parse(link));
+		i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		context.startActivity(i);
+
+	}
 	
 }

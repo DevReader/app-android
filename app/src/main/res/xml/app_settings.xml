@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<!-- More -->
+	<ru.devreader.app.ui.preference.CategoryPreference
+		android:title="@string/pref_more_category"/>
+
+	<Preference
+		android:icon="@android:color/transparent"
+		android:key="installInA2IGA"
+		android:title="@string/pref_more_a2iga"/>
+
+	<ru.devreader.app.ui.preference.PromtPreference
+		android:title="@string/promt_tip"
+		android:summary="@string/pref_more_a2iga_promt"/>
+	
+</PreferenceScreen>
