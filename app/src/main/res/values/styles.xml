@@ -34,8 +34,8 @@
 		<item name="android:divider">@null</item>
     </style>  
 	
-	<style name="AppTheme.Intro" parent="AppTheme.NoActionBar">
-		<item name="android:windowBackground">@drawable/layer_background_intro</item>
+	<style name="AppTheme.Splash" parent="AppTheme.NoActionBar">
+		<item name="android:windowBackground">@drawable/layer_background_splash</item>
 		<item name="android:navigationBarColor">@color/colorSurface</item>
 		<item name="colorPrimaryDark">@color/colorSurface</item>
     </style>

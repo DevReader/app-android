@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 	LinearLayout mLoadingDummy;
 	LinearLayout mSheetPageReloadAction, mSheetPageHomeAction, mSheetAppSettingsAction, mSheetAppExitAction, mSheetSendReportAction;
 	
-	boolean dbg_javaScript = true, dbg_appCache = false;
+	boolean dbg_javaScript = true, dbg_webViewCache = false;
 	boolean isPageLoadError = false;
 	boolean isFirstStart;
 	boolean isFabAlphaEnabled, isOtaAutoCheckEnabled;
@@ -59,13 +59,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		mSharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
 		mSharedPrefsEditor = mSharedPrefs.edit();
 		
-		isFirstStart = mSharedPrefs.getBoolean("isFirstStart", true);
+		// ? Prefs
 		isFabAlphaEnabled = mSharedPrefs.getBoolean("ui.fabAlpha", false);
-		isOtaAutoCheckEnabled = mSharedPrefs.getBoolean("ota.checkAuto", false);
 		
 		// ? Запуск WebView
 		initWebView();
 		
+		// ? Заглушка при загрузке страницы
 		mLoadingDummy = findViewById(R.id.el_dummyLoading);
 		
 		// ? Настройка FAB Back&Reload
@@ -122,6 +122,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 	protected void onResume() {
 		super.onResume();
 		
+		// ? Prefs
+		isFirstStart = mSharedPrefs.getBoolean("isFirstStart", true);
+		isOtaAutoCheckEnabled = mSharedPrefs.getBoolean("ota.checkAuto", false);
+		
 		// ? Отображаю приветствие при первом запуске
 		if (isFirstStart) {
 			initFirstStartMessage();
@@ -162,6 +166,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 	
 	// ? Настройка WebView
 	void initWebView() {
+		
+		// ? Prefs
+		dbg_javaScript = mSharedPrefs.getBoolean("dbg.js", true);
+		dbg_webViewCache = mSharedPrefs.getBoolean("dbg.webViewCashe", true);
 
 		AppUtils.Log(this, "d", "Init WebView");
 
@@ -180,8 +188,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		}
 
 		// ? Если настройка "Page caching" активна
-		if (dbg_appCache) {
-			AppUtils.Log(this, "d", "dbg.appCache: " + dbg_appCache);
+		if (dbg_webViewCache) {
+			AppUtils.Log(this, "d", "dbg.appCache: " + dbg_webViewCache);
 			mWebView.getSettings().setAppCacheEnabled(true); // ? Разрешаю кеширование страниц
 			mWebView.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT); // ? Режим кеширования
 			// TODO: Нужно почитать о режиме кеширования страниц в WebView в документации

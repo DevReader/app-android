@@ -62,6 +62,10 @@
 		android:title="@string/pref_ota_check"
 		android:summary="@string/pref_ota_check_summary"/>
 	
+	<ru.devreader.app.ui.preference.PromtPreference
+		android:title="@string/promt_tip"
+		android:summary="@string/pref_ota_promt"/>
+	
 	<SwitchPreference
 		android:icon="@android:color/transparent"
 		android:key="ota.checkAuto"
@@ -70,8 +74,25 @@
 		android:defaultValue="false"
 		android:enabled="true"/>
 	
+	<!-- Debug -->
+	<ru.devreader.app.ui.preference.BorderPreference />
+	<ru.devreader.app.ui.preference.CategoryPreference
+		android:title="Отладка (Debug)"/>
+	
+	<SwitchPreference
+		android:icon="@android:color/transparent"
+		android:key="dbg.js"
+		android:title="JavaScript"
+		android:defaultValue="true"/>
+	
+	<SwitchPreference
+		android:icon="@android:color/transparent"
+		android:key="dbg.webViewCashe"
+		android:title="Кеширование страниц в WebView"
+		android:defaultValue="true"/>
+
 	<ru.devreader.app.ui.preference.PromtPreference
-		android:title="@string/promt_tip"
-		android:summary="@string/pref_ota_promt"/>
+		
+		android:summary="Экспериментальные настройки!"/>
 	
 </PreferenceScreen>

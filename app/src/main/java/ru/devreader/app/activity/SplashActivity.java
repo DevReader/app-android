@@ -10,7 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import ru.devreader.app.R;
 import ru.devreader.app.util.AppUtils;
 
-public class IntroActivity extends AppCompatActivity {
+public class SplashActivity extends AppCompatActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -22,14 +22,14 @@ public class IntroActivity extends AppCompatActivity {
 			public void run() {
 
 				// ? Запуск MainActivity
-				Intent i = new Intent(IntroActivity.this, MainActivity.class);
-				IntroActivity.this.startActivity(i);
-				AppUtils.Log(IntroActivity.this, "i", "Запуск MainActivity");
+				Intent i = new Intent(SplashActivity.this, MainActivity.class);
+				SplashActivity.this.startActivity(i);
+				AppUtils.Log(SplashActivity.this, "i", "Запуск MainActivity");
 					
 				// ? "Убийство" сплеша (иначе при нажатии пользователем
 				// кнопки "Back" будет открыт снова сплеш.
-				IntroActivity.this.finish();
-				AppUtils.Log(IntroActivity.this, "i", "Завершение жизни IntroActivity");
+				SplashActivity.this.finish();
+				AppUtils.Log(SplashActivity.this, "i", "Завершение жизни SplashActivity");
 					
 				// ? Отображение анимации при переходе к MainActivity
 				overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out);
