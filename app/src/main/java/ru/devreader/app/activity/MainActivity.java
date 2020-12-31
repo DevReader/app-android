@@ -8,13 +8,15 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.content.DialogInterface;
+import android.widget.LinearLayout;
+import android.text.TextUtils;
+import android.view.View;
 
 import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-
-import android.text.TextUtils;
-import android.view.View;
+import android.support.v7.app.AlertDialog;
 
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
@@ -24,8 +26,6 @@ import android.webkit.WebViewClient;
 import ru.devreader.app.R;
 import ru.devreader.app.activity.MainActivity;
 import ru.devreader.app.util.AppUtils;
-import android.support.v7.app.AlertDialog;
-import android.content.DialogInterface;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 	
@@ -34,12 +34,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 	//final String loadUrl = "https://" + "devreader.github.io" + "/";
 	
 	WebView mWebView;
-	FloatingActionButton mFabMenu;
+	FloatingActionButton mFabBackAndReload, mFabHome;
 	BottomSheetDialog mDialogMenu;
+	LinearLayout mLoadingDummy;
+	LinearLayout mSheetPageReloadAction, mSheetPageHomeAction, mSheetAppSettingsAction, mSheetAppExitAction, mSheetSendReportAction;
 	
 	boolean dbg_javaScript = true, dbg_appCache = false;
 	boolean isPageLoadError = false;
 	boolean isFirstStart;
+	
+	//float fabAlpha = (float) 0.6;
 	
 	SharedPreferences mSharedPrefs;
 	SharedPreferences.Editor mSharedPrefsEditor;
@@ -62,19 +66,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 			initFirstStartMessage();
 		}
 		
-		// ? Настройка FAB-меню
-		mFabMenu = findViewById(R.id.el_fabMenu);
-		// ? Вызов Sheet-диалога меню долгим нажатием
-		mFabMenu.setOnLongClickListener(new View.OnLongClickListener() {
+		mLoadingDummy = findViewById(R.id.el_dummyLoading);
+		
+		// ? Настройка FAB Back&Reload
+		mFabBackAndReload = findViewById(R.id.el_fabBackAndReload);
+		mFabBackAndReload.setOnClickListener(this);
+		mFabBackAndReload.setOnLongClickListener(new View.OnLongClickListener() {
 			public boolean onLongClick(View mView) {
-				mDialogMenu = new BottomSheetDialog(MainActivity.this);
-				View mDialogView = getLayoutInflater().inflate(R.layout.sheet_main, null);
-				mDialogMenu.setContentView(mDialogView);
-				mDialogMenu.show();
 				return true;
 			}
 		});
-	
+		
+		// ? Настройка FAB Home
+		mFabHome = findViewById(R.id.el_fabHome);
+		mFabHome.setOnClickListener(this);
+		mFabHome.setOnLongClickListener(new View.OnLongClickListener() {
+			public boolean onLongClick(View mView) {
+				return true;
+			}
+		});
+		
 	}
 
 	@Override
@@ -82,8 +93,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 		switch (mView.getId()) {
 			
-			case R.id.home:
+			case R.id.el_fabBackAndReload:
 				
+				// ? Если onReceivedError
+				if (isPageLoadError) {
+					//AppUtils.showToast(this, "Reload");
+					mWebViewPageReload(false);
+				} else {
+					//AppUtils.showToast(this, "Back");
+					mWebViewPageBack();
+				}
+				
+				break;
+				
+			case R.id.el_fabHome:
+				mWebView.loadUrl(loadUrl);
+				AppUtils.Log(MainActivity.this, "d", "mWebViewPageHome (homepage: " + loadUrl + ")");
 				break;
 
 			default: break;
@@ -176,7 +201,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 				isPageLoadError = true;
 				
 				// ? Отобразим иконку Refresh в FabMenu
-				mFabMenu.setImageResource(R.drawable.ic_page_refresh);
+				mFabBackAndReload.setImageResource(R.drawable.ic_page_refresh);
 				
 			}
 
@@ -193,6 +218,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 					AppUtils.Log(MainActivity.this, "i", "nProgress < 100");
 				} else if (nProgress == 100) {
 					AppUtils.Log(MainActivity.this, "i", "nProgress == 100");
+					mWebView.setVisibility(View.VISIBLE);
+					mLoadingDummy.setVisibility(View.GONE);
 				} else {
 					AppUtils.Log(MainActivity.this, "i", "nProgress / else");
 				}
@@ -216,18 +243,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 	}
 	
-	public void mFabAction(View mView) {
-		if (isPageLoadError) {
-			//AppUtils.showToast(this, "Reload");
-			mWebViewPageReload(mView);
-		} else {
-			// AppUtils.showToast(this, "Back");
-			mWebViewPageBack(mView);
-		}
-	}
-	
 	// ? Переход к пред. странице
-	public void mWebViewPageBack(View mView) {
+	void mWebViewPageBack() {
+		
 		if (mWebView.isFocused() && mWebView.canGoBack()) {
 			mWebView.goBack();
 			AppUtils.Log(MainActivity.this, "d", "mWebViewPageBack");
@@ -237,25 +255,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 			AppUtils.Log(MainActivity.this, "d", "mWebViewPageBack [edit app]");
 			finish();
 		}
+		
 	}
 	
 	// ? Перезагрузка страницы
-	public void mWebViewPageReload(View mView) {
+	void mWebViewPageReload(boolean viaDialog) {
+		
 		mWebView.reload();
-		AppUtils.Log(MainActivity.this, "d", "mWebViewPageReload");
-		mDialogMenu.dismiss();
-	}
-	
-	// ? Переход на начальную страницу
-	public void mWebViewPageHome(View mView) {
-		mWebView.loadUrl(loadUrl);
-		AppUtils.Log(MainActivity.this, "d", "mWebViewPageHome (homepage: " + loadUrl + ")");
-		mDialogMenu.dismiss();
-	}
-	
-	// ? Закрытие приложения
-	public void mAppExit(View mView) {
-		finish();
+		AppUtils.Log(MainActivity.this, "d", "mWebViewPageReload (Via dialog: " + viaDialog + ")");
+		
+		if (viaDialog) {
+			mDialogMenu.dismiss();
+		}
+		
 	}
 	
 }

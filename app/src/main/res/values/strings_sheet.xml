@@ -8,12 +8,4 @@
 	<string name="sheet_welcome_msg_2">Нет, нет. Учить мы Вас не будем. С этой задачей хорошо справляются различные интернет-курсы, колледжи и прочие профильные учебные заведения. Цель DevReader в том, чтобы у Вас в кармане был справочный материал в удобной форме и в любое время.</string>
 	<string name="sheet_welcome_tip">Совет: нажмите и удерживайте кнопку с аналогичной иконкой для показа дополнительных опций приложения.</string>
 	
-	<!-- Sheet / Main -->
-	<string name="sheet_main">Меню приложения</string>
-	<string name="sheet_main_page_reload">Перезагрузить страницу</string>
-	<string name="sheet_main_page_home">Начальная страница</string>
-	<string name="sheet_main_app_exit">Выйти из приложения</string>
-	<string name="sheet_main_app_settings">Настройки приложения</string>
-	<string name="sheet_main_app_report">Нашли ошибку?</string>
-	
 </resources>
