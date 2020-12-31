@@ -22,7 +22,7 @@
 	<!-- More -->
 	<string name="pref_more_category">Дополнительно</string>
 	<string name="pref_more_a2iga">Интеграция с A2IGA</string>
-	<string name="pref_more_a2iga_summary">Запускайте Projer в нужный момент не выходя из среды разработки жестом запуска ассистента!</string>
+	<string name="pref_more_a2iga_summary">Запускайте DevReader в нужный момент не выходя из среды разработки жестом запуска ассистента!</string>
 	<string name="pref_more_a2iga_promt">Нажмите на пункт «Интеграция с A2IGA», а затем в списке приложений выберите приложение «A2IGA» и следуйте инструкциям.</string>
 	<string name="pref_more_a2iga_not_found_summary">A2IGA не установлен! Нажмите, чтобы перейти на страницу загрузки.</string>
 	<string name="pref_more_a2iga_chooser_title">Найдите и выберите «A2IGA»</string>

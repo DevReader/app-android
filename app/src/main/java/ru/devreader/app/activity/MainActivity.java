@@ -26,6 +26,7 @@ import android.webkit.WebViewClient;
 import ru.devreader.app.R;
 import ru.devreader.app.activity.MainActivity;
 import ru.devreader.app.util.AppUtils;
+import ru.devreader.app.task.OTACheckTask;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 	
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 	boolean dbg_javaScript = true, dbg_appCache = false;
 	boolean isPageLoadError = false;
 	boolean isFirstStart;
-	boolean isFabAlphaActivated;
+	boolean isFabAlphaEnabled, isOtaAutoCheckEnabled;
 	
 	float fabAlphaValue = (float) 0.6;
 	
@@ -58,7 +59,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		mSharedPrefsEditor = mSharedPrefs.edit();
 		
 		isFirstStart = mSharedPrefs.getBoolean("isFirstStart", true);
-		isFabAlphaActivated = mSharedPrefs.getBoolean("ui.fabAlpha", false);
+		isFabAlphaEnabled = mSharedPrefs.getBoolean("ui.fabAlpha", false);
+		isOtaAutoCheckEnabled = mSharedPrefs.getBoolean("ota.checkAuto", false);
 		
 		// ? Запуск WebView
 		initWebView();
@@ -125,9 +127,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		}
 		
 		// ? Настройка прозрачности fab'ов
-		if (isFabAlphaActivated) {
+		if (isFabAlphaEnabled) {
 			mFabHome.setAlpha(fabAlphaValue);
 			mFabBackAndReload.setAlpha(fabAlphaValue);
+		}
+		
+		// ? Проверка обновлений
+		if (isOtaAutoCheckEnabled) {
+			if (AppUtils.getVersionName(this, getPackageName()).contains("beta")) {
+				OTACheckTask.checkUpdates(this, true, false);
+			} else {
+				OTACheckTask.checkUpdates(this, false, false);
+			}
 		}
 		
 	}

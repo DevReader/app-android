@@ -25,32 +25,34 @@ public class OTACheckTask extends AsyncTask<Void, Void, String> {
 
     private Context mContext;
 	private String mChannel;
+	private boolean mProgressDialog;
 
 	private ProgressDialog progressDialog;
 
-    public OTACheckTask(Context context, String isChannel) {
+    public OTACheckTask(Context context, String channel, boolean isProgressDialogEnabled) {
         this.mContext = context;
-		this.mChannel = isChannel;
+		this.mChannel = channel;
+		this.mProgressDialog = isProgressDialogEnabled;
     }
 
     protected void onPreExecute() {
 
-		progressDialog = new ProgressDialog(mContext);
-		progressDialog.setTitle(mContext.getString(R.string.ota_dlg_checking));
-		progressDialog.setMessage(mContext.getString(R.string.ota_dlg_checking_description));
-		progressDialog.setCancelable(false);
-		progressDialog.show();
+		if (mProgressDialog) {
+			progressDialog = new ProgressDialog(mContext);
+			progressDialog.setTitle(mContext.getString(R.string.ota_dlg_checking));
+			progressDialog.setMessage(mContext.getString(R.string.ota_dlg_checking_description));
+			progressDialog.setCancelable(false);
+			progressDialog.show();
+		}
 		
     }
 
     @Override
     protected void onPostExecute(String result) {
 
-		progressDialog.dismiss();
-
-        if (!TextUtils.isEmpty(result)) {
-            parseJson(result);
-        }
+		if (mProgressDialog) progressDialog.dismiss();
+		
+        if (!TextUtils.isEmpty(result)) parseJson(result);
 		
 		AppUtils.Log(mContext, "d", "onPostExecute: " + result);
 
@@ -121,25 +123,25 @@ public class OTACheckTask extends AsyncTask<Void, Void, String> {
 
 		if (mChannel == "beta") {
 			return HttpUtils.get(mContext, Constants.OTA.CHANNEL_BETA);
-		} else if (mChannel == "stable") {
+		} else if (mChannel == "release") {
 			return HttpUtils.get(mContext, Constants.OTA.CHANNEL_RELEASE);
 		}
 		
-		// -> new OTACheckTask(getContext(), "stable").execute();
+		// -> new OTACheckTask(getContext(), "release").execute();
 
 		return HttpUtils.get(mContext, Constants.OTA.CHANNEL_RELEASE);
 
 	}
 	
 	// ? Проверка обновленмй
-	public static void checkUpdates(Context context, boolean checkFromBetaChannel) {
+	public static void checkUpdates(Context context, boolean isBetaChannelEnabled, boolean isProgressDialogEnabled) {
 		
 		if (AppUtils.isNetworkAvailable(context)) {
 			
-			if (checkFromBetaChannel) {
-				new OTACheckTask(context, "beta").execute();
+			if (isBetaChannelEnabled) {
+				new OTACheckTask(context, "beta", isProgressDialogEnabled).execute();
 			} else {
-				new OTACheckTask(context, "stable").execute();
+				new OTACheckTask(context, "release", isProgressDialogEnabled).execute();
 			}
 			
 		} else {

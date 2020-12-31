@@ -49,11 +49,8 @@ public class SettingsActivity extends PreferenceActivity {
 				break;
 				
 			case "ota.check":
-				if (AppUtils.getVersionName(this, getPackageName()).contains("beta")) {
-					OTACheckTask.checkUpdates(this, true);
-				} else {
-					OTACheckTask.checkUpdates(this, false);
-				}
+				if (AppUtils.getVersionName(this, getPackageName()).contains("beta")) OTACheckTask.checkUpdates(this, true, true);
+				else  																  OTACheckTask.checkUpdates(this, false, true);
 				break;
 
 		}

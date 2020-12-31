@@ -52,7 +52,7 @@
 		android:title="@string/promt_tip"
 		android:summary="@string/pref_more_a2iga_promt"/>
 	
-	<!-- More -->
+	<!-- OTA -->
 	<ru.devreader.app.ui.preference.CategoryPreference
 		android:title="@string/pref_ota_category"/>
 
@@ -68,7 +68,7 @@
 		android:title="@string/pref_ota_check_auto"
 		android:summary="@string/pref_ota_check_auto_summary"
 		android:defaultValue="false"
-		android:enabled="false"/>
+		android:enabled="true"/>
 	
 	<ru.devreader.app.ui.preference.PromtPreference
 		android:title="@string/promt_tip"
