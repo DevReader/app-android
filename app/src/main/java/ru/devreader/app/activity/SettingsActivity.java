@@ -56,8 +56,7 @@ public class SettingsActivity extends PreferenceActivity {
 				break;
 				
 			case "ota.check":
-				if (AppUtils.getVersionName(this, getPackageName()).contains("beta")) OTACheckTask.checkUpdates(this, true, false);
-				else  																  OTACheckTask.checkUpdates(this, false, false);
+				checkUpdates();																  OTACheckTask.checkUpdates(this, false, false);
 				break;
 
 		}
@@ -92,6 +91,17 @@ public class SettingsActivity extends PreferenceActivity {
 			AppUtils.openURL(this, "https://github.com/rx1310/a2iga/releases");
 		}
 
+	}
+	
+	// ? Проверка обновлений
+	void checkUpdates() {
+		
+		if (AppUtils.getVersionName(this, getPackageName()).contains("beta")) {
+			OTACheckTask.checkUpdates(this, true, true);
+		} else {
+			OTACheckTask.checkUpdates(this, false, true);
+		}
+		
 	}
 
 }
