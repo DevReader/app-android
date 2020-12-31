@@ -60,7 +60,7 @@
 		style="@style/AppTheme.SheetDialog.Item">
 
 		<ImageView
-			android:src="@drawable/ic_page_back"
+			android:src="@drawable/ic_page_home"
 			style="@style/AppTheme.SheetDialog.ItemIcon"
 			android:alpha="0.6"/>
 
