@@ -4,11 +4,12 @@ package ru.devreader.app.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.DialogInterface;
+
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.content.DialogInterface;
 import android.widget.LinearLayout;
 import android.text.TextUtils;
 import android.view.View;

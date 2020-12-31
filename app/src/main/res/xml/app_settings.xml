@@ -45,7 +45,7 @@
 
 	<Preference
 		android:icon="@android:color/transparent"
-		android:key="installInA2IGA"
+		android:key="more.installInA2IGA"
 		android:title="@string/pref_more_a2iga"/>
 
 	<ru.devreader.app.ui.preference.PromtPreference

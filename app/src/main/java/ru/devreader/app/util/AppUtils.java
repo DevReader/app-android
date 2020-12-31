@@ -9,13 +9,16 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
+
 import android.graphics.Color;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.net.Uri;
 import android.support.annotation.ColorInt;
 import android.util.Log;
 import android.widget.Toast;
+
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.net.Uri;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;

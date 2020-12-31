@@ -11,14 +11,17 @@ import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 
 import ru.devreader.app.R;
-import ru.devreader.app.util.AppUtils;
 import ru.devreader.app.task.OTACheckTask;
+import ru.devreader.app.util.AppUtils;
 
 public class SettingsActivity extends PreferenceActivity {
 
 	ListView mListView;
 	
-	Preference installInA2IGA;
+	Preference moreInstallInA2IGA;
+	Preference otaCheck;
+	
+	String ota_lastCheckDate;
 	
 	SharedPreferences mSharedPreferences;
 
@@ -27,30 +30,34 @@ public class SettingsActivity extends PreferenceActivity {
 		super.onCreate(savedInstanceState);
 
 		addPreferencesFromResource(R.xml.app_settings);
-
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+		
 		mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-		getActionBar().setDisplayHomeAsUpEnabled(true);
-
+		ota_lastCheckDate = mSharedPreferences.getString("ota.lastCheckDate", getString(android.R.string.untitled));
+		
 		mListView = findViewById(android.R.id.list);
 		mListView.setDivider(null);
 
-		installInA2IGA = findPreference("installInA2IGA");
-		installInA2IGA.setSummary(a2igaInstalledStatus());
+		moreInstallInA2IGA = findPreference("more.installInA2IGA");
+		moreInstallInA2IGA.setSummary(a2igaInstalledStatus());
+		
+		otaCheck = findPreference("ota.check");
+		otaCheck.setSummary(String.format(getString(R.string.pref_ota_check_summary), ota_lastCheckDate));
 		
 	}
-
+	
 	public boolean onPreferenceTreeClick(PreferenceScreen prefScreen, Preference pref) {
 
 		switch (pref.getKey()) {
 
-			case "installInA2IGA":
-				installInA2IGA();
+			case "more.installInA2IGA":
+				moreInstallInA2IGA();
 				break;
 				
 			case "ota.check":
-				if (AppUtils.getVersionName(this, getPackageName()).contains("beta")) OTACheckTask.checkUpdates(this, true, true);
-				else  																  OTACheckTask.checkUpdates(this, false, true);
+				if (AppUtils.getVersionName(this, getPackageName()).contains("beta")) OTACheckTask.checkUpdates(this, true, false);
+				else  																  OTACheckTask.checkUpdates(this, false, false);
 				break;
 
 		}
@@ -71,7 +78,7 @@ public class SettingsActivity extends PreferenceActivity {
 	}
 
 	// ? Установка A2IGA
-	void installInA2IGA() {
+	void moreInstallInA2IGA() {
 
 		if (AppUtils.isAppInstalled(this, "ru.rx1310.app.a2iga")) {
 

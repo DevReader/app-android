@@ -3,18 +3,25 @@
 package ru.devreader.app.task;
 
 import android.app.ProgressDialog;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
+import android.preference.PreferenceManager;
+
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.support.v7.app.AlertDialog;
-import android.text.TextUtils;
+import android.content.SharedPreferences;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import ru.devreader.app.Constants;
 import ru.devreader.app.R;
@@ -22,13 +29,13 @@ import ru.devreader.app.util.AppUtils;
 import ru.devreader.app.util.HttpUtils;
 
 public class OTACheckTask extends AsyncTask<Void, Void, String> {
-
+	
     private Context mContext;
 	private String mChannel;
 	private boolean mProgressDialog;
-
+	
 	private ProgressDialog progressDialog;
-
+	
     public OTACheckTask(Context context, String channel, boolean isProgressDialogEnabled) {
         this.mContext = context;
 		this.mChannel = channel;
@@ -136,7 +143,18 @@ public class OTACheckTask extends AsyncTask<Void, Void, String> {
 	// ? Проверка обновленмй
 	public static void checkUpdates(Context context, boolean isBetaChannelEnabled, boolean isProgressDialogEnabled) {
 		
+		SharedPreferences mSharedPrefs;
+		SharedPreferences.Editor mSharedPrefsEditor;
+		SimpleDateFormat mDateFormat = new SimpleDateFormat("dd/MM/yyyy (HH:mm:ss)", Locale.getDefault());
+		String isLastCheckDate = mDateFormat.format(new Date());
+		
+		mSharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+		mSharedPrefsEditor = mSharedPrefs.edit();
+		
 		if (AppUtils.isNetworkAvailable(context)) {
+			
+			mSharedPrefsEditor.putString("ota.lastCheckDate", isLastCheckDate);
+			mSharedPrefsEditor.commit();
 			
 			if (isBetaChannelEnabled) {
 				new OTACheckTask(context, "beta", isProgressDialogEnabled).execute();
