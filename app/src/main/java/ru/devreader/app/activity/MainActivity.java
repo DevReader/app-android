@@ -42,8 +42,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 	boolean dbg_javaScript = true, dbg_appCache = false;
 	boolean isPageLoadError = false;
 	boolean isFirstStart;
+	boolean isFabAlphaActivated;
 	
-	//float fabAlpha = (float) 0.6;
+	float fabAlphaValue = (float) 0.6;
 	
 	SharedPreferences mSharedPrefs;
 	SharedPreferences.Editor mSharedPrefsEditor;
@@ -57,14 +58,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		mSharedPrefsEditor = mSharedPrefs.edit();
 		
 		isFirstStart = mSharedPrefs.getBoolean("isFirstStart", true);
+		isFabAlphaActivated = mSharedPrefs.getBoolean("ui.fabAlpha", false);
 		
 		// ? Запуск WebView
 		initWebView();
-		
-		// ? Отображаю приветствие при первом запуске
-		if (isFirstStart) {
-			initFirstStartMessage();
-		}
 		
 		mLoadingDummy = findViewById(R.id.el_dummyLoading);
 		
@@ -116,6 +113,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 		}
 
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		
+		// ? Отображаю приветствие при первом запуске
+		if (isFirstStart) {
+			initFirstStartMessage();
+		}
+		
+		// ? Настройка прозрачности fab'ов
+		if (isFabAlphaActivated) {
+			mFabHome.setAlpha(fabAlphaValue);
+			mFabBackAndReload.setAlpha(fabAlphaValue);
+		}
+		
 	}
 	
 	// ? Сообщение при первом запуске

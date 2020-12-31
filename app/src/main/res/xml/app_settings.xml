@@ -2,6 +2,42 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+	<!-- UI -->
+	<ru.devreader.app.ui.preference.CategoryPreference
+		android:title="@string/pref_ui_category"/>
+	
+	<SwitchPreference
+		android:icon="@android:color/transparent"
+		android:key="ui.fabAlpha"
+		android:title="@string/pref_ui_fab_alpha"
+		android:defaultValue="false"/>
+	
+	<ru.devreader.app.ui.preference.PromtPreference
+		android:title="@string/promt_tip"
+		android:summary="@string/pref_ui_fab_alpha_promt"/>
+	
+	<SwitchPreference
+		android:icon="@android:color/transparent"
+		android:key="ui.fabScroll"
+		android:title="@string/pref_ui_fab_scroll"
+		android:summary="@string/pref_ui_fab_scroll_summary"
+		android:defaultValue="false"
+		android:enabled="false"/>
+	
+	<SwitchPreference
+		android:icon="@android:color/transparent"
+		android:key="ui.pageTitle"
+		android:title="@string/pref_ui_page_title"
+		android:summary="@string/pref_ui_page_title_summary"
+		android:defaultValue="false"
+		android:enabled="false"/>
+	
+	<SwitchPreference
+		android:icon="@android:color/transparent"
+		android:key="ui.rotateAuto"
+		android:title="@string/pref_ui_rotate_auto"
+		android:defaultValue="false"/>
+	
 	<!-- More -->
 	<ru.devreader.app.ui.preference.CategoryPreference
 		android:title="@string/pref_more_category"/>
