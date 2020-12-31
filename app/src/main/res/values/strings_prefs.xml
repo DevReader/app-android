@@ -12,7 +12,12 @@
 	<string name="pref_ui_rotate_auto">Автоповорот экрана</string>
 	
 	<!-- OTA -->
-	<string name="pref_ota_category">Обновления</string>
+	<string name="pref_ota_category">Обновление приложения</string>
+	<string name="pref_ota_check">Проверить вручную</string>
+	<string name="pref_ota_check_summary">Дата посл. проверки:</string>
+	<string name="pref_ota_check_auto">Автоматическая проверка</string>
+	<string name="pref_ota_check_auto_summary">Выполнять проверку обновлений каждый раз при запуске приложения?</string>
+	<string name="pref_ota_promt">Если у Вас тестовая версия, то DevReader сам понимает и проверяет обновления по нужному каналу и при обновлении будет загружена именно тестовая версия, а не последняя стабильная.</string>
 	
 	<!-- More -->
 	<string name="pref_more_category">Дополнительно</string>

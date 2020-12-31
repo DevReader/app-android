@@ -36,7 +36,8 @@
 		android:icon="@android:color/transparent"
 		android:key="ui.rotateAuto"
 		android:title="@string/pref_ui_rotate_auto"
-		android:defaultValue="false"/>
+		android:defaultValue="false"
+		android:enabled="false"/>
 	
 	<!-- More -->
 	<ru.devreader.app.ui.preference.CategoryPreference
@@ -50,5 +51,27 @@
 	<ru.devreader.app.ui.preference.PromtPreference
 		android:title="@string/promt_tip"
 		android:summary="@string/pref_more_a2iga_promt"/>
+	
+	<!-- More -->
+	<ru.devreader.app.ui.preference.CategoryPreference
+		android:title="@string/pref_ota_category"/>
+
+	<Preference
+		android:icon="@android:color/transparent"
+		android:key="ota.check"
+		android:title="@string/pref_ota_check"
+		android:summary="@string/pref_ota_check_summary"/>
+	
+	<SwitchPreference
+		android:icon="@android:color/transparent"
+		android:key="ota.checkAuto"
+		android:title="@string/pref_ota_check_auto"
+		android:summary="@string/pref_ota_check_auto_summary"
+		android:defaultValue="false"
+		android:enabled="false"/>
+	
+	<ru.devreader.app.ui.preference.PromtPreference
+		android:title="@string/promt_tip"
+		android:summary="@string/pref_ota_promt"/>
 	
 </PreferenceScreen>

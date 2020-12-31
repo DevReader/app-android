@@ -12,6 +12,7 @@ import android.preference.PreferenceScreen;
 
 import ru.devreader.app.R;
 import ru.devreader.app.util.AppUtils;
+import ru.devreader.app.task.OTACheckTask;
 
 public class SettingsActivity extends PreferenceActivity {
 
@@ -45,6 +46,14 @@ public class SettingsActivity extends PreferenceActivity {
 
 			case "installInA2IGA":
 				installInA2IGA();
+				break;
+				
+			case "ota.check":
+				if (AppUtils.getVersionName(this, getPackageName()).contains("beta")) {
+					OTACheckTask.checkUpdates(this, true);
+				} else {
+					OTACheckTask.checkUpdates(this, false);
+				}
 				break;
 
 		}

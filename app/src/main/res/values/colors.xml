@@ -6,8 +6,9 @@
 	<color name="colorPrimaryDark">@color/colorPrimary</color>
 	<color name="colorSurface">#FF121212</color>
 	<color name="colorWindow">#FF2E2E2E</color>
+	<color name="colorHover">#FF4C4135</color>
 	
 	<color name="colorAppAdaptiveIcon">@color/colorSurface</color>
-	<color name="colorPromtPreferenceBackground">#FF443626</color>
+	<color name="colorPromtPreferenceBackground">@color/colorHover</color>
 	
 </resources>

@@ -10,7 +10,7 @@
 		<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
 		
 		<item name="colorButtonNormal">@color/colorAccent</item>
-		<item name="colorControlHighlight">@color/colorAccent</item>
+		<item name="colorControlHighlight">@color/colorHover</item>
 		<item name="bottomSheetDialogTheme">@style/AppTheme.SheetDialog</item>
 		<item name="android:navigationBarColor">@color/colorSurface</item>
 		<item name="android:windowBackground">@color/colorSurface</item>

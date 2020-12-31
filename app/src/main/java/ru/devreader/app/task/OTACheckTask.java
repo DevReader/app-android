@@ -93,23 +93,23 @@ public class OTACheckTask extends AsyncTask<Void, Void, String> {
 		alertBuilder.setTitle(updateVersion);
 		alertBuilder.setMessage(updateMessage);
 		alertBuilder.setPositiveButton(R.string.ota_action_download, new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface d, int i) {
-					mContext.startActivity(new Intent (Intent.ACTION_VIEW, Uri.parse(apkUrl)));
-				}
-			});
+			public void onClick(DialogInterface d, int i) {
+				mContext.startActivity(new Intent (Intent.ACTION_VIEW, Uri.parse(apkUrl)));
+			}
+		});
 		alertBuilder.setNegativeButton(R.string.ota_action_changelog, new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface d, int i) {
-					context.startActivity(new Intent (Intent.ACTION_VIEW, Uri.parse(changelogUrl)));
-				}
-			});
+			public void onClick(DialogInterface d, int i) {
+				context.startActivity(new Intent (Intent.ACTION_VIEW, Uri.parse(changelogUrl)));
+			}
+		});
 		alertBuilder.setNeutralButton(R.string.ota_action_copy_url, new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface d, int i) {
-					ClipboardManager mClipboardMng = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
-					ClipData mClipData = ClipData.newPlainText(null, apkUrl);
-					mClipboardMng.setPrimaryClip(mClipData);
-					AppUtils.showToast(context, context.getString(R.string.ota_msg_url_copied));
-				}
-			});
+			public void onClick(DialogInterface d, int i) {
+				ClipboardManager mClipboardMng = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+				ClipData mClipData = ClipData.newPlainText(null, apkUrl);
+				mClipboardMng.setPrimaryClip(mClipData);
+				AppUtils.showToast(context, context.getString(R.string.ota_msg_url_copied));
+			}
+		});
 		alertBuilder.show();
 		
 		AppUtils.Log(mContext, "d", "updateDialog = show()");
@@ -129,6 +129,23 @@ public class OTACheckTask extends AsyncTask<Void, Void, String> {
 
 		return HttpUtils.get(mContext, Constants.OTA.CHANNEL_RELEASE);
 
+	}
+	
+	// ? Проверка обновленмй
+	public static void checkUpdates(Context context, boolean checkFromBetaChannel) {
+		
+		if (AppUtils.isNetworkAvailable(context)) {
+			
+			if (checkFromBetaChannel) {
+				new OTACheckTask(context, "beta").execute();
+			} else {
+				new OTACheckTask(context, "stable").execute();
+			}
+			
+		} else {
+			AppUtils.showToast(context, context.getString(R.string.ota_msg_no_network));
+		}
+		
 	}
 
 }
