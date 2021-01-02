@@ -8,4 +8,9 @@
 	<!-- Promt titles -->
 	<string name="promt_tip">Подсказка</string>
 	
+	<!-- Error Page / m2 -->
+	<string name="err_m2_title">Ошибка подключения!</string>
+	<string name="err_m2_desc">Ошибка загрузки. Проверьте подключение к сети и повторите попытку.</string>
+	<string name="err_m2_action_start2048">1024 + 1024 = ?</string>
+	
 </resources>

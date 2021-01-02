@@ -5,9 +5,9 @@ package ru.devreader.app.task;
 import android.app.ProgressDialog;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.preference.PreferenceManager;
+import android.app.AlertDialog;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;

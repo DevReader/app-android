@@ -4,41 +4,42 @@ package ru.devreader.app.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.DialogInterface;
-
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.widget.LinearLayout;
 import android.text.TextUtils;
+import android.util.Base64;
+import android.view.KeyEvent;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.AlertDialog;
 
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import java.io.InputStream;
+
 import ru.devreader.app.R;
 import ru.devreader.app.activity.MainActivity;
-import ru.devreader.app.util.AppUtils;
 import ru.devreader.app.task.OTACheckTask;
+import ru.devreader.app.util.AppUtils;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 	
 	// ? Страница, которая будет загружена в WebView
-	final String loadUrl = "file:///android_asset/" + "test2.html";
-	//final String loadUrl = "https://" + "devreader.github.io" + "/";
+	final String loadUrl = "file:///android_asset/" + "test/test2.html";
+	// final String loadUrl = "https://" + "devreader.github.io" + "/";
 	
 	WebView mWebView;
 	FloatingActionButton mFabBackAndReload, mFabHome;
 	BottomSheetDialog mDialogMenu;
-	LinearLayout mLoadingDummy;
+	LinearLayout mLoadingDummy, mErrorDummy;
 	LinearLayout mSheetPageReloadAction, mSheetPageHomeAction, mSheetAppSettingsAction, mSheetAppExitAction, mSheetSendReportAction;
 	
 	boolean dbg_javaScript = true, dbg_webViewCache = false;
@@ -65,8 +66,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		// ? Запуск WebView
 		initWebView();
 		
+		// ? WebView
+		mWebView = findViewById(R.id.el_webView);
+		
 		// ? Заглушка при загрузке страницы
 		mLoadingDummy = findViewById(R.id.el_dummyLoading);
+		
+		mErrorDummy = findViewById(R.id.el_dummyError_m2);
 		
 		// ? Настройка FAB Back&Reload
 		mFabBackAndReload = findViewById(R.id.el_fabBackAndReload);
@@ -99,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 				// ? Если onReceivedError
 				if (isPageLoadError) {
 					//AppUtils.showToast(this, "Reload");
-					mWebViewPageReload(false);
+					mWebViewPageReload();
 				} else {
 					//AppUtils.showToast(this, "Back");
 					mWebViewPageBack();
@@ -179,7 +185,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		// ? Получение доступа к настройке
 		WebSettings WebViewSettings = mWebView.getSettings();
 		WebViewSettings.setDefaultTextEncodingName("utf-8"); // ? Кодировка докум-тов
-
+		
 		// ? Если настройка "JavaScript support" активна
 		if (dbg_javaScript) {
 			AppUtils.Log(this, "d", "dbg.javaScript: " + dbg_javaScript);
@@ -197,12 +203,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 		// ? Цвет фона WebView
 		mWebView.setBackgroundColor(Color.parseColor("#121212"));
+		
 		// TODO: Почитать о "getSettings().setDomStorageEnabled(boolean)"
 		mWebView.getSettings().setDomStorageEnabled(true);
 		mWebView.getSettings().setUseWideViewPort(true);
+		
 		// ? Скрываю скроллбар
 		mWebView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
 
+		if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
+			WebViewSettings.setAllowFileAccessFromFileURLs(true);
+			WebViewSettings.setAllowUniversalAccessFromFileURLs(true);
+		}
+		
 		mWebView.setWebViewClient(new WebViewClient() {
 			
 			// ? Настраиваю переход по ссылкам
@@ -233,10 +246,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 				// ? Скроем WebView при ошибке
 				mWebView.setVisibility(View.GONE);
 				
+				// ? Отобразим заглушку
+				//mErrorDummy.setVisibility(View.VISIBLE);
+				
+				// ? Перемена переменной
 				isPageLoadError = true;
 				
 				// ? Отобразим иконку Refresh в FabMenu
 				mFabBackAndReload.setImageResource(R.drawable.ic_page_refresh);
+				
+				// ! net::ERR_INTERNET_DISCONNECTED
+				if (errCode == -2) {
+					
+				}
+				
+			}
+			
+			// ? Страница полностью загружена
+			@Override
+			public void onPageFinished(WebView webView, String url) {
+				super.onPageFinished(webView, url);
+				
+				// ? Инжектирование скрипта
+				injectJs();
 				
 			}
 
@@ -249,12 +281,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 				AppUtils.Log(MainActivity.this, "i", "onProgressChanged");
 
-				if (nProgress < 100) {
+				if (nProgress < 100 && mLoadingDummy.getVisibility() == View.GONE) {
+					
 					AppUtils.Log(MainActivity.this, "i", "nProgress < 100");
+					mLoadingDummy.setVisibility(View.VISIBLE);
+					
 				} else if (nProgress == 100) {
+					
 					AppUtils.Log(MainActivity.this, "i", "nProgress == 100");
+					
 					mWebView.setVisibility(View.VISIBLE);
 					mLoadingDummy.setVisibility(View.GONE);
+					
+					if (isPageLoadError) {
+						mErrorDummy.setVisibility(View.VISIBLE);
+					}
+					
 				} else {
 					AppUtils.Log(MainActivity.this, "i", "nProgress / else");
 				}
@@ -294,15 +336,65 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 	}
 	
 	// ? Перезагрузка страницы
-	void mWebViewPageReload(boolean viaDialog) {
+	void mWebViewPageReload() {
 		
 		mWebView.reload();
-		AppUtils.Log(MainActivity.this, "d", "mWebViewPageReload (Via dialog: " + viaDialog + ")");
+		AppUtils.Log(MainActivity.this, "d", "mWebViewPageReload");
 		
-		if (viaDialog) {
-			mDialogMenu.dismiss();
+	}
+	
+	// ? Инжектирование скрипта для взаимодействия со страницей
+	void injectJs() {
+		
+		try {
+			
+			InputStream mInputStream = getAssets().open("script.js");
+			byte[] mBuffer = new byte[mInputStream.available()];
+			
+			mInputStream.read(mBuffer);
+			mInputStream.close();
+			
+			String mEncoded = Base64.encodeToString(mBuffer, Base64.NO_WRAP);
+			
+			mWebView.loadUrl("javascript:(function() {" +
+							 "var parent = document.getElementsByTagName('head').item(0);" +
+							 "var script = document.createElement('script');" +
+							 "script.type = 'text/javascript';" +
+							 "script.innerHTML = window.atob('" + mEncoded + "');" +
+							 "parent.appendChild(script)" +
+							 "})()");
+							 
+			
+			/*mWebView.loadUrl("javascript:(function() {" +
+							 "var parent = document.getElementsByTagName('head').item(0);" +
+							 "var style = document.createElement('style');" +
+							 "style.type = 'text/css';" +
+							 "style.innerHTML = window.atob('" + mEncoded + "');" +
+							 "parent.appendChild(style)" +
+							 "})()");*/
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			AppUtils.Log(this, "e", "injectJs: " + e);
 		}
 		
+	}
+	
+	// ? 
+	public boolean onKeyDown(int keyCode, KeyEvent keyEvent) {
+
+		if ((keyCode == KeyEvent.KEYCODE_BACK) && mWebView.canGoBack()) {
+			mWebViewPageBack();
+			AppUtils.Log(MainActivity.this, "d", "KeyEvent.KEYCODE_BACK");
+			return true;
+		} if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
+			AppUtils.Log(MainActivity.this, "d", "KeyEvent.KEYCODE_VOLUME_UP");
+		} if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
+			AppUtils.Log(MainActivity.this, "d", "KeyEvent.KEYCODE_VOLUME_DOWN");
+		} 
+
+		return super.onKeyDown(keyCode, keyEvent);
+
 	}
 	
 }
