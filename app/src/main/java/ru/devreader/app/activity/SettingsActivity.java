@@ -55,7 +55,7 @@ public class SettingsActivity extends PreferenceActivity {
 			
 			case "dbg.firstStartPrefReset":
 				mSharedPrefsEditor.putBoolean("isFirstStart", true);
-				mSharedPrefsEditor.commit();														  OTACheckTask.checkUpdates(this, false, false);
+				mSharedPrefsEditor.commit();
 				break;
 
 			case "more.installInA2IGA":
@@ -63,7 +63,7 @@ public class SettingsActivity extends PreferenceActivity {
 				break;
 				
 			case "ota.check":
-				checkUpdates();																  OTACheckTask.checkUpdates(this, false, false);
+				checkUpdates();
 				break;
 				
 			default: break;
