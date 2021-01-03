@@ -17,14 +17,12 @@ public class SplashActivity extends AppCompatActivity {
 	boolean isFirstStart;
 	
 	SharedPreferences mSharedPrefs;
-	SharedPreferences.Editor mSharedPrefsEditor;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		mSharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-		mSharedPrefsEditor = mSharedPrefs.edit();
 		
 		// ? Prefs
 		isFirstStart = mSharedPrefs.getBoolean("isFirstStart", true);
