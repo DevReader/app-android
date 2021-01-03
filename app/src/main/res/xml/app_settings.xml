@@ -76,7 +76,7 @@
 	<!-- Debug -->
 	<ru.devreader.app.ui.preference.BorderPreference />
 	<ru.devreader.app.ui.preference.CategoryPreference
-		android:title="Отладка (Debug)"/>
+		android:title="Debug settings"/>
 	
 	<SwitchPreference
 		android:icon="@android:color/transparent"
@@ -87,7 +87,7 @@
 	<SwitchPreference
 		android:icon="@android:color/transparent"
 		android:key="dbg.webViewCashe"
-		android:title="Кеширование страниц в WebView"
+		android:title="WebView cache"
 		android:defaultValue="true"/>
 
 	<SwitchPreference
@@ -99,7 +99,7 @@
 	<Preference
 		android:icon="@android:color/transparent"
 		android:key="dbg.firstStartPrefReset"
-		android:title="Сброс первого запуска"/>
+		android:title="Reset first start pref"/>
 	
 	<SwitchPreference
 		android:icon="@android:color/transparent"
@@ -114,6 +114,7 @@
 		android:defaultValue="false"/>
 	
 	<ru.devreader.app.ui.preference.PromtPreference 
-		android:summary="Настройки для разработчика!"/>
+		android:title="Installation info"
+		android:key="dbg.installationInfo"/>
 	
 </PreferenceScreen>

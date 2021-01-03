@@ -20,6 +20,7 @@ public class SettingsActivity extends PreferenceActivity {
 	
 	Preference moreInstallInA2IGA;
 	Preference otaCheck;
+	Preference dbgInstallationInfo;
 	
 	String ota_lastCheckDate;
 	
@@ -46,6 +47,14 @@ public class SettingsActivity extends PreferenceActivity {
 		
 		otaCheck = findPreference("ota.check");
 		otaCheck.setSummary(String.format(getString(R.string.pref_ota_check_summary), ota_lastCheckDate));
+		
+		// ! Debug
+		dbgInstallationInfo = findPreference("dbg.installationInfo");
+		dbgInstallationInfo.setSummary("Install date: " + AppUtils.getInstallDate(this, getPackageName(), false, false) + 
+									   "\nLast update date: " + AppUtils.getInstallDate(this, getPackageName(), true, false) +
+									   "\nPackage name: " + getPackageName() +
+									   "\nBeta build status: " + AppUtils.getVersionName(this, getPackageName()).contains("beta") +
+									   "\nA2IGA install status: " + AppUtils.isAppInstalled(this, "ru.rx1310.app.a2iga"));
 		
 	}
 	

@@ -149,7 +149,7 @@ public class AppUtils {
 
 	}
 
-	public static String getInstallDate(Context context, String packageName, boolean lastUpdateTime) {
+	public static String getInstallDate(Context context, String packageName, boolean lastUpdateTime, boolean onlyInt) {
 
         PackageManager packageMng =  context.getPackageManager();
         long installTimeInMs;
@@ -166,8 +166,12 @@ public class AppUtils {
 			} else {
 				installTimeInMs = packageInfo.firstInstallTime;
 			}
-
-            installDateString  = getDate(installTimeInMs, "dd/MM/yyyy (HH:mm:ss)");
+			
+			if (onlyInt) {
+				installDateString  = getDate(installTimeInMs, "ddMMyyyyHHmmss");
+			} else {
+				installDateString  = getDate(installTimeInMs, "dd/MM/yyyy (HH:mm:ss)");
+			}
 
         } catch (PackageManager.NameNotFoundException e) {
 			Log(context, "e", "getInstallDate: " + e + "\nlastUpdateTime: " + lastUpdateTime);
