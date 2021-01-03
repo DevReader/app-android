@@ -56,6 +56,8 @@ public class SettingsActivity extends PreferenceActivity {
 			case "dbg.firstStartPrefReset":
 				mSharedPrefsEditor.putBoolean("isFirstStart", true);
 				mSharedPrefsEditor.commit();
+				AppUtils.showToast(this, "Success!");
+				AppUtils.Log(this, "d", "[firstStartPrefReset] isFirstStart = true");
 				break;
 
 			case "more.installInA2IGA":

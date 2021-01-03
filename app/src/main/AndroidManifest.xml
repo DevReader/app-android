@@ -47,6 +47,10 @@
 			android:name=".activity.MainActivity"/>
 		
 		<activity
+			android:theme="@style/AppTheme.NoActionBar"
+			android:name=".activity.IntroActivity"/>
+		
+		<activity
 			android:label="@string/activity_settings"
 			android:theme="@style/AppTheme.Preferences"
 			android:name=".activity.SettingsActivity">

@@ -14,4 +14,10 @@
 	<string name="err_m2_action_start2048">1024 + 1024 = ?</string>
 	<string name="err_m2_action_repeat">Повторить попытку</string>
 	
+	<!-- Intro Page -->
+	<string name="intro_title">@string/app_name</string>
+	<string name="intro_subtitle">Проще. Удобнее. Быстрее.</string>
+	<string name="intro_tip">Нажмите и удерживайте на кнопке с аналогичной иконкой для перехода к настройкам приложения.</string>
+	<string name="intro_action_continue">Продолжить</string>
+	
 </resources>

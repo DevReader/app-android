@@ -49,7 +49,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 			dbg_shouldOverrideUrlLoadingV2,
 			dbg_showLoadUrl;
 			
-	boolean isFirstStart;
 	boolean isFabAlphaEnabled, isOtaAutoCheckEnabled;
 	
 	float fabAlphaValue = (float) 0.6;
@@ -127,13 +126,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		super.onResume();
 		
 		// ? Prefs
-		isFirstStart = mSharedPrefs.getBoolean("isFirstStart", true);
 		isOtaAutoCheckEnabled = mSharedPrefs.getBoolean("ota.checkAuto", false);
-		
-		// ? Отображаю приветствие при первом запуске
-		if (isFirstStart) {
-			initFirstStartMessage();
-		}
 		
 		// ? Настройка прозрачности fab'ов
 		if (isFabAlphaEnabled) {
@@ -149,22 +142,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 				OTACheckTask.checkUpdates(this, false, false);
 			}
 		}
-		
-	}
-	
-	// ? Сообщение при первом запуске
-	void initFirstStartMessage() {
-		
-		// ? Сохраняю настройку, которая теперь знает,
-		// что первый запуск уже был
-		mSharedPrefsEditor.putBoolean("isFirstStart", false);
-		mSharedPrefsEditor.commit();
-		
-		// ? Отображаю диалог
-		mDialogMenu = new BottomSheetDialog(MainActivity.this);
-		View mDialogView = getLayoutInflater().inflate(R.layout.sheet_welcome, null);
-		mDialogMenu.setContentView(mDialogView);
-		mDialogMenu.show(); // ? Ну и показываю. Нмче нового не открыл бл.
 		
 	}
 	
