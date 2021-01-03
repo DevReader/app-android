@@ -1,0 +1,7 @@
+{
+	"apkUrl": "https://github.com/devreader/app-android/releases/download/210103/app-release.apk",
+	"changelogUrl": "http://google.com",
+	"versionName": "21.0-beta",
+	"versionCode": 210103,
+	"updateMessage": "Первая предварительная сборка приложения для публичного тестирования. С полным списком нововведений можно ознакомиться по кнопке ниже."
+}

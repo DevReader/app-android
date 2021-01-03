@@ -108,7 +108,7 @@ public class SettingsActivity extends PreferenceActivity {
 			startActivity(Intent.createChooser(sendPackageName, getString(R.string.pref_more_a2iga_chooser_title)));
 
 		} else {
-			AppUtils.openURL(this, "https://github.com/rx1310/a2iga/releases");
+			AppUtils.openURL(this, "https://github.com/rx1310/a2iga/releases/latest");
 		}
 
 	}
