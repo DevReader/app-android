@@ -98,7 +98,7 @@
 	
 	<Preference
 		android:icon="@android:color/transparent"
-		android:key="dbg.resetFirstStart"
+		android:key="dbg.firstStartPrefReset"
 		android:title="Сброс первого запуска"/>
 	
 	<SwitchPreference
