@@ -33,8 +33,8 @@ import ru.devreader.app.util.AppUtils;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 	
 	// ? Страница, которая будет загружена в WebView
-	final String loadUrl = "file:///android_asset/" + "test/index.html";
-	// final String loadUrl = "https://" + "devreader.github.io" + "/";
+	//final String loadUrl = "file:///android_asset/" + "test/index.html";
+	final String loadUrl = "https://" + "devreader.github.io" + "/";
 	
 	WebView mWebView;
 	FloatingActionButton mFabBack, mFabHome;
@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		dbg_javaScript = mSharedPrefs.getBoolean("dbg.js", true);
 		dbg_webViewCache = mSharedPrefs.getBoolean("dbg.webViewCashe", true);
 		dbg_injectJs = mSharedPrefs.getBoolean("dbg.injectJs", true);
-		dbg_shouldOverrideUrlLoadingV2 = mSharedPrefs.getBoolean("dbg.shouldOverrideUrlLoadingV2", false);
+		dbg_shouldOverrideUrlLoadingV2 = mSharedPrefs.getBoolean("dbg.shouldOverrideUrlLoadingV2", true);
 		dbg_showLoadUrl = mSharedPrefs.getBoolean("dbg.showLoadUrl", false);
 		
 		AppUtils.Log(this, "d", "Init WebView");
@@ -208,7 +208,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 					
 					/* ? Если начало ссылки, на которую нажал пользователь, соответствует
 				     	 значению из urlPrefix, то открываем ссылку прямо в нашем приложении */
-					if (url != null && url.startsWith(urlPrefix)){
+					if (url.contains(urlPrefix)){
 						return false;
 					} else {
 						// .., а если нет, то отправляем пользователя в браузер
