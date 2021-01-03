@@ -4,6 +4,8 @@ package ru.devreader.app.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.DialogInterface;
+
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,11 +19,13 @@ import android.widget.LinearLayout;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AlertDialog;
 
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.webkit.JsResult;
 
 import java.io.InputStream;
 
@@ -303,6 +307,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 				if (!TextUtils.isEmpty(pageTitle)) {
 					//setTitle(pageTitle);
 				}
+			}
+			
+			// ? 
+			@Override
+			public boolean onJsAlert(WebView webView, String url, String alertMessage, JsResult jsResult) {
+						
+				AlertDialog.Builder alertBuilder = new AlertDialog.Builder(MainActivity.this);
+
+				alertBuilder.setTitle(R.string.app_name);
+				alertBuilder.setMessage(alertMessage);
+				alertBuilder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface d, int i) {
+						d.dismiss();
+					}
+				});
+				alertBuilder.show();
+					
+				jsResult.cancel();
+				
+				return true;
+					
 			}
 
 		});
