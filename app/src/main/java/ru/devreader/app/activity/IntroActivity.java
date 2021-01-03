@@ -4,16 +4,19 @@ package ru.devreader.app.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+
 import android.os.Bundle;
 import android.os.Handler;
+
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import ru.devreader.app.R;
-import ru.devreader.app.util.AppUtils;
 import android.widget.Button;
 import android.widget.LinearLayout;
+
+import ru.devreader.app.R;
+import ru.devreader.app.util.AppUtils;
 
 public class IntroActivity extends AppCompatActivity {
 
@@ -50,6 +53,7 @@ public class IntroActivity extends AppCompatActivity {
 			public void run() {
 				introTip.setVisibility(View.VISIBLE);
 				introContinueButton.setEnabled(true);
+				introContinueButton.setText(R.string.intro_action_continue);
 			} 
 		}, 1000);
 		

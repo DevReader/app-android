@@ -41,10 +41,10 @@
 		<Button
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="@string/intro_action_continue"
 			style="@style/Widget.AppCompat.Button.Colored"
 			android:onClick="introContinue"
-			android:id="@+id/el_introContinueButton"/>
+			android:id="@+id/el_introContinueButton"
+			android:text="• • •"/>
 
 	</LinearLayout>
 
