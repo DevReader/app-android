@@ -362,9 +362,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 	}
 	
 	// ? Перезагрузка страницы
-	void mWebViewPageReload() {
+	public void mWebViewPageReload(View mView) {
 		
 		mWebView.reload();
+		
+		// ? Если до этого была ошибка, то скрываем заглушку
+		if (isPageLoadError) {
+			mErrorDummy.setVisibility(View.GONE);
+		}
+		
 		AppUtils.Log(MainActivity.this, "d", "mWebViewPageReload");
 		
 	}
