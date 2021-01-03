@@ -71,8 +71,7 @@
 		android:key="ota.checkAuto"
 		android:title="@string/pref_ota_check_auto"
 		android:summary="@string/pref_ota_check_auto_summary"
-		android:defaultValue="false"
-		android:enabled="true"/>
+		android:defaultValue="true"/>
 	
 	<!-- Debug -->
 	<ru.devreader.app.ui.preference.BorderPreference />
@@ -91,8 +90,30 @@
 		android:title="Кеширование страниц в WebView"
 		android:defaultValue="true"/>
 
-	<ru.devreader.app.ui.preference.PromtPreference
-		
-		android:summary="Экспериментальные настройки!"/>
+	<SwitchPreference
+		android:icon="@android:color/transparent"
+		android:key="dbg.injectJs"
+		android:title="Inject JS"
+		android:defaultValue="true"/>
+	
+	<Preference
+		android:icon="@android:color/transparent"
+		android:key="dbg.resetFirstStart"
+		android:title="Сброс первого запуска"/>
+	
+	<SwitchPreference
+		android:icon="@android:color/transparent"
+		android:key="dbg.shouldOverrideUrlLoadingV2"
+		android:title="Should override url loading (v2)"
+		android:defaultValue="false"/>
+	
+	<SwitchPreference
+		android:icon="@android:color/transparent"
+		android:key="dbg.showLoadUrl"
+		android:title="Show load url"
+		android:defaultValue="false"/>
+	
+	<ru.devreader.app.ui.preference.PromtPreference 
+		android:summary="Настройки для разработчика!"/>
 	
 </PreferenceScreen>

@@ -33,16 +33,20 @@ import ru.devreader.app.util.AppUtils;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 	
 	// ? Страница, которая будет загружена в WebView
-	final String loadUrl = "file:///android_asset/" + "test/test2.html";
+	final String loadUrl = "file:///android_asset/" + "test/index.html";
 	// final String loadUrl = "https://" + "devreader.github.io" + "/";
 	
 	WebView mWebView;
-	FloatingActionButton mFabBackAndReload, mFabHome;
+	FloatingActionButton mFabBack, mFabHome;
 	BottomSheetDialog mDialogMenu;
 	LinearLayout mLoadingDummy, mErrorDummy;
-	LinearLayout mSheetPageReloadAction, mSheetPageHomeAction, mSheetAppSettingsAction, mSheetAppExitAction, mSheetSendReportAction;
 	
-	boolean dbg_javaScript = true, dbg_webViewCache = false;
+	boolean dbg_javaScript, 
+			dbg_webViewCache, 
+			dbg_injectJs, 
+			dbg_shouldOverrideUrlLoadingV2,
+			dbg_showLoadUrl;
+			
 	boolean isPageLoadError = false;
 	boolean isFirstStart;
 	boolean isFabAlphaEnabled, isOtaAutoCheckEnabled;
@@ -75,9 +79,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		mErrorDummy = findViewById(R.id.el_dummyError_m2);
 		
 		// ? Настройка FAB Back&Reload
-		mFabBackAndReload = findViewById(R.id.el_fabBackAndReload);
-		mFabBackAndReload.setOnClickListener(this);
-		mFabBackAndReload.setOnLongClickListener(new View.OnLongClickListener() {
+		mFabBack = findViewById(R.id.el_fabBack);
+		mFabBack.setOnClickListener(this);
+		mFabBack.setOnLongClickListener(new View.OnLongClickListener() {
 			public boolean onLongClick(View mView) {
 				return true;
 			}
@@ -100,17 +104,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 		switch (mView.getId()) {
 			
-			case R.id.el_fabBackAndReload:
-				
-				// ? Если onReceivedError
-				if (isPageLoadError) {
-					//AppUtils.showToast(this, "Reload");
-					mWebViewPageReload();
-				} else {
-					//AppUtils.showToast(this, "Back");
-					mWebViewPageBack();
-				}
-				
+			case R.id.el_fabBack:
+				mWebView.goBack();
 				break;
 				
 			case R.id.el_fabHome:
@@ -140,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		// ? Настройка прозрачности fab'ов
 		if (isFabAlphaEnabled) {
 			mFabHome.setAlpha(fabAlphaValue);
-			mFabBackAndReload.setAlpha(fabAlphaValue);
+			mFabBack.setAlpha(fabAlphaValue);
 		}
 		
 		// ? Проверка обновлений
@@ -176,7 +171,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		// ? Prefs
 		dbg_javaScript = mSharedPrefs.getBoolean("dbg.js", true);
 		dbg_webViewCache = mSharedPrefs.getBoolean("dbg.webViewCashe", true);
-
+		dbg_injectJs = mSharedPrefs.getBoolean("dbg.injectJs", true);
+		dbg_shouldOverrideUrlLoadingV2 = mSharedPrefs.getBoolean("dbg.shouldOverrideUrlLoadingV2", false);
+		dbg_showLoadUrl = mSharedPrefs.getBoolean("dbg.showLoadUrl", false);
+		
 		AppUtils.Log(this, "d", "Init WebView");
 
 		// ? Поиск элемента
@@ -210,8 +208,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		
 		// ? Скрываю скроллбар
 		mWebView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
-
-		if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
+		
+		mWebView.getSettings().setDatabaseEnabled(true);
+		mWebView.getSettings().setDatabasePath("/data/data/" + getPackageName() + "/databases/");
+		
+		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
 			WebViewSettings.setAllowFileAccessFromFileURLs(true);
 			WebViewSettings.setAllowUniversalAccessFromFileURLs(true);
 		}
@@ -222,15 +223,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 			public boolean shouldOverrideUrlLoading(WebView webView, String url) {
 
 				String urlPrefix = loadUrl;
-
-				/* ? Если начало ссылки, на которую нажал пользователь, соответствует
+				
+				if (dbg_shouldOverrideUrlLoadingV2) {
+					
+					/* ? Если начало ссылки, на которую нажал пользователь, соответствует
 				     значению из urlPrefix, то открываем ссылку прямо в нашем приложении */
-				if (url != null && url.startsWith(urlPrefix)){
-					return false;
+					if (url != null && url.startsWith(urlPrefix)){
+						return false;
+					} else {
+						// .., а если нет, то отправляем пользователя в браузер
+						webView.getContext().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+						return true;
+					}
+					
 				} else {
-					// .., а если нет, то отправляем пользователя в браузер
+					
+					if (Uri.parse(url).getHost().length() == 0) {
+						return false;
+					}
+					
 					webView.getContext().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+					
 					return true;
+					
 				}
 
 			}
@@ -247,13 +262,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 				mWebView.setVisibility(View.GONE);
 				
 				// ? Отобразим заглушку
-				//mErrorDummy.setVisibility(View.VISIBLE);
+				mErrorDummy.setVisibility(View.VISIBLE);
 				
 				// ? Перемена переменной
 				isPageLoadError = true;
-				
-				// ? Отобразим иконку Refresh в FabMenu
-				mFabBackAndReload.setImageResource(R.drawable.ic_page_refresh);
 				
 				// ! net::ERR_INTERNET_DISCONNECTED
 				if (errCode == -2) {
@@ -267,15 +279,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 			public void onPageFinished(WebView webView, String url) {
 				super.onPageFinished(webView, url);
 				
+				if (dbg_showLoadUrl) {
+					AppUtils.showToast(MainActivity.this, "LOADED URL: " + url);
+				}
+				
+				mErrorDummy.setVisibility(View.GONE);
+				
 				// ? Инжектирование скрипта
-				injectJs();
+				if (dbg_injectJs) {
+					injectJs();
+				}
 				
 			}
 
 		});
 
 		mWebView.setWebChromeClient(new WebChromeClient() {
-
+			
 			// Отлов статуса загрузки страницы
 			public void onProgressChanged(WebView webView, int nProgress) {
 
@@ -294,7 +314,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 					mLoadingDummy.setVisibility(View.GONE);
 					
 					if (isPageLoadError) {
-						mErrorDummy.setVisibility(View.VISIBLE);
+						//mErrorDummy.setVisibility(View.VISIBLE);
+					} else {
+						mErrorDummy.setVisibility(View.GONE);
 					}
 					
 				} else {
@@ -319,11 +341,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		AppUtils.Log(MainActivity.this, "i", "WebView load url: " + loadUrl);
 
 	}
-	
-	// ? Переход к пред. странице
-	void mWebViewPageBack() {
+
+	@Override
+	public void onBackPressed() {
 		
-		if (mWebView.isFocused() && mWebView.canGoBack()) {
+		if (mWebView.canGoBack()) {
 			mWebView.goBack();
 			AppUtils.Log(MainActivity.this, "d", "mWebViewPageBack");
 		} else {
@@ -384,9 +406,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 	public boolean onKeyDown(int keyCode, KeyEvent keyEvent) {
 
 		if ((keyCode == KeyEvent.KEYCODE_BACK) && mWebView.canGoBack()) {
-			mWebViewPageBack();
+			//onBackPressed();
 			AppUtils.Log(MainActivity.this, "d", "KeyEvent.KEYCODE_BACK");
-			return true;
+			//return true;
 		} if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
 			AppUtils.Log(MainActivity.this, "d", "KeyEvent.KEYCODE_VOLUME_UP");
 		} if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {

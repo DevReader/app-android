@@ -23,8 +23,9 @@ public class SettingsActivity extends PreferenceActivity {
 	
 	String ota_lastCheckDate;
 	
-	SharedPreferences mSharedPreferences;
-
+	SharedPreferences mSharedPrefs;
+	SharedPreferences.Editor mSharedPrefsEditor;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -32,9 +33,10 @@ public class SettingsActivity extends PreferenceActivity {
 		addPreferencesFromResource(R.xml.app_settings);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		
-		mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-
-		ota_lastCheckDate = mSharedPreferences.getString("ota.lastCheckDate", getString(android.R.string.untitled));
+		mSharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+		mSharedPrefsEditor = mSharedPrefs.edit();
+		
+		ota_lastCheckDate = mSharedPrefs.getString("ota.lastCheckDate", getString(android.R.string.untitled));
 		
 		mListView = findViewById(android.R.id.list);
 		mListView.setDivider(null);
@@ -50,14 +52,21 @@ public class SettingsActivity extends PreferenceActivity {
 	public boolean onPreferenceTreeClick(PreferenceScreen prefScreen, Preference pref) {
 
 		switch (pref.getKey()) {
+			
+			case "dbg.firstStartPrefReset":
+				mSharedPrefsEditor.putBoolean("isFirstStart", true);
+				mSharedPrefsEditor.commit();														  OTACheckTask.checkUpdates(this, false, false);
+				break;
 
 			case "more.installInA2IGA":
-				moreInstallInA2IGA();
+				installInA2IGA();
 				break;
 				
 			case "ota.check":
 				checkUpdates();																  OTACheckTask.checkUpdates(this, false, false);
 				break;
+				
+			default: break;
 
 		}
 
@@ -77,7 +86,7 @@ public class SettingsActivity extends PreferenceActivity {
 	}
 
 	// ? Установка A2IGA
-	void moreInstallInA2IGA() {
+	void installInA2IGA() {
 
 		if (AppUtils.isAppInstalled(this, "ru.rx1310.app.a2iga")) {
 

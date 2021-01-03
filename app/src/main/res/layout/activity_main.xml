@@ -24,7 +24,7 @@
 			android:id="@+id/el_dummyLoading"/>
 
 		<android.support.design.widget.FloatingActionButton
-			android:id="@+id/el_fabBackAndReload"
+			android:id="@+id/el_fabBack"
 			android:src="@drawable/ic_page_back"
 			android:layout_gravity="bottom|right"
 			app:fabSize="normal"

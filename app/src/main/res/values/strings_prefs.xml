@@ -27,4 +27,18 @@
 	<string name="pref_more_a2iga_not_found_summary">A2IGA не установлен! Нажмите, чтобы перейти на страницу загрузки.</string>
 	<string name="pref_more_a2iga_chooser_title">Найдите и выберите «A2IGA»</string>
 	
+	<!-- App info -->
+	<!--string name="pref_info_category">Информация</string>
+	<string name="pref_info_app_version">Версия приложения</string>
+	<string name="pref_info_app_build">Сборка</string>
+	<string name="pref_info_app_maintainer">Сопровождающий</string>
+	<string name="pref_info_app_git">Исходный код</string>
+	<string name="pref_info_app_licenses">Лицензии</string>
+	<string name="pref_info_"></string>
+	<string name="pref_info_"></string>
+	<string name="pref_info_"></string>
+	<string name="pref_info_"></string>
+	<string name="pref_info_"></string>
+	<string name="pref_info_"></string-->
+	
 </resources>
