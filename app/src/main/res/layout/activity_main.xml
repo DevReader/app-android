@@ -23,6 +23,13 @@
 			layout="@layout/dummy_page_loading"
 			android:id="@+id/el_dummyLoading"/>
 
+		<include
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			layout="@layout/dummy_page_error_m2"
+			android:id="@+id/el_dummyError_m2"
+			android:visibility="gone"/>
+
 		<android.support.design.widget.FloatingActionButton
 			android:id="@+id/el_fabBack"
 			android:src="@drawable/ic_page_back"
@@ -34,13 +41,6 @@
 			app:rippleColor="?colorAccent"
 			app:backgroundTint="@color/colorWindow"
 			style="@style/AppTheme.FAB"/>
-
-		<include
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			layout="@layout/dummy_page_error_m2"
-			android:id="@+id/el_dummyError_m2"
-			android:visibility="gone"/>
 
 		<android.support.design.widget.FloatingActionButton
 			android:id="@+id/el_fabHome"

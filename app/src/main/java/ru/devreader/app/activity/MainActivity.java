@@ -41,13 +41,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 	BottomSheetDialog mDialogMenu;
 	LinearLayout mLoadingDummy, mErrorDummy;
 	
+	boolean isPageLoadError = false;
+	
 	boolean dbg_javaScript, 
 			dbg_webViewCache, 
 			dbg_injectJs, 
 			dbg_shouldOverrideUrlLoadingV2,
 			dbg_showLoadUrl;
 			
-	boolean isPageLoadError = false;
 	boolean isFirstStart;
 	boolean isFabAlphaEnabled, isOtaAutoCheckEnabled;
 	
@@ -76,6 +77,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		// ? Заглушка при загрузке страницы
 		mLoadingDummy = findViewById(R.id.el_dummyLoading);
 		
+		// ? Заглушка при ошибке загрузки страницы
 		mErrorDummy = findViewById(R.id.el_dummyError_m2);
 		
 		// ? Настройка FAB Back&Reload
@@ -105,11 +107,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		switch (mView.getId()) {
 			
 			case R.id.el_fabBack:
-				mWebView.goBack();
+				onBackPressed();
 				break;
 				
 			case R.id.el_fabHome:
 				mWebView.loadUrl(loadUrl);
+				if (isPageLoadError) mErrorDummy.setVisibility(View.GONE);
 				AppUtils.Log(MainActivity.this, "d", "mWebViewPageHome (homepage: " + loadUrl + ")");
 				break;
 
@@ -227,7 +230,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 				if (dbg_shouldOverrideUrlLoadingV2) {
 					
 					/* ? Если начало ссылки, на которую нажал пользователь, соответствует
-				     значению из urlPrefix, то открываем ссылку прямо в нашем приложении */
+				     	 значению из urlPrefix, то открываем ссылку прямо в нашем приложении */
 					if (url != null && url.startsWith(urlPrefix)){
 						return false;
 					} else {
@@ -264,13 +267,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 				// ? Отобразим заглушку
 				mErrorDummy.setVisibility(View.VISIBLE);
 				
-				// ? Перемена переменной
+				// Перемена переменной
 				isPageLoadError = true;
 				
 				// ! net::ERR_INTERNET_DISCONNECTED
-				if (errCode == -2) {
-					
-				}
+				if (errCode == -2) {}
 				
 			}
 			
@@ -279,11 +280,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 			public void onPageFinished(WebView webView, String url) {
 				super.onPageFinished(webView, url);
 				
+				// ? Всплыв. уведомление с названием загруженной страницы
 				if (dbg_showLoadUrl) {
 					AppUtils.showToast(MainActivity.this, "LOADED URL: " + url);
 				}
-				
-				mErrorDummy.setVisibility(View.GONE);
 				
 				// ? Инжектирование скрипта
 				if (dbg_injectJs) {
@@ -313,12 +313,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 					mWebView.setVisibility(View.VISIBLE);
 					mLoadingDummy.setVisibility(View.GONE);
 					
-					if (isPageLoadError) {
-						//mErrorDummy.setVisibility(View.VISIBLE);
-					} else {
-						mErrorDummy.setVisibility(View.GONE);
-					}
-					
 				} else {
 					AppUtils.Log(MainActivity.this, "i", "nProgress / else");
 				}
@@ -342,12 +336,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 	}
 
+	// ? Нажатие кнопки Back
 	@Override
 	public void onBackPressed() {
 		
 		if (mWebView.canGoBack()) {
+			
+			// ? Перемещение на пред. стр.
 			mWebView.goBack();
+			
+			// ? Если до этого была ошибка, то скрываем заглушку
+			if (isPageLoadError) {
+				mErrorDummy.setVisibility(View.GONE);
+			}
+			
 			AppUtils.Log(MainActivity.this, "d", "mWebViewPageBack");
+			
 		} else {
 			// ? Если это посл. страница, то выход из приложения
 			super.onBackPressed();
