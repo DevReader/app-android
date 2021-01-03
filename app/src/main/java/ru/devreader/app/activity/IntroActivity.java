@@ -12,10 +12,15 @@ import android.view.View;
 
 import ru.devreader.app.R;
 import ru.devreader.app.util.AppUtils;
+import android.widget.Button;
+import android.widget.LinearLayout;
 
 public class IntroActivity extends AppCompatActivity {
 
 	boolean isFirstStart;
+	
+	Button introContinueButton;
+	LinearLayout introTip;
 
 	SharedPreferences mSharedPrefs;
 	SharedPreferences.Editor mSharedPrefsEditor;
@@ -31,10 +36,26 @@ public class IntroActivity extends AppCompatActivity {
 
 		// ? Prefs
 		isFirstStart = mSharedPrefs.getBoolean("isFirstStart", true);
-
+		
+		// ? Кнопка "Продолжить"
+		introContinueButton = findViewById(R.id.el_introContinueButton);
+		introContinueButton.setEnabled(false);
+		
+		// ? Блок с подсказкой
+		introTip = findViewById(R.id.el_introTip);
+		introTip.setVisibility(View.INVISIBLE);
+		
+		Handler mHandler = new Handler(); 
+		mHandler.postDelayed(new Runnable() {
+			public void run() {
+				introTip.setVisibility(View.VISIBLE);
+				introContinueButton.setEnabled(true);
+			} 
+		}, 1000);
+		
 	}
 	
-	public void finishIntro(View mView) {
+	public void introContinue(View mView) {
 		
 		// ? Запуск основной активности
 		startActivity(new Intent(IntroActivity.this, MainActivity.class));
