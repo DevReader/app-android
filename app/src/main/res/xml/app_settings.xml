@@ -105,7 +105,7 @@
 		android:icon="@android:color/transparent"
 		android:key="dbg.shouldOverrideUrlLoadingV2"
 		android:title="Should override url loading (v2)"
-		android:defaultValue="false"/>
+		android:defaultValue="true"/>
 	
 	<SwitchPreference
 		android:icon="@android:color/transparent"
