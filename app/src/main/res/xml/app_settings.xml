@@ -32,13 +32,6 @@
 		android:defaultValue="false"
 		android:enabled="false"/>
 	
-	<SwitchPreference
-		android:icon="@android:color/transparent"
-		android:key="ui.rotateAuto"
-		android:title="@string/pref_ui_rotate_auto"
-		android:defaultValue="false"
-		android:enabled="false"/>
-	
 	<!-- More -->
 	<ru.devreader.app.ui.preference.CategoryPreference
 		android:title="@string/pref_more_category"/>
@@ -94,7 +87,7 @@
 		android:icon="@android:color/transparent"
 		android:key="dbg.injectJs"
 		android:title="Inject JS"
-		android:defaultValue="true"/>
+		android:defaultValue="false"/>
 	
 	<Preference
 		android:icon="@android:color/transparent"
@@ -112,6 +105,11 @@
 		android:key="dbg.showLoadUrl"
 		android:title="Show load url"
 		android:defaultValue="false"/>
+	
+	<Preference
+		android:icon="@android:color/transparent"
+		android:key="dbg.appCacheDelete"
+		android:title="Delete app cache"/>
 	
 	<ru.devreader.app.ui.preference.PromtPreference 
 		android:title="Installation info"

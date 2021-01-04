@@ -33,6 +33,7 @@ import ru.devreader.app.R;
 import ru.devreader.app.activity.MainActivity;
 import ru.devreader.app.task.OTACheckTask;
 import ru.devreader.app.util.AppUtils;
+import android.content.pm.ActivityInfo;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 	
@@ -124,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		}
 
 	}
-
+	
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -155,7 +156,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		// ? Prefs
 		dbg_javaScript = mSharedPrefs.getBoolean("dbg.js", true);
 		dbg_webViewCache = mSharedPrefs.getBoolean("dbg.webViewCashe", true);
-		dbg_injectJs = mSharedPrefs.getBoolean("dbg.injectJs", true);
+		dbg_injectJs = mSharedPrefs.getBoolean("dbg.injectJs", false);
 		dbg_shouldOverrideUrlLoadingV2 = mSharedPrefs.getBoolean("dbg.shouldOverrideUrlLoadingV2", true);
 		dbg_showLoadUrl = mSharedPrefs.getBoolean("dbg.showLoadUrl", false);
 		

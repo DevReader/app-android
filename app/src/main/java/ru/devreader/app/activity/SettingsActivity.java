@@ -13,6 +13,8 @@ import android.preference.PreferenceScreen;
 import ru.devreader.app.R;
 import ru.devreader.app.task.OTACheckTask;
 import ru.devreader.app.util.AppUtils;
+import android.os.Build;
+import android.app.ActivityManager;
 
 public class SettingsActivity extends PreferenceActivity {
 
@@ -67,6 +69,10 @@ public class SettingsActivity extends PreferenceActivity {
 				mSharedPrefsEditor.commit();
 				AppUtils.showToast(this, "Success!");
 				AppUtils.Log(this, "d", "[firstStartPrefReset] isFirstStart = true");
+				break;
+				
+			case "dbg.appCacheDelete":
+				((ActivityManager) this.getSystemService(ACTIVITY_SERVICE)).clearApplicationUserData();
 				break;
 
 			case "more.installInA2IGA":
