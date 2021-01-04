@@ -316,7 +316,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 						
 				android.support.v7.app.AlertDialog.Builder alertBuilder = new AlertDialog.Builder(MainActivity.this, R.style.AppTheme_Dialog_Alert);
 
-				alertBuilder.setTitle(R.string.app_name);
+				alertBuilder.setTitle(getString(R.string.app_name) + " (JS Alert)");
 				alertBuilder.setMessage(alertMessage);
 				alertBuilder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface d, int i) {
@@ -400,13 +400,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 							 "})()");
 							 
 			
-			mWebView.loadUrl("javascript:(function() {" +
+			/*mWebView.loadUrl("javascript:(function() {" +
 							 "var parent = document.getElementsByTagName('head').item(0);" +
 							 "var style = document.createElement('style');" +
 							 "style.type = 'text/css';" +
 							 "style.innerHTML = window.atob('" + "styles.css" + "');" +
 							 "parent.appendChild(style)" +
-							 "})()");
+							 "})()");*/
 			
 		} catch (Exception e) {
 			e.printStackTrace();

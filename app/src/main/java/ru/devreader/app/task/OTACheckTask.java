@@ -98,7 +98,7 @@ public class OTACheckTask extends AsyncTask<Void, Void, String> {
 
 		android.support.v7.app.AlertDialog.Builder alertBuilder = new android.support.v7.app.AlertDialog.Builder(context, R.style.AppTheme_Dialog_Alert);
 
-		alertBuilder.setTitle(updateVersion);
+		alertBuilder.setTitle("DevReader " + updateVersion);
 		alertBuilder.setMessage(updateMessage);
 		alertBuilder.setPositiveButton(R.string.ota_action_download, new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface d, int i) {
