@@ -70,7 +70,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		mSharedPrefsEditor = mSharedPrefs.edit();
 		
 		// ? Prefs
-		isFabAlphaEnabled = mSharedPrefs.getBoolean("ui.fabAlpha", false);
+		isOtaAutoCheckEnabled = mSharedPrefs.getBoolean("ota.checkAuto", false);
+		
+		// ? Проверка обновлений
+		if (isOtaAutoCheckEnabled) OTACheckTask.checkUpdates(this, false);
 		
 		// ? Запуск WebView
 		initWebView();
@@ -103,6 +106,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 			}
 		});
 		
+		
+		
 	}
 
 	@Override
@@ -131,21 +136,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		super.onResume();
 		
 		// ? Prefs
-		isOtaAutoCheckEnabled = mSharedPrefs.getBoolean("ota.checkAuto", false);
+		isFabAlphaEnabled = mSharedPrefs.getBoolean("ui.fabAlpha", false);
 		
 		// ? Настройка прозрачности fab'ов
 		if (isFabAlphaEnabled) {
 			mFabHome.setAlpha(fabAlphaValue);
 			mFabBack.setAlpha(fabAlphaValue);
-		}
-		
-		// ? Проверка обновлений
-		if (isOtaAutoCheckEnabled) {
-			if (AppUtils.getVersionName(this, getPackageName()).contains("beta")) {
-				OTACheckTask.checkUpdates(this, true, false);
-			} else {
-				OTACheckTask.checkUpdates(this, false, false);
-			}
 		}
 		
 	}
@@ -338,7 +334,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		AppUtils.Log(MainActivity.this, "i", "WebView load url: " + loadUrl);
 
 	}
-
+	
 	// ? Нажатие кнопки Back
 	@Override
 	public void onBackPressed() {

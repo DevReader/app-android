@@ -140,7 +140,7 @@ public class OTACheckTask extends AsyncTask<Void, Void, String> {
 	}
 	
 	// ? Проверка обновленмй
-	public static void checkUpdates(Context context, boolean isBetaChannelEnabled, boolean isProgressDialogEnabled) {
+	public static void checkUpdates(Context context, boolean isProgressDialogEnabled) {
 		
 		SharedPreferences mSharedPrefs;
 		SharedPreferences.Editor mSharedPrefsEditor;
@@ -155,7 +155,7 @@ public class OTACheckTask extends AsyncTask<Void, Void, String> {
 			mSharedPrefsEditor.putString("ota.lastCheckDate", isLastCheckDate);
 			mSharedPrefsEditor.commit();
 			
-			if (isBetaChannelEnabled) {
+			if (AppUtils.getVersionName(context, context.getPackageName()).contains("beta")) {
 				new OTACheckTask(context, "beta", isProgressDialogEnabled).execute();
 			} else {
 				new OTACheckTask(context, "release", isProgressDialogEnabled).execute();

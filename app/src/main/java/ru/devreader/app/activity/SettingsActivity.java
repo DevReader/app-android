@@ -80,7 +80,8 @@ public class SettingsActivity extends PreferenceActivity {
 				break;
 				
 			case "ota.check":
-				checkUpdates();
+				// ? Проверка обновлений
+				OTACheckTask.checkUpdates(this, true);
 				break;
 				
 			default: break;
@@ -117,17 +118,6 @@ public class SettingsActivity extends PreferenceActivity {
 			AppUtils.openURL(this, "https://github.com/rx1310/a2iga/releases/latest");
 		}
 
-	}
-	
-	// ? Проверка обновлений
-	void checkUpdates() {
-		
-		if (AppUtils.getVersionName(this, getPackageName()).contains("beta")) {
-			OTACheckTask.checkUpdates(this, true, true);
-		} else {
-			OTACheckTask.checkUpdates(this, false, true);
-		}
-		
 	}
 
 }
