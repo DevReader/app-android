@@ -23,6 +23,16 @@
 		
     </style>
 	
+	<style name="AppTheme.Dialog.Alert" parent="Theme.AppCompat.Dialog.Alert">
+		<item name="android:windowBackground">@drawable/background_dialog_alert</item>
+		<item name="android:background">@android:color/transparent</item>
+		<item name="android:colorPrimary">?colorPrimary</item>
+		<item name="android:colorAccent">@color/colorAccent</item>
+		<!--item name="android:colorAccent">#FFFF0000</item>
+		<item name="android:textColor">#FF4665EF</item>
+		<item name="android:textColorPrimary">#FFDBE500</item-->
+	</style>
+	
 	<style name="AppTheme.NoActionBar" parent="AppTheme">
 		<item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

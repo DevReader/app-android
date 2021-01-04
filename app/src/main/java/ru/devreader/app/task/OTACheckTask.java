@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.preference.PreferenceManager;
-import android.app.AlertDialog;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -45,7 +44,7 @@ public class OTACheckTask extends AsyncTask<Void, Void, String> {
     protected void onPreExecute() {
 
 		if (mProgressDialog) {
-			progressDialog = new ProgressDialog(mContext);
+			progressDialog = new ProgressDialog(mContext, R.style.AppTheme_Dialog_Alert);
 			progressDialog.setTitle(mContext.getString(R.string.ota_dlg_checking));
 			progressDialog.setMessage(mContext.getString(R.string.ota_dlg_checking_description));
 			progressDialog.setCancelable(false);
@@ -97,7 +96,7 @@ public class OTACheckTask extends AsyncTask<Void, Void, String> {
 
 	void updateDialog(final Context context, String updateVersion, String updateMessage, final String apkUrl, final String changelogUrl) {
 
-		AlertDialog.Builder alertBuilder = new AlertDialog.Builder(context);
+		android.support.v7.app.AlertDialog.Builder alertBuilder = new android.support.v7.app.AlertDialog.Builder(context, R.style.AppTheme_Dialog_Alert);
 
 		alertBuilder.setTitle(updateVersion);
 		alertBuilder.setMessage(updateMessage);

@@ -5,6 +5,7 @@ package ru.devreader.app.activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.DialogInterface;
+import android.content.pm.ActivityInfo;
 
 import android.graphics.Color;
 import android.net.Uri;
@@ -33,7 +34,6 @@ import ru.devreader.app.R;
 import ru.devreader.app.activity.MainActivity;
 import ru.devreader.app.task.OTACheckTask;
 import ru.devreader.app.util.AppUtils;
-import android.content.pm.ActivityInfo;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 	
@@ -314,7 +314,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 			@Override
 			public boolean onJsAlert(WebView webView, String url, String alertMessage, JsResult jsResult) {
 						
-				AlertDialog.Builder alertBuilder = new AlertDialog.Builder(MainActivity.this);
+				android.support.v7.app.AlertDialog.Builder alertBuilder = new AlertDialog.Builder(MainActivity.this, R.style.AppTheme_Dialog_Alert);
 
 				alertBuilder.setTitle(R.string.app_name);
 				alertBuilder.setMessage(alertMessage);
@@ -400,13 +400,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 							 "})()");
 							 
 			
-			/*mWebView.loadUrl("javascript:(function() {" +
+			mWebView.loadUrl("javascript:(function() {" +
 							 "var parent = document.getElementsByTagName('head').item(0);" +
 							 "var style = document.createElement('style');" +
 							 "style.type = 'text/css';" +
-							 "style.innerHTML = window.atob('" + mEncoded + "');" +
+							 "style.innerHTML = window.atob('" + "styles.css" + "');" +
 							 "parent.appendChild(style)" +
-							 "})()");*/
+							 "})()");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
