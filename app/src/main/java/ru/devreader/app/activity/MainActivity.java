@@ -92,6 +92,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		mFabBack.setOnClickListener(this);
 		mFabBack.setOnLongClickListener(new View.OnLongClickListener() {
 			public boolean onLongClick(View mView) {
+				AlertDialog.Builder b = new AlertDialog.Builder(MainActivity.this, R.style.AppTheme_Dialog_Alert);
+				b.setItems(R.array.fabBack_longpress_menu, new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface d, int itemPos) {
+						if (itemPos == 0) {
+							mWebViewPageReload(mWebView);
+						}
+					}
+				});
+				b.show();
 				return true;
 			}
 		});
@@ -105,8 +114,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 				return true;
 			}
 		});
-		
-		
 		
 	}
 
