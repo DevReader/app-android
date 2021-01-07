@@ -1,7 +1,7 @@
 {
-	"apkUrl": "https://github.com/devreader/app-android/releases/download/210103/app-beta.apk",
-	"changelogUrl": "https://github.com/devreader/app-android/releases/tag/210103",
-	"versionName": "21.0-beta",
-	"versionCode": 210103,
-	"updateMessage": "Первая предварительная сборка приложения для публичного тестирования. С полным списком нововведений можно ознакомиться по кнопке ниже."
+	"apkUrl": "https://github.com/devreader/app-android/releases/download/210107/app-beta.apk",
+	"changelogUrl": "https://github.com/devreader/app-android/releases/tag/210107",
+	"versionName": "21.1-beta",
+	"versionCode": 210107,
+	"updateMessage": "Вторая версия бля публичного тестирования, в которой была проделана большая работа по улучшению работы приложения, исправлению ошибок из прошлой версии и доработки уже существующих функций. Также были внесены очень важные изменения в структуру приложения и обработку получаемых с сайта данных. Полный список изменений по кнопке ниже."
 }
