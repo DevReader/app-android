@@ -94,6 +94,18 @@ public class SettingsActivity extends PreferenceActivity {
 				OTACheckTask.checkUpdates(this, true);
 				break;
 				
+			case "info.appVersion":
+				AppUtils.openURL(this, "https://devreader.github.io/devreader");
+				break;
+				
+			case "info.appSourceCode":
+				AppUtils.openURL(this, "https://github.com/devreader/app-android");
+				break;
+				
+			case "info.appDev":
+				AppUtils.openURL(this, "https://t.me/rx1310_dev");
+				break;
+				
 			default: break;
 
 		}

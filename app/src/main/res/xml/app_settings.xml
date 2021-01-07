@@ -76,8 +76,7 @@
 		android:title="@string/pref_info_app_version"/>
 	
 	<ru.devreader.app.ui.preference.PromtPreference
-		android:key="info.appInstallPromt"
-		android:summary="yy"/>
+		android:key="info.appInstallPromt"/>
 	
 	<Preference
 		android:icon="@android:color/transparent"
