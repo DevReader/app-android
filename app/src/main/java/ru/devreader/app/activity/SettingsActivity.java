@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ListView;
+import android.view.MenuItem;
+import android.view.Menu;
 
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
@@ -15,6 +17,7 @@ import ru.devreader.app.task.OTACheckTask;
 import ru.devreader.app.util.AppUtils;
 import android.os.Build;
 import android.app.ActivityManager;
+import android.support.v4.os.BuildCompat;
 
 public class SettingsActivity extends PreferenceActivity {
 
@@ -52,11 +55,12 @@ public class SettingsActivity extends PreferenceActivity {
 		
 		// ! Debug
 		dbgInstallationInfo = findPreference("dbg.installationInfo");
-		dbgInstallationInfo.setSummary("Install date: " + AppUtils.getInstallDate(this, getPackageName(), false, false) + 
-									   "\nLast update date: " + AppUtils.getInstallDate(this, getPackageName(), true, false) +
-									   "\nPackage name: " + getPackageName() +
-									   "\nBeta build status: " + AppUtils.getVersionName(this, getPackageName()).contains("beta") +
-									   "\nA2IGA install status: " + AppUtils.isAppInstalled(this, "ru.rx1310.app.a2iga"));
+		dbgInstallationInfo.setSummary("— Package name: " + getPackageName() +
+									   "\n— Beta build status: " + AppUtils.getVersionName(this, getPackageName()).contains("beta") +
+									   "\n— A2IGA install status: " + AppUtils.isAppInstalled(this, "ru.rx1310.app.a2iga") +
+									   "\n— Device: " + Build.DEVICE + " (" + Build.MODEL + ") / " + Build.PRODUCT +
+									   "\n— Brand: " + Build.BRAND + " (" + Build.MANUFACTURER + ")" +
+									   "\n— Fingerprint: " + Build.FINGERPRINT);
 		
 		// ! Info
 		infoAppVersion = findPreference("info.appVersion");
@@ -125,5 +129,33 @@ public class SettingsActivity extends PreferenceActivity {
 		}
 
 	}
+	
+	public boolean onCreateOptionsMenu(Menu mMenu) {
+
+		getMenuInflater().inflate(R.menu.settings, mMenu);
+
+		return super.onCreateOptionsMenu(mMenu);
+
+	}
+
+    public boolean onOptionsItemSelected(MenuItem mMenuItem) {
+
+        int id = mMenuItem.getItemId();
+
+        switch(id) {
+
+			case android.R.id.home:
+				finish();
+				return true;
+
+            case R.id.menu_settings_telegram:
+				AppUtils.openURL(this, "https://t.me/devreader");
+				return true;
+
+        }
+
+        return super.onOptionsItemSelected(mMenuItem);
+
+    }
 
 }

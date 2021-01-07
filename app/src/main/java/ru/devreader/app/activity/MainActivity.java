@@ -13,9 +13,9 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Base64;
+import android.widget.LinearLayout;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.LinearLayout;
 
 import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.FloatingActionButton;
