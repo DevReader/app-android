@@ -11,8 +11,8 @@ android {
         minSdkVersion 14
         targetSdkVersion 29
 		
-        versionCode 1
-        versionName "21.0-beta"
+        versionCode 210104
+        versionName "21.1-beta"
 		
     }
 	

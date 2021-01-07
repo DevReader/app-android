@@ -87,6 +87,8 @@ public class OTACheckTask extends AsyncTask<Void, Void, String> {
 			} else {
 				AppUtils.showToast(mContext, mContext.getString(R.string.ota_msg_used_latest_release));
 			}
+			
+			AppUtils.Log(mContext, "d", "Parse JSON: " + result);
 
         } catch (JSONException e) {
 			AppUtils.Log(mContext, "e", "parseJson: " + e);
