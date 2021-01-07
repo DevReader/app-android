@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 			isExitDialogEnabled;
 	
 	float fabAlphaValue = (float) 0.6;
+	float fabAlphaValueReset = (float) 1.0;
 	
 	SharedPreferences mSharedPrefs;
 	SharedPreferences.Editor mSharedPrefsEditor;
@@ -120,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		});
 		
 	}
-
+	
 	@Override
 	public void onClick(View mView) {
 
@@ -153,6 +154,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		if (isFabAlphaEnabled) {
 			mFabHome.setAlpha(fabAlphaValue);
 			mFabBack.setAlpha(fabAlphaValue);
+		} else {
+			mFabHome.setAlpha(fabAlphaValueReset);
+			mFabBack.setAlpha(fabAlphaValueReset);
 		}
 		
 	}
