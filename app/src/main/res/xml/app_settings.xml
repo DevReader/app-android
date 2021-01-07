@@ -32,6 +32,12 @@
 		android:defaultValue="false"
 		android:enabled="false"/>
 	
+	<SwitchPreference
+		android:icon="@android:color/transparent"
+		android:key="ui.showExitDialog"
+		android:title="@string/pref_ui_show_exitdialog"
+		android:defaultValue="true"/>
+	
 	<!-- More -->
 	<ru.devreader.app.ui.preference.CategoryPreference
 		android:title="@string/pref_more_category"/>

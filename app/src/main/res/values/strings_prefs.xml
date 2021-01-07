@@ -9,6 +9,7 @@
 	<string name="pref_ui_fab_scroll_summary">Скрывать иконки при пролистывании страницы?</string>
 	<string name="pref_ui_page_title">Заголовок страницы</string>
 	<string name="pref_ui_page_title_summary">Отображать небольшой блок вверху экрана с названием текущей открытой страницы?</string>
+	<string name="pref_ui_show_exitdialog">Спрашивать перед выходом</string>
 	
 	<!-- OTA -->
 	<string name="pref_ota_category">Обновление приложения</string>

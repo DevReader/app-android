@@ -17,6 +17,8 @@ import android.widget.LinearLayout;
 import android.view.KeyEvent;
 import android.view.View;
 
+import android.annotation.TargetApi;
+
 import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -54,7 +56,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 			dbg_shouldOverrideUrlLoadingV2,
 			dbg_showLoadUrl;
 			
-	boolean isFabAlphaEnabled, isOtaAutoCheckEnabled;
+	boolean isFabAlphaEnabled, 
+			isOtaAutoCheckEnabled,
+			isExitDialogEnabled;
 	
 	float fabAlphaValue = (float) 0.6;
 	
@@ -171,6 +175,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		// ? Получение доступа к настройке
 		WebSettings WebViewSettings = mWebView.getSettings();
 		WebViewSettings.setDefaultTextEncodingName("utf-8"); // ? Кодировка докум-тов
+		WebViewSettings.setRenderPriority(WebSettings.RenderPriority.HIGH);
+		WebViewSettings.setAppCachePath(getCacheDir().getAbsolutePath());
+		WebViewSettings.setLoadWithOverviewMode(true);
+		WebViewSettings.setAllowContentAccess(true);
+        WebViewSettings.setAllowFileAccess(true);
 		
 		// ? Если настройка "JavaScript support" активна
 		if (dbg_javaScript) {
@@ -359,10 +368,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 			AppUtils.Log(MainActivity.this, "d", "mWebViewPageBack");
 			
 		} else {
-			// ? Если это посл. страница, то выход из приложения
-			super.onBackPressed();
-			AppUtils.Log(MainActivity.this, "d", "mWebViewPageBack [edit app]");
-			finish();
+			
+			// ? Prefs
+			isExitDialogEnabled = mSharedPrefs.getBoolean("ui.showExitDialog", true);
+			
+			// ? Если настройка активна, то перед выходом будет показано предупреждение
+			if (isExitDialogEnabled) {
+				android.support.v7.app.AlertDialog.Builder alertBuilder = new AlertDialog.Builder(MainActivity.this, R.style.AppTheme_Dialog_Alert);
+				alertBuilder.setMessage(R.string.dlg_exit_message);
+				alertBuilder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface d, int i) {
+						AppUtils.Log(MainActivity.this, "d", "mWebViewPageBack [exit app]");
+						MainActivity.this.finish();
+					}
+				});
+				alertBuilder.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface d, int i) {
+						d.dismiss();
+					}
+				});
+				alertBuilder.show();
+			} else {
+				super.onBackPressed();
+				finish();
+			}
+			
 		}
 		
 	}
