@@ -20,7 +20,7 @@ public class SettingsActivity extends PreferenceActivity {
 
 	ListView mListView;
 	
-	Preference moreInstallInA2IGA;
+	Preference moreInstallInA2IGA, infoAppVersion, infoAppInstallPromt;
 	Preference otaCheck;
 	Preference dbgInstallationInfo;
 	
@@ -58,6 +58,12 @@ public class SettingsActivity extends PreferenceActivity {
 									   "\nBeta build status: " + AppUtils.getVersionName(this, getPackageName()).contains("beta") +
 									   "\nA2IGA install status: " + AppUtils.isAppInstalled(this, "ru.rx1310.app.a2iga"));
 		
+		// ! Info
+		infoAppVersion = findPreference("info.appVersion");
+		infoAppVersion.setSummary(AppUtils.getVersionName(this, getPackageName()) + " (" + AppUtils.getVersionCode(this, getPackageName()) + ")");
+		
+		infoAppInstallPromt = findPreference("info.appInstallPromt");
+		infoAppInstallPromt.setSummary(String.format(getString(R.string.pref_info_app_promt), AppUtils.getInstallDate(this, getPackageName(), false, false), AppUtils.getInstallDate(this, getPackageName(), true, false)));
 	}
 	
 	public boolean onPreferenceTreeClick(PreferenceScreen prefScreen, Preference pref) {

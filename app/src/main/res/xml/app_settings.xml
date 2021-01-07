@@ -66,6 +66,31 @@
 		android:summary="@string/pref_ota_check_auto_summary"
 		android:defaultValue="true"/>
 	
+	<!-- APP INFO -->
+	<ru.devreader.app.ui.preference.CategoryPreference
+		android:title="@string/pref_info_app_category"/>
+
+	<Preference
+		android:icon="@android:color/transparent"
+		android:key="info.appVersion"
+		android:title="@string/pref_info_app_version"/>
+	
+	<ru.devreader.app.ui.preference.PromtPreference
+		android:key="info.appInstallPromt"
+		android:summary="yy"/>
+	
+	<Preference
+		android:icon="@android:color/transparent"
+		android:key="info.appSourceCode"
+		android:title="@string/pref_info_app_github"
+		android:summary="@string/pref_info_app_github_summary"/>
+	
+	<Preference
+		android:icon="@android:color/transparent"
+		android:key="info.appDev"
+		android:title="@string/pref_info_app_dev"
+		android:summary="@string/app_author"/>
+	
 	<!-- Debug -->
 	<ru.devreader.app.ui.preference.BorderPreference />
 	<ru.devreader.app.ui.preference.CategoryPreference

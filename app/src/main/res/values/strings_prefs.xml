@@ -21,23 +21,17 @@
 	<!-- More -->
 	<string name="pref_more_category">Дополнительно</string>
 	<string name="pref_more_a2iga">Интеграция с A2IGA</string>
-	<string name="pref_more_a2iga_summary">Запускайте DevReader в нужный момент не выходя из среды разработки жестом запуска ассистента!</string>
+	<string name="pref_more_a2iga_summary">Используя A2IGA вы можете быстро запустить DevReader в любой нужный вам момент из любого приложения. Никаких лишних движений!</string>
 	<string name="pref_more_a2iga_promt">Нажмите на пункт «Интеграция с A2IGA», а затем в списке приложений выберите приложение «A2IGA» и следуйте инструкциям.</string>
 	<string name="pref_more_a2iga_not_found_summary">A2IGA не установлен! Нажмите, чтобы перейти на страницу загрузки.</string>
 	<string name="pref_more_a2iga_chooser_title">Найдите и выберите «A2IGA»</string>
 	
-	<!-- App info -->
-	<!--string name="pref_info_category">Информация</string>
+	<!-- App Info -->
+	<string name="pref_info_app_category">О программе</string>
+	<string name="pref_info_app_promt">Дата установки: %1$s\nДата посл. обновления: %2$s</string>
 	<string name="pref_info_app_version">Версия приложения</string>
-	<string name="pref_info_app_build">Сборка</string>
-	<string name="pref_info_app_maintainer">Сопровождающий</string>
-	<string name="pref_info_app_git">Исходный код</string>
-	<string name="pref_info_app_licenses">Лицензии</string>
-	<string name="pref_info_"></string>
-	<string name="pref_info_"></string>
-	<string name="pref_info_"></string>
-	<string name="pref_info_"></string>
-	<string name="pref_info_"></string>
-	<string name="pref_info_"></string-->
+	<string name="pref_info_app_github">GitHub</string>
+	<string name="pref_info_app_github_summary">Исходный код приложения распространяется под лицензией MIT License.</string>
+	<string name="pref_info_app_dev">Разработчик приложения</string>
 	
 </resources>
