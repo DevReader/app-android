@@ -25,6 +25,7 @@ import java.util.Date;
 
 public class AppUtils {
 	
+	// Логи
 	public static void Log(Context context, String logType, String logMessage) {
 		
 		if (logType == "e") {
@@ -41,6 +42,7 @@ public class AppUtils {
 		
 	}
 	
+	// ? Получение имени версии
 	public static String getVersionName(Context context, String packageName) {
 
 		try {
@@ -60,6 +62,7 @@ public class AppUtils {
 
 	}
 
+	// ? Получение кода версии
     public static int getVersionCode(Context context, String packageName) {
 
 		try {
@@ -79,6 +82,7 @@ public class AppUtils {
 
 	}
 
+	// ? Получение имени приложения
 	public static String getAppName(Context context, String packageName) {
 
 		try {
@@ -98,6 +102,7 @@ public class AppUtils {
 
 	}
 
+	// ? Проверка на наличие программы
 	public static boolean isAppInstalled(Context context, String packageName) {
 
 		PackageManager packageMng = context.getPackageManager();
@@ -111,6 +116,7 @@ public class AppUtils {
 
 	}
 
+	// ? Получение системного цвета акцента
 	@ColorInt
 	public static int getSystemAccentColor(Context context) {
 
@@ -125,11 +131,13 @@ public class AppUtils {
 
 	}
 
+	// ? Отображение Toast
 	public static void showToast(Context context, String message) {
 		Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 		Log(context, "d", "showToast: " + message);
 	}
 
+	// ? Проверка на наличие интернета
 	public static boolean isNetworkAvailable(Context context) {
 
 		ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -139,6 +147,7 @@ public class AppUtils {
 
 	}
 
+	// ? Получение текущ. даты
 	public static String getDate(long ms, String customDateFormat) {
 
 		SimpleDateFormat dateFormat = new SimpleDateFormat(customDateFormat);
@@ -149,6 +158,7 @@ public class AppUtils {
 
 	}
 
+	// ? Дата установки
 	public static String getInstallDate(Context context, String packageName, boolean lastUpdateTime, boolean onlyInt) {
 
         PackageManager packageMng =  context.getPackageManager();
@@ -183,6 +193,7 @@ public class AppUtils {
 
     }
 
+	// ? Переход по ссылкам
 	public static void openURL(Context context, String link) {
 
 		Intent i = new Intent(Intent.ACTION_VIEW);
