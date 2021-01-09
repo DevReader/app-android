@@ -102,6 +102,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 					public void onClick(DialogInterface d, int itemPos) {
 						if (itemPos == 0) {
 							mWebViewPageReload(mWebView);
+						} if (itemPos == 1) {
+							MainActivity.this.recreate();
 						}
 					}
 				});
@@ -190,6 +192,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 			AppUtils.Log(this, "d", "dbg.javaScript: " + dbg_javaScript);
 			mWebView.getSettings().setJavaScriptEnabled(true); // ? Разрешаю запуск js-скриптов
 			mWebView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+		} else {
+			AppUtils.Log(this, "d", "dbg.javaScript: " + dbg_javaScript);
+			mWebView.getSettings().setJavaScriptEnabled(false); // ? Запрещаю запуск js-скриптов
+			mWebView.getSettings().setJavaScriptCanOpenWindowsAutomatically(false);
 		}
 
 		// ? Если настройка "Page caching" активна
@@ -198,6 +204,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 			mWebView.getSettings().setAppCacheEnabled(true); // ? Разрешаю кеширование страниц
 			mWebView.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT); // ? Режим кеширования
 			// TODO: Нужно почитать о режиме кеширования страниц в WebView в документации
+		} else {
+			AppUtils.Log(this, "d", "dbg.appCache: " + dbg_webViewCache);
+			mWebView.getSettings().setAppCacheEnabled(false); // ? Запрещаю кеширование страниц
 		}
 
 		// ? Цвет фона WebView

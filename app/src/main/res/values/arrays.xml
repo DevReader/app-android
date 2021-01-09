@@ -3,6 +3,7 @@
 	
 	<string-array name="fabBack_longpress_menu">
         <item>Перезагрузить страницу</item>
+		<item>Пересоздать страницу</item>
     </string-array>
 	
 </resources>
