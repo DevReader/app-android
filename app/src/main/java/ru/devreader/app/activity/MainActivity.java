@@ -2,33 +2,30 @@
 
 package ru.devreader.app.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.DialogInterface;
-import android.content.pm.ActivityInfo;
 
+import android.util.Base64;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
-import android.util.Base64;
-import android.widget.LinearLayout;
 import android.view.KeyEvent;
 import android.view.View;
 
-import android.annotation.TargetApi;
-
 import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 
+import android.webkit.JsResult;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.webkit.JsResult;
+import android.widget.LinearLayout;
 
 import java.io.InputStream;
 
@@ -37,14 +34,14 @@ import ru.devreader.app.activity.MainActivity;
 import ru.devreader.app.task.OTACheckTask;
 import ru.devreader.app.util.AppUtils;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity {
 	
 	// ? Страница, которая будет загружена в WebView
 	//final String loadUrl = "file:///android_asset/" + "test/index.html";
 	final String loadUrl = "https://" + "devreader.github.io" + "/";
 	
 	WebView mWebView;
-	FloatingActionButton mFabBack, mFabHome;
+	FloatingActionButton mFabBack, mFabHome, mFabScrollTop;
 	BottomSheetDialog mDialogMenu;
 	LinearLayout mLoadingDummy, mErrorDummy;
 	
@@ -94,7 +91,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		
 		// ? Настройка FAB Back&Reload
 		mFabBack = findViewById(R.id.el_fabBack);
-		mFabBack.setOnClickListener(this);
+		mFabBack.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View mView) {
+				onBackPressed();
+			}
+		});
 		mFabBack.setOnLongClickListener(new View.OnLongClickListener() {
 			public boolean onLongClick(View mView) {
 				AlertDialog.Builder b = new AlertDialog.Builder(MainActivity.this, R.style.AppTheme_Dialog_Alert);
@@ -114,7 +115,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		
 		// ? Настройка FAB Home
 		mFabHome = findViewById(R.id.el_fabHome);
-		mFabHome.setOnClickListener(this);
+		mFabHome.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View mView) {
+				mWebView.loadUrl(loadUrl);
+				if (isPageLoadError) mErrorDummy.setVisibility(View.GONE);
+				AppUtils.Log(MainActivity.this, "d", "mWebViewPageHome (homepage: " + loadUrl + ")");
+			}
+		});
 		mFabHome.setOnLongClickListener(new View.OnLongClickListener() {
 			public boolean onLongClick(View mView) {
 				startActivity(new Intent(MainActivity.this, SettingsActivity.class));
@@ -122,27 +129,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 			}
 		});
 		
-	}
-	
-	@Override
-	public void onClick(View mView) {
-
-		switch (mView.getId()) {
-			
-			case R.id.el_fabBack:
-				onBackPressed();
-				break;
-				
-			case R.id.el_fabHome:
-				mWebView.loadUrl(loadUrl);
-				if (isPageLoadError) mErrorDummy.setVisibility(View.GONE);
-				AppUtils.Log(MainActivity.this, "d", "mWebViewPageHome (homepage: " + loadUrl + ")");
-				break;
-
-			default: break;
-
-		}
-
+		// ? Настройка FAB Scroll Top
+		mFabScrollTop = findViewById(R.id.el_fabScrollTop);
+		mFabScrollTop.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View mView) {
+				mWebView.scrollTo(0,0);
+			}
+		});
+		
 	}
 	
 	@Override
@@ -156,9 +150,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		if (isFabAlphaEnabled) {
 			mFabHome.setAlpha(fabAlphaValue);
 			mFabBack.setAlpha(fabAlphaValue);
+			mFabScrollTop.setAlpha(fabAlphaValue);
 		} else {
 			mFabHome.setAlpha(fabAlphaValueReset);
 			mFabBack.setAlpha(fabAlphaValueReset);
+			mFabScrollTop.setAlpha(fabAlphaValueReset);
 		}
 		
 	}
@@ -259,7 +255,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 				}
 
 			}
-
+			
 			// ? Отлов ошибок
 			@SuppressWarnings("deprecation")
 			@Override
