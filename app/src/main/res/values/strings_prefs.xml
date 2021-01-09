@@ -3,8 +3,6 @@
 	
 	<!-- UI -->
 	<string name="pref_ui_category">Интерфейс</string>
-	<string name="pref_ui_fab_alpha">Полупрозрачные кнопки</string>
-	<string name="pref_ui_fab_alpha_promt">Если кнопки навигации мешают при чтении, выделяясь цветом, то включите настройку и кнопки станут полупрозрачными.</string>
 	<string name="pref_ui_fab_scroll">Исчезающие кнопки</string>
 	<string name="pref_ui_fab_scroll_summary">Скрывать иконки при пролистывании страницы?</string>
 	<string name="pref_ui_page_title">Заголовок страницы</string>

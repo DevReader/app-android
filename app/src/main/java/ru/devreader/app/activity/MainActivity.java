@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 	final String loadUrl = "https://" + "devreader.github.io" + "/";
 	
 	WebView mWebView;
-	FloatingActionButton mFabBack, mFabHome, mFabScrollTop;
+	FloatingActionButton mFabBack, mFabHome, mFabScrollToTop;
 	BottomSheetDialog mDialogMenu;
 	LinearLayout mLoadingDummy, mErrorDummy;
 	
@@ -54,12 +54,9 @@ public class MainActivity extends AppCompatActivity {
 			dbg_shouldOverrideUrlLoadingV2,
 			dbg_showLoadUrl;
 			
-	boolean isFabAlphaEnabled, 
-			isOtaAutoCheckEnabled,
-			isExitDialogEnabled;
-	
-	float fabAlphaValue = (float) 0.6;
-	float fabAlphaValueReset = (float) 1.0;
+	boolean isOtaAutoCheckEnabled,
+			isExitDialogEnabled,
+			isHideFabOnScrollEnabled;
 	
 	SharedPreferences mSharedPrefs;
 	SharedPreferences.Editor mSharedPrefsEditor;
@@ -131,29 +128,14 @@ public class MainActivity extends AppCompatActivity {
 		});
 		
 		// ? Настройка FAB Scroll Top
-		mFabScrollTop = findViewById(R.id.el_fabScrollTop);
-		mFabScrollTop.hide();
-		mFabScrollTop.setOnClickListener(new View.OnClickListener() {
+		mFabScrollToTop = findViewById(R.id.el_fabScrollToTop);
+		mFabScrollToTop.hide();
+		mFabScrollToTop.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View mView) {
 				mWebView.scrollTo(0,0);
 			}
 		});
 		
-		hideFabOnScroll();
-		
-	}
-	
-	@TargetApi(23)
-	public void hideFabOnScroll(){
-		mWebView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
-			@Override
-			public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-				if (scrollY > oldScrollY)
-					mFabScrollTop.hide();
-				else if (scrollY < oldScrollY)
-					mFabScrollTop.show();
-			}
-		});
 	}
 	
 	@Override
@@ -161,19 +143,43 @@ public class MainActivity extends AppCompatActivity {
 		super.onResume();
 		
 		// ? Prefs
-		isFabAlphaEnabled = mSharedPrefs.getBoolean("ui.fabAlpha", false);
+		isHideFabOnScrollEnabled = mSharedPrefs.getBoolean("ui.fabScroll", false);
 		
-		// ? Настройка прозрачности fab'ов
-		if (isFabAlphaEnabled) {
-			mFabHome.setAlpha(fabAlphaValue);
-			mFabBack.setAlpha(fabAlphaValue);
-			mFabScrollTop.setAlpha(fabAlphaValue);
+		// ? Исчезающие кнопки навигации
+		if (isHideFabOnScrollEnabled) {
+			hideFabOnScroll(true);
 		} else {
-			mFabHome.setAlpha(fabAlphaValueReset);
-			mFabBack.setAlpha(fabAlphaValueReset);
-			mFabScrollTop.setAlpha(fabAlphaValueReset);
+			hideFabOnScroll(false);
 		}
 		
+	}
+	
+	@TargetApi(23)
+	public void hideFabOnScroll(final boolean isNavFabHideEnabled){
+		mWebView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+			@Override
+			public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+				if (scrollY > oldScrollY) {
+					
+					mFabScrollToTop.hide();
+					
+					if (isNavFabHideEnabled) {
+						mFabBack.hide();
+						mFabHome.hide();
+					}
+					
+				} else if (scrollY < oldScrollY) {
+					
+					mFabScrollToTop.show();
+					
+					if (isNavFabHideEnabled) {
+						mFabBack.show();
+						mFabHome.show();
+					}
+					
+				}
+			}
+		});
 	}
 	
 	// ? Настройка WebView

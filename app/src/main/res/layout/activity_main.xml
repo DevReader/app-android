@@ -43,7 +43,7 @@
 			style="@style/AppTheme.FAB"/>
 
 		<android.support.design.widget.FloatingActionButton
-			android:id="@+id/el_fabScrollTop"
+			android:id="@+id/el_fabScrollToTop"
 			android:src="@drawable/ic_page_top"
 			android:layout_gravity="top|center"
 			app:fabSize="mini"

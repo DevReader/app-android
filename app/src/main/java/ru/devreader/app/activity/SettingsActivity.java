@@ -23,7 +23,9 @@ public class SettingsActivity extends PreferenceActivity {
 
 	ListView mListView;
 	
-	Preference moreInstallInA2IGA, infoAppVersion, infoAppInstallPromt;
+	Preference uiFabScroll;
+	Preference moreInstallInA2IGA;
+	Preference infoAppVersion, infoAppInstallPromt;
 	Preference otaCheck;
 	Preference dbgInstallationInfo;
 	
@@ -41,6 +43,12 @@ public class SettingsActivity extends PreferenceActivity {
 		
 		mSharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
 		mSharedPrefsEditor = mSharedPrefs.edit();
+		
+		uiFabScroll = findPreference("ui.fabScroll");
+		
+		if (Build.VERSION.SDK_INT <= 23) {
+			uiFabScroll.setEnabled(false);
+		}
 		
 		ota_lastCheckDate = mSharedPrefs.getString("ota.lastCheckDate", getString(android.R.string.untitled));
 		
