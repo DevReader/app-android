@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 	boolean isOtaAutoCheckEnabled,
 			isExitDialogEnabled,
 			isHideFabOnScrollEnabled;
-	
+			
 	SharedPreferences mSharedPrefs;
 	SharedPreferences.Editor mSharedPrefsEditor;
 	

@@ -7,6 +7,7 @@
 	
 	<!-- Promt titles -->
 	<string name="promt_tip">Подсказка</string>
+	<string name="promt_additional">Дополнительная информация</string>
 	
 	<!-- Error Page / m2 -->
 	<string name="err_m2_title">Oops.</string>

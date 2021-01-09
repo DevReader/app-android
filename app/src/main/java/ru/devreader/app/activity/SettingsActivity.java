@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ListView;
+import android.os.Build;
+import android.app.ActivityManager;
+import android.support.v4.os.BuildCompat;
 import android.view.MenuItem;
 import android.view.Menu;
 
@@ -15,9 +18,7 @@ import android.preference.PreferenceScreen;
 import ru.devreader.app.R;
 import ru.devreader.app.task.OTACheckTask;
 import ru.devreader.app.util.AppUtils;
-import android.os.Build;
-import android.app.ActivityManager;
-import android.support.v4.os.BuildCompat;
+import ru.devreader.app.util.SysUtils;
 
 public class SettingsActivity extends PreferenceActivity {
 
@@ -68,7 +69,8 @@ public class SettingsActivity extends PreferenceActivity {
 									   "\n— A2IGA install status: " + AppUtils.isAppInstalled(this, "ru.rx1310.app.a2iga") +
 									   "\n— Device: " + Build.DEVICE + " (" + Build.MODEL + ") / " + Build.PRODUCT +
 									   "\n— Brand: " + Build.BRAND + " (" + Build.MANUFACTURER + ")" +
-									   "\n— Fingerprint: " + Build.FINGERPRINT);
+									   "\n— Fingerprint: " + Build.FINGERPRINT +
+									   "\n— Detect MIUI: " + SysUtils.isMIUI());
 		
 		// ! Info
 		infoAppVersion = findPreference("info.appVersion");
