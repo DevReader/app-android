@@ -60,7 +60,7 @@
 		android:key="ota.checkAuto"
 		android:title="@string/pref_ota_check_auto"
 		android:summary="@string/pref_ota_check_auto_summary"
-		android:defaultValue="true"/>
+		android:defaultValue="false"/>
 	
 	<!-- APP INFO -->
 	<ru.devreader.app.ui.preference.CategoryPreference
