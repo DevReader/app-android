@@ -133,6 +133,7 @@ public class MainActivity extends AppCompatActivity {
 		mFabScrollToTop.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View mView) {
 				mWebView.scrollTo(0,0);
+				mFabScrollToTop.hide();
 			}
 		});
 		
@@ -159,25 +160,21 @@ public class MainActivity extends AppCompatActivity {
 		mWebView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
 			@Override
 			public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+				
 				if (scrollY > oldScrollY) {
-					
 					mFabScrollToTop.hide();
-					
 					if (isNavFabHideEnabled) {
 						mFabBack.hide();
 						mFabHome.hide();
 					}
-					
 				} else if (scrollY < oldScrollY) {
-					
 					mFabScrollToTop.show();
-					
 					if (isNavFabHideEnabled) {
 						mFabBack.show();
 						mFabHome.show();
 					}
-					
 				}
+				
 			}
 		});
 	}
