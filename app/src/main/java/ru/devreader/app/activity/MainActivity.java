@@ -33,6 +33,7 @@ import ru.devreader.app.R;
 import ru.devreader.app.activity.MainActivity;
 import ru.devreader.app.task.OTACheckTask;
 import ru.devreader.app.util.AppUtils;
+import android.annotation.TargetApi;
 
 public class MainActivity extends AppCompatActivity {
 	
@@ -131,12 +132,28 @@ public class MainActivity extends AppCompatActivity {
 		
 		// ? Настройка FAB Scroll Top
 		mFabScrollTop = findViewById(R.id.el_fabScrollTop);
+		mFabScrollTop.hide();
 		mFabScrollTop.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View mView) {
 				mWebView.scrollTo(0,0);
 			}
 		});
 		
+		hideFabOnScroll();
+		
+	}
+	
+	@TargetApi(23)
+	public void hideFabOnScroll(){
+		mWebView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+			@Override
+			public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+				if (scrollY > oldScrollY)
+					mFabScrollTop.hide();
+				else if (scrollY < oldScrollY)
+					mFabScrollTop.show();
+			}
+		});
 	}
 	
 	@Override
