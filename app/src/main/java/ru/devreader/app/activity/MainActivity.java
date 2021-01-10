@@ -162,13 +162,13 @@ public class MainActivity extends AppCompatActivity {
 			public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
 				
 				if (scrollY > oldScrollY) {
-					mFabScrollToTop.hide();
+					mFabScrollToTop.show();
 					if (isNavFabHideEnabled) {
 						mFabBack.hide();
 						mFabHome.hide();
 					}
 				} else if (scrollY < oldScrollY) {
-					mFabScrollToTop.show();
+					mFabScrollToTop.hide();
 					if (isNavFabHideEnabled) {
 						mFabBack.show();
 						mFabHome.show();
