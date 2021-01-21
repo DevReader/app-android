@@ -7,7 +7,6 @@
 	<string name="pref_ui_fab_scroll_summary">Скрывать иконки при пролистывании страницы?</string>
 	<string name="pref_ui_page_title">Заголовок страницы</string>
 	<string name="pref_ui_page_title_summary">Отображать небольшой блок вверху экрана с названием текущей открытой страницы?</string>
-	<string name="pref_ui_show_exitdialog">Спрашивать перед выходом</string>
 	
 	<!-- OTA -->
 	<string name="pref_ota_category">Обновление приложения</string>
@@ -24,6 +23,9 @@
 	<string name="pref_more_a2iga_promt">Нажмите на пункт «Интеграция с A2IGA», а затем в списке приложений выберите приложение «A2IGA» и следуйте инструкциям.</string>
 	<string name="pref_more_a2iga_not_found_summary">A2IGA не установлен! Нажмите, чтобы перейти на страницу загрузки.</string>
 	<string name="pref_more_a2iga_chooser_title">Найдите и выберите «A2IGA»</string>
+	<string name="pref_more_last_page_remember">Запоминать посл. статью</string>
+	<string name="pref_more_last_page_remember_summary">Показывать окно с переходом к последней статье, которую Вы открывали в последний сеанс?</string>
+	<string name="pref_more_show_exitdialog">Спрашивать перед выходом</string>
 	
 	<!-- App Info -->
 	<string name="pref_info_app_category">О программе</string>

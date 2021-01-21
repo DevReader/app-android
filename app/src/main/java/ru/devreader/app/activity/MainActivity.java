@@ -56,7 +56,10 @@ public class MainActivity extends AppCompatActivity {
 			
 	boolean isOtaAutoCheckEnabled,
 			isExitDialogEnabled,
-			isHideFabOnScrollEnabled;
+			isHideFabOnScrollEnabled,
+			isLastPageRememberEnabled;
+			
+	String isLastRememberedPage;
 			
 	SharedPreferences mSharedPrefs;
 	SharedPreferences.Editor mSharedPrefsEditor;
@@ -71,9 +74,13 @@ public class MainActivity extends AppCompatActivity {
 		
 		// ? Prefs
 		isOtaAutoCheckEnabled = mSharedPrefs.getBoolean("ota.checkAuto", false);
+		isLastPageRememberEnabled = mSharedPrefs.getBoolean("more.lastPageRemember", false);
+		isLastRememberedPage = mSharedPrefs.getString("isLastPageUrl", "");
 		
 		// ? Проверка обновлений
 		if (isOtaAutoCheckEnabled) OTACheckTask.checkUpdates(this, false);
+		
+		if (isLastPageRememberEnabled) openLastPage();
 		
 		// ? Запуск WebView
 		initWebView();
@@ -399,7 +406,7 @@ public class MainActivity extends AppCompatActivity {
 		} else {
 			
 			// ? Prefs
-			isExitDialogEnabled = mSharedPrefs.getBoolean("ui.showExitDialog", true);
+			isExitDialogEnabled = mSharedPrefs.getBoolean("more.showExitDialog", true);
 			
 			// ? Если настройка активна, то перед выходом будет показано предупреждение
 			if (isExitDialogEnabled) {
@@ -492,6 +499,37 @@ public class MainActivity extends AppCompatActivity {
 
 		return super.onKeyDown(keyCode, keyEvent);
 
+	}
+
+	@Override
+	protected void onStop() {
+		super.onStop();
+		
+		// ? Получение URL посл. страницы
+		String getLastPageUrl = mWebView.getUrl().toString();
+		
+		// ? Сохранение настройки
+		mSharedPrefsEditor.putString("isLastPageUrl", getLastPageUrl); // ? Сохраняю ссылку посл. стр.
+		mSharedPrefsEditor.commit();
+		
+	}
+	
+	void openLastPage() {
+		android.support.v7.app.AlertDialog.Builder alertBuilder = new AlertDialog.Builder(MainActivity.this, R.style.AppTheme_Dialog_Alert);
+		alertBuilder.setTitle(R.string.dlg_open_last_page);
+		alertBuilder.setMessage(getString(R.string.dlg_open_last_page_message) + "\n\nURL: " + isLastRememberedPage);
+		alertBuilder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface d, int i) {
+				AppUtils.Log(MainActivity.this, "d", "openLastPage [press YES]");
+				mWebView.loadUrl(isLastRememberedPage);
+			}
+		});
+		alertBuilder.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface d, int i) {
+				d.dismiss();
+			}
+		});
+		alertBuilder.show();
 	}
 	
 }

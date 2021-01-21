@@ -22,12 +22,6 @@
 		android:defaultValue="false"
 		android:enabled="false"/>
 	
-	<SwitchPreference
-		android:icon="@android:color/transparent"
-		android:key="ui.showExitDialog"
-		android:title="@string/pref_ui_show_exitdialog"
-		android:defaultValue="true"/>
-	
 	<!-- More -->
 	<ru.devreader.app.ui.preference.CategoryPreference
 		android:title="@string/pref_more_category"/>
@@ -40,6 +34,19 @@
 	<ru.devreader.app.ui.preference.PromtPreference
 		android:title="@string/promt_tip"
 		android:summary="@string/pref_more_a2iga_promt"/>
+	
+	<SwitchPreference
+		android:icon="@android:color/transparent"
+		android:key="more.lastPageRemember"
+		android:title="@string/pref_more_last_page_remember"
+		android:summary="@string/pref_more_last_page_remember_summary"
+		android:defaultValue="true"/>
+
+	<SwitchPreference
+		android:icon="@android:color/transparent"
+		android:key="more.showExitDialog"
+		android:title="@string/pref_more_show_exitdialog"
+		android:defaultValue="true"/>
 	
 	<!-- OTA -->
 	<ru.devreader.app.ui.preference.CategoryPreference
