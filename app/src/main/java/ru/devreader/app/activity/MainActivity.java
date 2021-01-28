@@ -80,8 +80,6 @@ public class MainActivity extends AppCompatActivity {
 		// ? Проверка обновлений
 		if (isOtaAutoCheckEnabled) OTACheckTask.checkUpdates(this, false);
 		
-		if (isLastPageRememberEnabled) openLastPage();
-		
 		// ? Запуск WebView
 		initWebView();
 		
@@ -382,7 +380,12 @@ public class MainActivity extends AppCompatActivity {
 		});
 
 		// ? Указываем WebView какую стр. загружать
-		mWebView.loadUrl(loadUrl);
+		if (isLastPageRememberEnabled) {
+			mWebView.loadUrl(isLastRememberedPage);
+		} else {
+			mWebView.loadUrl(loadUrl);
+		}
+		
 		AppUtils.Log(MainActivity.this, "i", "WebView load url: " + loadUrl);
 
 	}
@@ -512,24 +515,6 @@ public class MainActivity extends AppCompatActivity {
 		mSharedPrefsEditor.putString("isLastPageUrl", getLastPageUrl); // ? Сохраняю ссылку посл. стр.
 		mSharedPrefsEditor.commit();
 		
-	}
-	
-	void openLastPage() {
-		android.support.v7.app.AlertDialog.Builder alertBuilder = new AlertDialog.Builder(MainActivity.this, R.style.AppTheme_Dialog_Alert);
-		alertBuilder.setTitle(R.string.dlg_open_last_page);
-		alertBuilder.setMessage(getString(R.string.dlg_open_last_page_message) + "\n\nURL: " + isLastRememberedPage);
-		alertBuilder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface d, int i) {
-				AppUtils.Log(MainActivity.this, "d", "openLastPage [press YES]");
-				mWebView.loadUrl(isLastRememberedPage);
-			}
-		});
-		alertBuilder.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface d, int i) {
-				d.dismiss();
-			}
-		});
-		alertBuilder.show();
 	}
 	
 }

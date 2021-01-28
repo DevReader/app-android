@@ -19,10 +19,6 @@
 	<!--string name="dlg_exit_title">Выход из приложения</string-->
 	<string name="dlg_exit_message">Вы действительно хотите закрыть приложение?</string>
 	
-	<!-- Dialog / Last page open -->
-	<string name="dlg_open_last_page">Продолжить чтение?</string>
-	<string name="dlg_open_last_page_message">Перед закрытием приложения вы читали статью. Хотите продолжить чтение?</string>
-	
 	<!-- Intro Page -->
 	<string name="intro_title">@string/app_name</string>
 	<string name="intro_subtitle">Проще. Удобнее. Быстрее.</string>

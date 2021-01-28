@@ -24,7 +24,7 @@
 	<string name="pref_more_a2iga_not_found_summary">A2IGA не установлен! Нажмите, чтобы перейти на страницу загрузки.</string>
 	<string name="pref_more_a2iga_chooser_title">Найдите и выберите «A2IGA»</string>
 	<string name="pref_more_last_page_remember">Запоминать посл. статью</string>
-	<string name="pref_more_last_page_remember_summary">Показывать окно с переходом к последней статье, которую Вы открывали в последний сеанс?</string>
+	<string name="pref_more_last_page_remember_summary">Продолжать чтение посл. статьи при запуске приложения?</string>
 	<string name="pref_more_show_exitdialog">Спрашивать перед выходом</string>
 	
 	<!-- App Info -->
