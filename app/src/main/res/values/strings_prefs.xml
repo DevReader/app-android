@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	
+	<string name="pref_experimental_category">Экспериментальные настройки</string>
+	
 	<!-- UI -->
 	<string name="pref_ui_category">Интерфейс</string>
 	<string name="pref_ui_fab_scroll">Исчезающие кнопки</string>

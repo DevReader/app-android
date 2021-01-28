@@ -37,13 +37,6 @@
 	
 	<SwitchPreference
 		android:icon="@android:color/transparent"
-		android:key="more.lastPageRemember"
-		android:title="@string/pref_more_last_page_remember"
-		android:summary="@string/pref_more_last_page_remember_summary"
-		android:defaultValue="true"/>
-
-	<SwitchPreference
-		android:icon="@android:color/transparent"
 		android:key="more.showExitDialog"
 		android:title="@string/pref_more_show_exitdialog"
 		android:defaultValue="true"/>
@@ -94,51 +87,60 @@
 		android:title="@string/pref_info_app_dev"
 		android:summary="@string/app_author"/>
 	
-	<!-- Debug -->
+	<!-- EXPERIMENTAL -->
 	<ru.devreader.app.ui.preference.BorderPreference />
 	<ru.devreader.app.ui.preference.CategoryPreference
-		android:title="Debug settings"/>
-	
-	<SwitchPreference
-		android:icon="@android:color/transparent"
-		android:key="dbg.js"
-		android:title="JavaScript"
-		android:defaultValue="true"/>
-	
-	<SwitchPreference
-		android:icon="@android:color/transparent"
-		android:key="dbg.webViewCashe"
-		android:title="WebView cache"
-		android:defaultValue="true"/>
+		android:title="@string/pref_experimental_category"/>
 
 	<SwitchPreference
 		android:icon="@android:color/transparent"
-		android:key="dbg.injectJs"
-		android:title="Inject JS"
-		android:defaultValue="false"/>
-	
-	<Preference
-		android:icon="@android:color/transparent"
-		android:key="dbg.firstStartPrefReset"
-		android:title="Reset first start pref"/>
-	
-	<SwitchPreference
-		android:icon="@android:color/transparent"
-		android:key="dbg.shouldOverrideUrlLoadingV2"
-		android:title="Should override url loading (v2)"
+		android:key="more.lastPageRemember"
+		android:title="@string/pref_more_last_page_remember"
+		android:summary="@string/pref_more_last_page_remember_summary"
 		android:defaultValue="true"/>
 	
-	<SwitchPreference
-		android:icon="@android:color/transparent"
-		android:key="dbg.showLoadUrl"
-		android:title="Show load url"
-		android:defaultValue="false"/>
-	
-	<Preference
-		android:icon="@android:color/transparent"
-		android:key="dbg.appCacheDelete"
-		android:title="Delete app cache"/>
-	
+	<!-- Debug -->
+	<PreferenceScreen
+		android:key="dbg.screen"
+        android:icon="@android:color/transparent"
+        android:title="Debug settings"
+		android:summary="Settings for developer. Use carefully!">
+		
+		<SwitchPreference
+			android:key="dbg.js"
+			android:title="JavaScript"
+			android:defaultValue="true"/>
+
+		<SwitchPreference
+			android:key="dbg.webViewCashe"
+			android:title="WebView cache"
+			android:defaultValue="true"/>
+
+		<SwitchPreference
+			android:key="dbg.injectJs"
+			android:title="Inject JS"
+			android:defaultValue="false"/>
+
+		<Preference
+			android:key="dbg.firstStartPrefReset"
+			android:title="Reset first start pref"/>
+
+		<SwitchPreference
+			android:key="dbg.shouldOverrideUrlLoadingV2"
+			android:title="Should override url loading (v2)"
+			android:defaultValue="true"/>
+
+		<SwitchPreference
+			android:key="dbg.showLoadUrl"
+			android:title="Show load url"
+			android:defaultValue="false"/>
+
+		<Preference
+			android:key="dbg.appCacheDelete"
+			android:title="Delete app cache"/>
+
+    </PreferenceScreen>
+
 	<ru.devreader.app.ui.preference.PromtPreference 
 		android:title="Installation info"
 		android:key="dbg.installationInfo"/>
