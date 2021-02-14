@@ -57,7 +57,11 @@ public class MainActivity extends AppCompatActivity {
 	boolean isOtaAutoCheckEnabled,
 			isExitDialogEnabled,
 			isHideFabOnScrollEnabled,
-			isLastPageRememberEnabled;
+			isLastPageRememberEnabled,
+			isImagesDnlEnabled,
+			isPageZoomEnabled,
+			isLargerFontEnabled,
+			isTextWrapEnabled;
 			
 	String isLastRememberedPage;
 			
@@ -194,6 +198,11 @@ public class MainActivity extends AppCompatActivity {
 		dbg_shouldOverrideUrlLoadingV2 = mSharedPrefs.getBoolean("dbg.shouldOverrideUrlLoadingV2", true);
 		dbg_showLoadUrl = mSharedPrefs.getBoolean("dbg.showLoadUrl", false);
 		
+		isImagesDnlEnabled = mSharedPrefs.getBoolean("content.imagesDnl", false);
+		isLargerFontEnabled = mSharedPrefs.getBoolean("content.largerFont", false);
+		isPageZoomEnabled = mSharedPrefs.getBoolean("content.pageZoom", false);
+		isTextWrapEnabled = mSharedPrefs.getBoolean("content.textWrap", false);
+		
 		AppUtils.Log(this, "d", "Init WebView");
 
 		// ? Поиск элемента
@@ -233,8 +242,6 @@ public class MainActivity extends AppCompatActivity {
 		// ? Цвет фона WebView
 		mWebView.setBackgroundColor(Color.parseColor("#121212"));
 		
-		// TODO: Почитать о "getSettings().setDomStorageEnabled(boolean)"
-		mWebView.getSettings().setDomStorageEnabled(true);
 		mWebView.getSettings().setUseWideViewPort(true);
 		
 		// ? Скрываю скроллбар
@@ -247,6 +254,34 @@ public class MainActivity extends AppCompatActivity {
 			WebViewSettings.setAllowFileAccessFromFileURLs(true);
 			WebViewSettings.setAllowUniversalAccessFromFileURLs(true);
 		}
+		
+		if (isLargerFontEnabled) {
+            mWebView.getSettings().setTextSize(WebSettings.TextSize.LARGER);
+        } else {
+            mWebView.getSettings().setTextSize(WebSettings.TextSize.NORMAL);
+        }
+
+        if (isPageZoomEnabled) {
+            mWebView.getSettings().setSupportZoom(true);
+            mWebView.getSettings().setBuiltInZoomControls(true);
+        } else {
+            mWebView.getSettings().setSupportZoom(false);
+            mWebView.getSettings().setBuiltInZoomControls(false);
+        }
+		
+		if (isTextWrapEnabled) {
+            mWebView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        } else {
+            mWebView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NORMAL);
+        }
+		
+		if (isImagesDnlEnabled) {
+            mWebView.getSettings().setDomStorageEnabled(false);
+            mWebView.getSettings().setLoadsImagesAutomatically(false);
+        } else {
+            mWebView.getSettings().setDomStorageEnabled(true);
+            mWebView.getSettings().setLoadsImagesAutomatically(true);
+        }
 		
 		mWebView.setWebViewClient(new WebViewClient() {
 			

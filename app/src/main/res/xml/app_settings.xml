@@ -22,6 +22,39 @@
 		android:defaultValue="false"
 		android:enabled="false"/>
 	
+	<!-- Content -->
+	<ru.devreader.app.ui.preference.CategoryPreference
+		android:title="@string/pref_content_category"/>
+
+	<SwitchPreference
+		android:icon="@android:color/transparent"
+		android:key="content.imagesDnl"
+		android:title="@string/pref_content_images_dnl"
+		android:summary="@string/pref_content_images_dnl_summary"
+		android:defaultValue="false"
+		android:enabled="true"/>
+	
+	<SwitchPreference
+		android:icon="@android:color/transparent"
+		android:key="content.largerFont"
+		android:title="@string/pref_content_larger_font"
+		android:defaultValue="false"
+		android:enabled="true"/>
+	
+	<SwitchPreference
+		android:icon="@android:color/transparent"
+		android:key="content.textWrap"
+		android:title="@string/pref_content_text_wrap"
+		android:defaultValue="false"
+		android:enabled="true"/>
+	
+	<SwitchPreference
+		android:icon="@android:color/transparent"
+		android:key="content.pageZoom"
+		android:title="@string/pref_content_page_zoom"
+		android:defaultValue="false"
+		android:enabled="true"/>
+	
 	<!-- More -->
 	<ru.devreader.app.ui.preference.CategoryPreference
 		android:title="@string/pref_more_category"/>

@@ -10,6 +10,14 @@
 	<string name="pref_ui_page_title">Заголовок страницы</string>
 	<string name="pref_ui_page_title_summary">Отображать небольшой блок вверху экрана с названием текущей открытой страницы?</string>
 	
+	<!-- Content -->
+	<string name="pref_content_category">Контент</string>
+	<string name="pref_content_images_dnl">Не загружать изображения</string>
+	<string name="pref_content_images_dnl_summary">Загрузка графического содержимого справочника может сильно нагружать сеть и расходовать трафик. Хотите отключить загрузку изображений?</string>
+	<string name="pref_content_larger_font">Увеличенный шрифт</string>
+	<string name="pref_content_text_wrap">Перенос текста</string>
+	<string name="pref_content_page_zoom">Зум страницы</string>
+	
 	<!-- OTA -->
 	<string name="pref_ota_category">Обновление приложения</string>
 	<string name="pref_ota_check">Проверить вручную</string>
