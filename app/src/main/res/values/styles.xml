@@ -28,9 +28,6 @@
 		<item name="android:background">@android:color/transparent</item>
 		<item name="android:colorPrimary">?colorPrimary</item>
 		<item name="android:colorAccent">@color/colorAccent</item>
-		<!--item name="android:colorAccent">#FFFF0000</item>
-		<item name="android:textColor">#FF4665EF</item>
-		<item name="android:textColorPrimary">#FFDBE500</item-->
 	</style>
 	
 	<style name="AppTheme.NoActionBar" parent="AppTheme">
