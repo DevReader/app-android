@@ -1,7 +1,7 @@
 {
-	"apkUrl": "https://github.com/devreader/app-android/releases/download/210111/app-beta.apk",
-	"changelogUrl": "https://github.com/devreader/app-android/releases/tag/210111",
-	"versionName": "21.2-beta",
-	"versionCode": 210111,
-	"updateMessage": "Третья версия приложения для публичного тестирования, в которой проделана работа по улучшению производительности приложения и стабильности. Также были внедрены исчезающие кнопки навигации, из-за которых была убрана настройка включения прозрачности. А также появилась кнопка для перехода к началу страницы."
+	"apkUrl": "https://github.com/devreader/app-android/releases/download/210219/app-beta.apk",
+	"changelogUrl": "https://github.com/devreader/app-android/releases/tag/210219",
+	"versionName": "21.3-beta",
+	"versionCode": 210219,
+	"updateMessage": "В текущем релизе было добавлено небольшое количество новый функций и возможностей, был доработан интерфейс и исправлены некоторые баги. Также была улучшена производительность и скорость загрузки статей, а ещё была улучшена работа кеширования станиц для быстрой отрисовки с минимальной задержкой."
 }
