@@ -4,6 +4,7 @@ package ru.devreader.app.util;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.ComponentName;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -19,6 +20,9 @@ import android.net.Uri;
 
 import android.support.annotation.ColorInt;
 import android.support.customtabs.CustomTabsIntent;
+import android.support.annotation.NonNull;
+import android.support.customtabs.CustomTabsServiceConnection;
+import android.support.customtabs.CustomTabsClient;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -199,7 +203,7 @@ public class AppUtils {
 	// ? Переход по ссылкам
 	public static void openURL(Context context, String link) {
 
-		if (AppUtils.isAppInstalled(context, "com.android.chrome")) {
+		if (AppUtils.isAppInstalled(context, "com.android.chrome") && AppUtils.isChromeCustomTabsSupported(context)) {
 			
 			Uri uri = Uri.parse(link);
 			
@@ -224,5 +228,26 @@ public class AppUtils {
 		}
 
 	}
+	
+	// ? Проверка поддержки Chrome Custom Tabs
+	public static boolean isChromeCustomTabsSupported(@NonNull final Context context) {
+		
+        Intent i = new Intent("android.support.customtabs.action.CustomTabsService");
+		
+        i.setPackage("com.android.chrome");
+
+        CustomTabsServiceConnection tabsServiceConnection = new CustomTabsServiceConnection() {
+			
+            public void onCustomTabsServiceConnected(final ComponentName componentName, final CustomTabsClient customTabsClient) { }
+            public void onServiceDisconnected(final ComponentName name) { }
+			
+        };
+
+        boolean customTabsSupported = context.bindService(i, tabsServiceConnection, Context.BIND_AUTO_CREATE | Context.BIND_WAIVE_PRIORITY); 
+		context.unbindService(tabsServiceConnection);
+
+        return customTabsSupported;
+		
+    }
 	
 }
