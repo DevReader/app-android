@@ -10,7 +10,6 @@ import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
 
 import android.graphics.Color;
-import android.support.annotation.ColorInt;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -18,10 +17,14 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 
-import java.io.File;
+import android.support.annotation.ColorInt;
+import android.support.customtabs.CustomTabsIntent;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+import ru.devreader.app.R;
 
 public class AppUtils {
 	
@@ -196,10 +199,28 @@ public class AppUtils {
 	// ? Переход по ссылкам
 	public static void openURL(Context context, String link) {
 
-		Intent i = new Intent(Intent.ACTION_VIEW);
-		i.setData(Uri.parse(link));
-		i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		context.startActivity(i);
+		if (AppUtils.isAppInstalled(context, "com.android.chrome")) {
+			
+			Uri uri = Uri.parse(link);
+			
+			CustomTabsIntent.Builder tabsIntentBuilder = new CustomTabsIntent.Builder();
+			
+			tabsIntentBuilder.setToolbarColor(context.getColor(R.color.colorPrimary));
+			tabsIntentBuilder.setSecondaryToolbarColor(context.getColor(R.color.colorPrimaryDark));
+			tabsIntentBuilder.setShowTitle(true);
+			
+			CustomTabsIntent tabsIntent = tabsIntentBuilder.build();
+			
+			tabsIntent.launchUrl(context, uri);
+			
+		} else {
+			
+			Intent i = new Intent(Intent.ACTION_VIEW);
+			i.setData(Uri.parse(link));
+			i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			context.startActivity(i);
+			
+		}
 
 	}
 	
