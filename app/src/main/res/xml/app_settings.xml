@@ -172,6 +172,11 @@
 			android:key="dbg.appCacheDelete"
 			android:title="Delete app cache"/>
 
+		<SwitchPreference
+			android:key="dbg.renderPriorityHigh"
+			android:title="High Render Priority"
+			android:defaultValue="true"/>
+		
     </PreferenceScreen>
 
 	<ru.devreader.app.ui.preference.PromtPreference 

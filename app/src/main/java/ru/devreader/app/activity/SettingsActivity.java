@@ -19,8 +19,9 @@ import ru.devreader.app.R;
 import ru.devreader.app.task.OTACheckTask;
 import ru.devreader.app.util.AppUtils;
 import ru.devreader.app.util.SysUtils;
+import android.widget.BaseAdapter;
 
-public class SettingsActivity extends PreferenceActivity {
+public class SettingsActivity extends PreferenceActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 
 	ListView mListView;
 	
@@ -43,6 +44,7 @@ public class SettingsActivity extends PreferenceActivity {
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		
 		mSharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+		mSharedPrefs.registerOnSharedPreferenceChangeListener(this);
 		mSharedPrefsEditor = mSharedPrefs.edit();
 		
 		uiFabScroll = findPreference("ui.fabScroll");
@@ -121,6 +123,15 @@ public class SettingsActivity extends PreferenceActivity {
 		}
 
 		return super.onPreferenceTreeClick(prefScreen, pref);
+
+	}
+	
+	@Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPrefs, String key) {
+
+		/*if (key.equals("")) {
+            //
+        }*/
 
 	}
 

@@ -14,6 +14,7 @@ import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
+import android.annotation.TargetApi;
 
 import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.FloatingActionButton;
@@ -33,7 +34,6 @@ import ru.devreader.app.R;
 import ru.devreader.app.activity.MainActivity;
 import ru.devreader.app.task.OTACheckTask;
 import ru.devreader.app.util.AppUtils;
-import android.annotation.TargetApi;
 
 public class MainActivity extends AppCompatActivity {
 	
@@ -52,7 +52,8 @@ public class MainActivity extends AppCompatActivity {
 			dbg_webViewCache, 
 			dbg_injectJs, 
 			dbg_shouldOverrideUrlLoadingV2,
-			dbg_showLoadUrl;
+			dbg_showLoadUrl,
+			dbg_renderPriorityHigh;
 			
 	boolean isOtaAutoCheckEnabled,
 			isExitDialogEnabled,
@@ -197,6 +198,7 @@ public class MainActivity extends AppCompatActivity {
 		dbg_injectJs = mSharedPrefs.getBoolean("dbg.injectJs", false);
 		dbg_shouldOverrideUrlLoadingV2 = mSharedPrefs.getBoolean("dbg.shouldOverrideUrlLoadingV2", true);
 		dbg_showLoadUrl = mSharedPrefs.getBoolean("dbg.showLoadUrl", false);
+		dbg_renderPriorityHigh = mSharedPrefs.getBoolean("dbg.renderPriorityHigh", true);
 		
 		isImagesDnlEnabled = mSharedPrefs.getBoolean("content.imagesDnl", false);
 		isLargerFontEnabled = mSharedPrefs.getBoolean("content.largerFont", false);
@@ -211,11 +213,17 @@ public class MainActivity extends AppCompatActivity {
 		// ? Получение доступа к настройке
 		WebSettings WebViewSettings = mWebView.getSettings();
 		WebViewSettings.setDefaultTextEncodingName("utf-8"); // ? Кодировка докум-тов
-		WebViewSettings.setRenderPriority(WebSettings.RenderPriority.HIGH);
 		WebViewSettings.setAppCachePath(getCacheDir().getAbsolutePath());
 		WebViewSettings.setLoadWithOverviewMode(true);
 		WebViewSettings.setAllowContentAccess(true);
         WebViewSettings.setAllowFileAccess(true);
+		
+		// ? Если настройка "High Render Priority" активна
+		if (dbg_renderPriorityHigh) {
+			WebViewSettings.setRenderPriority(WebSettings.RenderPriority.HIGH);
+		} else {
+			WebViewSettings.setRenderPriority(WebSettings.RenderPriority.LOW);
+		}
 		
 		// ? Если настройка "JavaScript support" активна
 		if (dbg_javaScript) {
