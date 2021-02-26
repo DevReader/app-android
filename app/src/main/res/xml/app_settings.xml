@@ -120,6 +120,12 @@
 		android:title="@string/pref_info_app_dev"
 		android:summary="@string/app_author"/>
 	
+	<Preference
+		android:icon="@android:color/transparent"
+		android:key="info.tgChannel"
+		android:title="@string/pref_info_tg"
+		android:summary="@string/pref_info_tg_summary"/>
+	
 	<!-- EXPERIMENTAL -->
 	<ru.devreader.app.ui.preference.BorderPreference />
 	<ru.devreader.app.ui.preference.CategoryPreference
@@ -176,6 +182,11 @@
 			android:key="dbg.renderPriorityHigh"
 			android:title="High Render Priority"
 			android:defaultValue="true"/>
+		
+		<SwitchPreference
+			android:key="dbg.showWebViewErrLog"
+			android:title="Show WebView «onReceivedError» log"
+			android:defaultValue="false"/>
 		
     </PreferenceScreen>
 

@@ -56,7 +56,8 @@ public class MainActivity extends AppCompatActivity {
 			dbg_injectJs, 
 			dbg_shouldOverrideUrlLoadingV2,
 			dbg_showLoadUrl,
-			dbg_renderPriorityHigh;
+			dbg_renderPriorityHigh,
+			dbg_showWebViewErrLog;
 			
 	boolean isOtaAutoCheckEnabled,
 			isExitDialogEnabled,
@@ -220,6 +221,7 @@ public class MainActivity extends AppCompatActivity {
 		dbg_shouldOverrideUrlLoadingV2 = mSharedPrefs.getBoolean("dbg.shouldOverrideUrlLoadingV2", true);
 		dbg_showLoadUrl = mSharedPrefs.getBoolean("dbg.showLoadUrl", false);
 		dbg_renderPriorityHigh = mSharedPrefs.getBoolean("dbg.renderPriorityHigh", true);
+		dbg_showWebViewErrLog = mSharedPrefs.getBoolean("dbg.showWebViewErrLog", false);
 		
 		isImagesDnlEnabled = mSharedPrefs.getBoolean("content.imagesDnl", false);
 		isLargerFontEnabled = mSharedPrefs.getBoolean("content.largerFont", false);
@@ -368,6 +370,10 @@ public class MainActivity extends AppCompatActivity {
 				
 				// ! net::ERR_INTERNET_DISCONNECTED
 				if (errCode == -2) {}
+				
+				if (dbg_showWebViewErrLog) {
+					AppUtils.showToast(getApplicationContext(), log);
+				}
 				
 			}
 			

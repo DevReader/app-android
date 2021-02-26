@@ -118,6 +118,10 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
 				AppUtils.openURL(this, "https://t.me/rx1310_dev");
 				break;
 				
+			case "info.tgChannel":
+				AppUtils.openURL(this, "https://t.me/devreader");
+				break;
+				
 			default: break;
 
 		}
@@ -162,33 +166,5 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
 		}
 
 	}
-	
-	public boolean onCreateOptionsMenu(Menu mMenu) {
-
-		getMenuInflater().inflate(R.menu.settings, mMenu);
-
-		return super.onCreateOptionsMenu(mMenu);
-
-	}
-
-    public boolean onOptionsItemSelected(MenuItem mMenuItem) {
-
-        int id = mMenuItem.getItemId();
-
-        switch(id) {
-
-			case android.R.id.home:
-				finish();
-				return true;
-
-            case R.id.menu_settings_telegram:
-				AppUtils.openURL(this, "https://t.me/devreader");
-				return true;
-
-        }
-
-        return super.onOptionsItemSelected(mMenuItem);
-
-    }
 
 }

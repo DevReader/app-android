@@ -42,7 +42,10 @@
 	<string name="pref_info_app_promt">Дата установки: %1$s\nДата посл. обновления: %2$s</string>
 	<string name="pref_info_app_version">Версия приложения</string>
 	<string name="pref_info_app_github">GitHub</string>
-	<string name="pref_info_app_github_summary">Исходный код приложения распространяется под лицензией MIT License.</string>
+	<string name="pref_info_app_github_summary">Исходный код приложения распространяется под лицензией MIT License</string>
 	<string name="pref_info_app_dev">Разработчик приложения</string>
+	<string name="pref_info_tg">Telegram</string>
+	<string name="pref_info_tg_summary">Подпишись на канал @devreader, чтобы быть в курсе всех новостей по проекту!</string>
+	<!--string name="pref_info_fourpda">Тема на 4PDA.ru</string-->
 	
 </resources>
