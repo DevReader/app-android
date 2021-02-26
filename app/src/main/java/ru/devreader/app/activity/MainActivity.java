@@ -360,6 +360,9 @@ public class MainActivity extends AppCompatActivity {
 				// ? Отобразим заглушку
 				mErrorDummy.setVisibility(View.VISIBLE);
 				
+				// ? Изменим текст Page Title
+				mPageTitle.setText("🤷");
+				
 				// Перемена переменной
 				isPageLoadError = true;
 				
@@ -399,7 +402,7 @@ public class MainActivity extends AppCompatActivity {
 					AppUtils.Log(MainActivity.this, "i", "nProgress < 100");
 					
 					mLoadingDummy.setVisibility(View.VISIBLE);
-					mPageTitle.setText("• • •");
+					mPageTitle.setText("💆");
 					
 				} else if (nProgress == 100) {
 					
