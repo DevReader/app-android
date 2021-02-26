@@ -208,6 +208,7 @@ public class AppUtils {
 			tabsIntentBuilder.setToolbarColor(context.getColor(R.color.colorPrimary));
 			tabsIntentBuilder.setSecondaryToolbarColor(context.getColor(R.color.colorPrimaryDark));
 			tabsIntentBuilder.setShowTitle(true);
+			tabsIntentBuilder.addDefaultShareMenuItem();
 			
 			CustomTabsIntent tabsIntent = tabsIntentBuilder.build();
 			
