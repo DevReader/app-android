@@ -12,6 +12,8 @@
 	<!-- Error Page / m2 -->
 	<string name="err_m2_title">Oops.</string>
 	<string name="err_m2_desc">Ошибка загрузки. Проверьте подключение к сети и повторите попытку.</string>
+	<string name="err_m2_tip_title">Попробуйте сделать следующее:</string>
+	<string name="err_m2_tip">— Отключите режим полета.\n— Включите Wi-Fi или мобильный Интернет.\n— Проверьте уровень сигнала сети.</string>
 	<string name="err_m2_action_start2048">1024 + 1024 = ?</string>
 	<string name="err_m2_action_repeat">Повторить попытку</string>
 	
