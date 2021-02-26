@@ -20,7 +20,7 @@
 		android:title="@string/pref_ui_page_title"
 		android:summary="@string/pref_ui_page_title_summary"
 		android:defaultValue="false"
-		android:enabled="false"/>
+		android:enabled="true"/>
 	
 	<!-- Content -->
 	<ru.devreader.app.ui.preference.CategoryPreference

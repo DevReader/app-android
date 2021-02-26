@@ -34,6 +34,7 @@ import ru.devreader.app.R;
 import ru.devreader.app.activity.MainActivity;
 import ru.devreader.app.task.OTACheckTask;
 import ru.devreader.app.util.AppUtils;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 	
@@ -44,7 +45,9 @@ public class MainActivity extends AppCompatActivity {
 	WebView mWebView;
 	FloatingActionButton mFabBack, mFabHome, mFabScrollToTop;
 	BottomSheetDialog mDialogMenu;
-	LinearLayout mLoadingDummy, mErrorDummy;
+	LinearLayout mLoadingDummy,
+				 mErrorDummy,
+				 mPageTitleContainer;
 	
 	boolean isPageLoadError = false;
 	
@@ -62,9 +65,12 @@ public class MainActivity extends AppCompatActivity {
 			isImagesDnlEnabled,
 			isPageZoomEnabled,
 			isLargerFontEnabled,
-			isTextWrapEnabled;
+			isTextWrapEnabled,
+			isPageTitleEnabled;
 			
 	String isLastRememberedPage;
+	
+	TextView mPageTitle;
 			
 	SharedPreferences mSharedPrefs;
 	SharedPreferences.Editor mSharedPrefsEditor;
@@ -96,6 +102,12 @@ public class MainActivity extends AppCompatActivity {
 		
 		// ? Заглушка при ошибке загрузки страницы
 		mErrorDummy = findViewById(R.id.el_dummyError_m2);
+		
+		// ? Заголовок страницы
+		mPageTitle = findViewById(R.id.el_pageTitle);
+		
+		// ? LL, в котором находится заголовок страницы
+		mPageTitleContainer = findViewById(R.id.el_pageTitleContainer);
 		
 		// ? Настройка FAB Back&Reload
 		mFabBack = findViewById(R.id.el_fabBack);
@@ -155,12 +167,20 @@ public class MainActivity extends AppCompatActivity {
 		
 		// ? Prefs
 		isHideFabOnScrollEnabled = mSharedPrefs.getBoolean("ui.fabScroll", false);
+		isPageTitleEnabled = mSharedPrefs.getBoolean("ui.pageTitle", false);
 		
 		// ? Исчезающие кнопки навигации
 		if (isHideFabOnScrollEnabled) {
 			hideFabOnScroll(true);
 		} else {
 			hideFabOnScroll(false);
+		}
+		
+		// ? Состояние видимости заголовка сираницы
+		if (isPageTitleEnabled) {
+			mPageTitleContainer.setVisibility(View.VISIBLE);
+		} else {
+			mPageTitleContainer.setVisibility(View.GONE);
 		}
 		
 	}
@@ -376,7 +396,9 @@ public class MainActivity extends AppCompatActivity {
 				if (nProgress < 100 && mLoadingDummy.getVisibility() == View.GONE) {
 					
 					AppUtils.Log(MainActivity.this, "i", "nProgress < 100");
+					
 					mLoadingDummy.setVisibility(View.VISIBLE);
+					mPageTitle.setText("• • •");
 					
 				} else if (nProgress == 100) {
 					
@@ -396,7 +418,7 @@ public class MainActivity extends AppCompatActivity {
 			public void onReceivedTitle(WebView webView, String pageTitle) {
 				super.onReceivedTitle(webView, pageTitle);
 				if (!TextUtils.isEmpty(pageTitle)) {
-					//setTitle(pageTitle);
+					mPageTitle.setText(pageTitle);
 				}
 			}
 			
