@@ -10,7 +10,7 @@
 	android:gravity="center">
 
 	<ImageView
-		android:src="@drawable/ic_warning"
+		android:src="@drawable/ic_no_internet"
 		android:layout_width="100dp"
 		android:layout_height="100dp"
 		android:layout_marginBottom="20dp"
@@ -38,8 +38,7 @@
 		style="?android:attr/buttonBarButtonStyle"
 		android:layout_height="wrap_content"
 		android:text="@string/err_m2_action_repeat"
-		android:onClick="mWebViewPageReload"
-		android:drawableLeft="@drawable/ic_warning"/>
+		android:onClick="mWebViewPageReload"/>
 
 </LinearLayout>
 
