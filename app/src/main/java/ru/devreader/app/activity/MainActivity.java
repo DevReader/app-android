@@ -306,7 +306,8 @@ public class MainActivity extends AppCompatActivity {
 						return false;
 					} else {
 						// .., а если нет, то отправляем пользователя в браузер
-						webView.getContext().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+						//webView.getContext().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+						AppUtils.openURL(webView.getContext(), url);
 						return true;
 					}
 					
