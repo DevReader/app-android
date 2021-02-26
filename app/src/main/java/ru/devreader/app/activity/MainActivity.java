@@ -15,6 +15,7 @@ import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.annotation.TargetApi;
+import android.widget.TextView;
 
 import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.FloatingActionButton;
@@ -34,7 +35,6 @@ import ru.devreader.app.R;
 import ru.devreader.app.activity.MainActivity;
 import ru.devreader.app.task.OTACheckTask;
 import ru.devreader.app.util.AppUtils;
-import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 	
@@ -105,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
 		
 		// ? Заголовок страницы
 		mPageTitle = findViewById(R.id.el_pageTitle);
+		mPageTitle.setTextAppearance(android.R.style.TextAppearance_WindowTitle);
 		
 		// ? LL, в котором находится заголовок страницы
 		mPageTitleContainer = findViewById(R.id.el_pageTitleContainer);
