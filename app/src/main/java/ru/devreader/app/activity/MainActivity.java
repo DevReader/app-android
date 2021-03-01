@@ -371,7 +371,7 @@ public class MainActivity extends AppCompatActivity {
 				
 				// ? Инжектирование скрипта
 				if (dbg_injectJs) {
-					injectJs();
+					injectJs("showAppBox.js");
 				}
 				
 			}
@@ -508,18 +508,18 @@ public class MainActivity extends AppCompatActivity {
 	}
 	
 	// ? Инжектирование скрипта для взаимодействия со страницей
-	void injectJs() {
-		
+	void injectJs(String assetJsFileName) {
+
 		try {
-			
-			InputStream mInputStream = getAssets().open("script.js");
+
+			InputStream mInputStream = getAssets().open(assetJsFileName);
 			byte[] mBuffer = new byte[mInputStream.available()];
-			
+
 			mInputStream.read(mBuffer);
 			mInputStream.close();
-			
+
 			String mEncoded = Base64.encodeToString(mBuffer, Base64.NO_WRAP);
-			
+
 			mWebView.loadUrl("javascript:(function() {" +
 							 "var parent = document.getElementsByTagName('head').item(0);" +
 							 "var script = document.createElement('script');" +
@@ -527,21 +527,21 @@ public class MainActivity extends AppCompatActivity {
 							 "script.innerHTML = window.atob('" + mEncoded + "');" +
 							 "parent.appendChild(script)" +
 							 "})()");
-							 
-			
+
+
 			/*mWebView.loadUrl("javascript:(function() {" +
-							 "var parent = document.getElementsByTagName('head').item(0);" +
-							 "var style = document.createElement('style');" +
-							 "style.type = 'text/css';" +
-							 "style.innerHTML = window.atob('" + "styles.css" + "');" +
-							 "parent.appendChild(style)" +
-							 "})()");*/
-			
+			 "var parent = document.getElementsByTagName('head').item(0);" +
+			 "var style = document.createElement('style');" +
+			 "style.type = 'text/css';" +
+			 "style.innerHTML = window.atob('" + "styles.css" + "');" +
+			 "parent.appendChild(style)" +
+			 "})()");*/
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			AppUtils.Log(this, "e", "injectJs: " + e);
 		}
-		
+
 	}
 	
 	// ? 
