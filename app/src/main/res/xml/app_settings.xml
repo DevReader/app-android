@@ -14,14 +14,6 @@
 		android:defaultValue="false"
 		android:enabled="true"/>
 	
-	<SwitchPreference
-		android:icon="@android:color/transparent"
-		android:key="ui.pageTitle"
-		android:title="@string/pref_ui_page_title"
-		android:summary="@string/pref_ui_page_title_summary"
-		android:defaultValue="false"
-		android:enabled="true"/>
-	
 	<!-- Content -->
 	<ru.devreader.app.ui.preference.CategoryPreference
 		android:title="@string/pref_content_category"/>

@@ -41,9 +41,9 @@
 			android:alpha="0.8"/>
 
 		<Button
+			style="?android:attr/buttonBarButtonStyle"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			style="@style/Widget.AppCompat.Button.Colored"
 			android:onClick="mWebViewPageReload"
 			android:text="@string/err_m2_action_repeat"/>
 

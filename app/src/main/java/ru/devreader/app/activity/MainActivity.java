@@ -50,8 +50,7 @@ public class MainActivity extends AppCompatActivity {
 	
 	FrameLayout mErrorDummy;
 	
-	LinearLayout mLoadingDummy,
-				 mPageTitleContainer;
+	LinearLayout mLoadingDummy;
 	
 	boolean isPageLoadError = false;
 	
@@ -70,13 +69,10 @@ public class MainActivity extends AppCompatActivity {
 			isImagesDnlEnabled,
 			isPageZoomEnabled,
 			isLargerFontEnabled,
-			isTextWrapEnabled,
-			isPageTitleEnabled;
+			isTextWrapEnabled;
 			
 	String isLastRememberedPage;
 	
-	TextView mPageTitle;
-			
 	SharedPreferences mSharedPrefs;
 	SharedPreferences.Editor mSharedPrefsEditor;
 	
@@ -107,13 +103,6 @@ public class MainActivity extends AppCompatActivity {
 		
 		// ? Заглушка при ошибке загрузки страницы
 		mErrorDummy = findViewById(R.id.el_dummyError_m2);
-		
-		// ? Заголовок страницы
-		mPageTitle = findViewById(R.id.el_pageTitle);
-		mPageTitle.setTextAppearance(android.R.style.TextAppearance_WindowTitle);
-		
-		// ? LL, в котором находится заголовок страницы
-		mPageTitleContainer = findViewById(R.id.el_pageTitleContainer);
 		
 		// ? Настройка FAB Back&Reload
 		mFabBack = findViewById(R.id.el_fabBack);
@@ -173,20 +162,12 @@ public class MainActivity extends AppCompatActivity {
 		
 		// ? Prefs
 		isHideFabOnScrollEnabled = mSharedPrefs.getBoolean("ui.fabScroll", false);
-		isPageTitleEnabled = mSharedPrefs.getBoolean("ui.pageTitle", false);
 		
 		// ? Исчезающие кнопки навигации
 		if (isHideFabOnScrollEnabled) {
 			hideFabOnScroll(true);
 		} else {
 			hideFabOnScroll(false);
-		}
-		
-		// ? Состояние видимости заголовка сираницы
-		if (isPageTitleEnabled) {
-			mPageTitleContainer.setVisibility(View.VISIBLE);
-		} else {
-			mPageTitleContainer.setVisibility(View.GONE);
 		}
 		
 	}
@@ -366,9 +347,6 @@ public class MainActivity extends AppCompatActivity {
 				// ? Отобразим заглушку
 				mErrorDummy.setVisibility(View.VISIBLE);
 				
-				// ? Изменим текст Page Title
-				mPageTitle.setText("🤷");
-				
 				// Перемена переменной
 				isPageLoadError = true;
 				
@@ -412,7 +390,6 @@ public class MainActivity extends AppCompatActivity {
 					AppUtils.Log(MainActivity.this, "i", "nProgress < 100");
 					
 					mLoadingDummy.setVisibility(View.VISIBLE);
-					mPageTitle.setText("💆");
 					
 				} else if (nProgress == 100) {
 					
@@ -428,13 +405,13 @@ public class MainActivity extends AppCompatActivity {
 			}
 
 			// ? Получаем заголовок страницы
-			@Override
+			/*@Override
 			public void onReceivedTitle(WebView webView, String pageTitle) {
 				super.onReceivedTitle(webView, pageTitle);
 				if (!TextUtils.isEmpty(pageTitle)) {
-					mPageTitle.setText(pageTitle);
+					//
 				}
-			}
+			}*/
 			
 			// ? 
 			@Override
