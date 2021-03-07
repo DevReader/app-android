@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android">
-	
+
 	<!-- UI -->
 	<ru.devreader.app.ui.preference.CategoryPreference
 		android:title="@string/pref_ui_category"/>
-	
+
 	<SwitchPreference
 		android:icon="@android:color/transparent"
 		android:key="ui.fabScroll"
@@ -13,7 +13,7 @@
 		android:summary="@string/pref_ui_fab_scroll_summary"
 		android:defaultValue="false"
 		android:enabled="true"/>
-	
+
 	<!-- Content -->
 	<ru.devreader.app.ui.preference.CategoryPreference
 		android:title="@string/pref_content_category"/>
@@ -25,28 +25,21 @@
 		android:summary="@string/pref_content_images_dnl_summary"
 		android:defaultValue="false"
 		android:enabled="true"/>
-	
+
 	<SwitchPreference
 		android:icon="@android:color/transparent"
 		android:key="content.largerFont"
 		android:title="@string/pref_content_larger_font"
 		android:defaultValue="false"
 		android:enabled="true"/>
-	
-	<SwitchPreference
-		android:icon="@android:color/transparent"
-		android:key="content.textWrap"
-		android:title="@string/pref_content_text_wrap"
-		android:defaultValue="false"
-		android:enabled="true"/>
-	
+
 	<SwitchPreference
 		android:icon="@android:color/transparent"
 		android:key="content.pageZoom"
 		android:title="@string/pref_content_page_zoom"
 		android:defaultValue="false"
 		android:enabled="true"/>
-	
+
 	<!-- More -->
 	<ru.devreader.app.ui.preference.CategoryPreference
 		android:title="@string/pref_more_category"/>
@@ -59,13 +52,13 @@
 	<ru.devreader.app.ui.preference.PromtPreference
 		android:title="@string/promt_tip"
 		android:summary="@string/pref_more_a2iga_promt"/>
-	
+
 	<SwitchPreference
 		android:icon="@android:color/transparent"
 		android:key="more.showExitDialog"
 		android:title="@string/pref_more_show_exitdialog"
 		android:defaultValue="true"/>
-	
+
 	<!-- OTA -->
 	<ru.devreader.app.ui.preference.CategoryPreference
 		android:title="@string/pref_ota_category"/>
@@ -75,18 +68,18 @@
 		android:key="ota.check"
 		android:title="@string/pref_ota_check"
 		android:summary="@string/pref_ota_check_summary"/>
-	
+
 	<ru.devreader.app.ui.preference.PromtPreference
 		android:title="@string/promt_tip"
 		android:summary="@string/pref_ota_promt"/>
-	
+
 	<SwitchPreference
 		android:icon="@android:color/transparent"
 		android:key="ota.checkAuto"
 		android:title="@string/pref_ota_check_auto"
 		android:summary="@string/pref_ota_check_auto_summary"
 		android:defaultValue="false"/>
-	
+
 	<!-- APP INFO -->
 	<ru.devreader.app.ui.preference.CategoryPreference
 		android:title="@string/pref_info_app_category"/>
@@ -95,29 +88,29 @@
 		android:icon="@android:color/transparent"
 		android:key="info.appVersion"
 		android:title="@string/pref_info_app_version"/>
-	
+
 	<ru.devreader.app.ui.preference.PromtPreference
 		android:title="@string/promt_additional"
 		android:key="info.appInstallPromt"/>
-	
+
 	<Preference
 		android:icon="@android:color/transparent"
 		android:key="info.appSourceCode"
 		android:title="@string/pref_info_app_github"
 		android:summary="@string/pref_info_app_github_summary"/>
-	
+
 	<Preference
 		android:icon="@android:color/transparent"
 		android:key="info.appDev"
 		android:title="@string/pref_info_app_dev"
 		android:summary="@string/app_author"/>
-	
+
 	<Preference
 		android:icon="@android:color/transparent"
 		android:key="info.tgChannel"
 		android:title="@string/pref_info_tg"
 		android:summary="@string/pref_info_tg_summary"/>
-	
+
 	<!-- EXPERIMENTAL -->
 	<ru.devreader.app.ui.preference.BorderPreference />
 	<ru.devreader.app.ui.preference.CategoryPreference
@@ -129,14 +122,29 @@
 		android:title="@string/pref_more_last_page_remember"
 		android:summary="@string/pref_more_last_page_remember_summary"
 		android:defaultValue="true"/>
-	
+
 	<!-- Debug -->
 	<PreferenceScreen
 		android:key="dbg.screen"
         android:icon="@android:color/transparent"
         android:title="Debug settings"
 		android:summary="Settings for developer. Use carefully!">
-		
+
+		<Preference
+			android:key="dbg.firstStartPrefReset"
+			android:title="Reset first start pref"/>
+
+		<SwitchPreference
+			android:key="dbg.showLoadUrl"
+			android:title="Show load url"
+			android:defaultValue="false"/>
+
+		<Preference
+			android:key="dbg.appCacheDelete"
+			android:title="Delete app cache"/>
+
+		<PreferenceCategory android:title="WebView"/>
+
 		<SwitchPreference
 			android:key="dbg.js"
 			android:title="JavaScript"
@@ -152,38 +160,30 @@
 			android:title="Inject JS"
 			android:defaultValue="false"/>
 
-		<Preference
-			android:key="dbg.firstStartPrefReset"
-			android:title="Reset first start pref"/>
-
 		<SwitchPreference
 			android:key="dbg.shouldOverrideUrlLoadingV2"
 			android:title="Should override url loading (v2)"
 			android:defaultValue="true"/>
 
 		<SwitchPreference
-			android:key="dbg.showLoadUrl"
-			android:title="Show load url"
-			android:defaultValue="false"/>
-
-		<Preference
-			android:key="dbg.appCacheDelete"
-			android:title="Delete app cache"/>
-
-		<SwitchPreference
 			android:key="dbg.renderPriorityHigh"
 			android:title="High Render Priority"
 			android:defaultValue="true"/>
-		
+
 		<SwitchPreference
 			android:key="dbg.showWebViewErrLog"
 			android:title="Show WebView «onReceivedError» log"
 			android:defaultValue="false"/>
-		
+
+		<SwitchPreference
+			android:key="dbg.webViewTextWrap"
+			android:title="WebView text wrap"
+			android:defaultValue="false"/>
+
     </PreferenceScreen>
 
 	<ru.devreader.app.ui.preference.PromtPreference 
 		android:title="Installation info"
 		android:key="dbg.installationInfo"/>
-	
+
 </PreferenceScreen>

@@ -60,7 +60,8 @@ public class MainActivity extends AppCompatActivity {
 			dbg_shouldOverrideUrlLoadingV2,
 			dbg_showLoadUrl,
 			dbg_renderPriorityHigh,
-			dbg_showWebViewErrLog;
+			dbg_showWebViewErrLog,
+			dbg_webViewTextWrap;
 			
 	boolean isOtaAutoCheckEnabled,
 			isExitDialogEnabled,
@@ -68,8 +69,7 @@ public class MainActivity extends AppCompatActivity {
 			isLastPageRememberEnabled,
 			isImagesDnlEnabled,
 			isPageZoomEnabled,
-			isLargerFontEnabled,
-			isTextWrapEnabled;
+			isLargerFontEnabled;
 			
 	String isLastRememberedPage;
 	
@@ -207,11 +207,11 @@ public class MainActivity extends AppCompatActivity {
 		dbg_showLoadUrl = mSharedPrefs.getBoolean("dbg.showLoadUrl", false);
 		dbg_renderPriorityHigh = mSharedPrefs.getBoolean("dbg.renderPriorityHigh", true);
 		dbg_showWebViewErrLog = mSharedPrefs.getBoolean("dbg.showWebViewErrLog", false);
+		dbg_webViewTextWrap = mSharedPrefs.getBoolean("dbg.webViewTextWrap", false);
 		
 		isImagesDnlEnabled = mSharedPrefs.getBoolean("content.imagesDnl", false);
 		isLargerFontEnabled = mSharedPrefs.getBoolean("content.largerFont", false);
 		isPageZoomEnabled = mSharedPrefs.getBoolean("content.pageZoom", false);
-		isTextWrapEnabled = mSharedPrefs.getBoolean("content.textWrap", false);
 		
 		AppUtils.Log(this, "d", "Init WebView");
 
@@ -285,7 +285,7 @@ public class MainActivity extends AppCompatActivity {
             mWebView.getSettings().setBuiltInZoomControls(false);
         }
 		
-		if (isTextWrapEnabled) {
+		if (dbg_webViewTextWrap) {
             mWebView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         } else {
             mWebView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NORMAL);
