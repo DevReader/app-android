@@ -58,7 +58,14 @@
 		android:key="more.showExitDialog"
 		android:title="@string/pref_more_show_exitdialog"
 		android:defaultValue="true"/>
-
+	
+	<SwitchPreference
+		android:icon="@android:color/transparent"
+		android:key="more.lastPageRemember"
+		android:title="@string/pref_more_last_page_remember"
+		android:summary="@string/pref_more_last_page_remember_summary"
+		android:defaultValue="true"/>
+	
 	<!-- OTA -->
 	<ru.devreader.app.ui.preference.CategoryPreference
 		android:title="@string/pref_ota_category"/>
@@ -115,13 +122,6 @@
 	<ru.devreader.app.ui.preference.BorderPreference />
 	<ru.devreader.app.ui.preference.CategoryPreference
 		android:title="@string/pref_experimental_category"/>
-
-	<SwitchPreference
-		android:icon="@android:color/transparent"
-		android:key="more.lastPageRemember"
-		android:title="@string/pref_more_last_page_remember"
-		android:summary="@string/pref_more_last_page_remember_summary"
-		android:defaultValue="true"/>
 
 	<!-- Debug -->
 	<PreferenceScreen
