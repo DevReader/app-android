@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 	final String loadUrl = "https://" + "devreader.github.io" + "/";
 	
 	WebView mWebView;
-	FloatingActionButton mFabBack, mFabHome, mFabScrollToTop;
+	FloatingActionButton mFabBack, mFabReload, mFabHome, mFabScrollToTop;
 	BottomSheetDialog mDialogMenu;
 	
 	FrameLayout mErrorDummy;
@@ -125,6 +125,16 @@ public class MainActivity extends AppCompatActivity {
 				});
 				b.show();
 				return true;
+			}
+		});
+		
+		// ? Настройка FAB Reload
+		mFabReload = findViewById(R.id.el_fabReload);
+		mFabReload.hide();
+		mFabReload.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View mView) {
+				mWebViewPageReload(mWebView);
+				mFabReload.hide();
 			}
 		});
 		
@@ -346,6 +356,7 @@ public class MainActivity extends AppCompatActivity {
 				
 				// ? Отобразим заглушку
 				mErrorDummy.setVisibility(View.VISIBLE);
+				mFabReload.show();
 				
 				// Перемена переменной
 				isPageLoadError = true;
