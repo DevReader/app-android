@@ -186,8 +186,12 @@ public class MainActivity extends AppCompatActivity {
 		// ? Адаптация для левши
 		if (isLeftHandedEnabled) {
 			((FrameLayout.LayoutParams) mFabScrollToTop.getLayoutParams()).gravity = Gravity.LEFT|Gravity.CENTER;
+			((FrameLayout.LayoutParams) mFabBack.getLayoutParams()).gravity = Gravity.LEFT|Gravity.BOTTOM;
+			((FrameLayout.LayoutParams) mFabHome.getLayoutParams()).gravity = Gravity.RIGHT|Gravity.BOTTOM;
 		} else {
 			((FrameLayout.LayoutParams) mFabScrollToTop.getLayoutParams()).gravity = Gravity.RIGHT|Gravity.CENTER;
+			((FrameLayout.LayoutParams) mFabBack.getLayoutParams()).gravity = Gravity.RIGHT|Gravity.BOTTOM;
+			((FrameLayout.LayoutParams) mFabHome.getLayoutParams()).gravity = Gravity.LEFT|Gravity.BOTTOM;
 		}
 		
 	}
