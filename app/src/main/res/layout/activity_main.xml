@@ -72,6 +72,7 @@
 			android:layout_height="wrap_content"
 			android:src="@drawable/ic_page_top"
 			android:layout_gravity="right|center"
+			android:layout_margin="@dimen/ui_main_fab_margin"
 			app:fabSize="mini"
 			app:borderWidth="0dp"
 			app:elevation="4dp"
