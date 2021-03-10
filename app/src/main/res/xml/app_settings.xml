@@ -14,6 +14,13 @@
 		android:defaultValue="false"
 		android:enabled="true"/>
 
+	<SwitchPreference
+		android:icon="@android:color/transparent"
+		android:key="ui.leftHanded"
+		android:title="@string/pref_ui_lefthanded"
+		android:defaultValue="false"
+		android:enabled="true"/>
+	
 	<!-- Content -->
 	<ru.devreader.app.ui.preference.CategoryPreference
 		android:title="@string/pref_content_category"/>

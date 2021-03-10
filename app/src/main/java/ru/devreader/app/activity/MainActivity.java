@@ -37,6 +37,7 @@ import ru.devreader.app.R;
 import ru.devreader.app.activity.MainActivity;
 import ru.devreader.app.task.OTACheckTask;
 import ru.devreader.app.util.AppUtils;
+import android.view.Gravity;
 
 public class MainActivity extends AppCompatActivity {
 	
@@ -69,7 +70,8 @@ public class MainActivity extends AppCompatActivity {
 			isLastPageRememberEnabled,
 			isImagesDnlEnabled,
 			isPageZoomEnabled,
-			isLargerFontEnabled;
+			isLargerFontEnabled,
+			isLeftHandedEnabled;
 			
 	String isLastRememberedPage;
 	
@@ -172,12 +174,20 @@ public class MainActivity extends AppCompatActivity {
 		
 		// ? Prefs
 		isHideFabOnScrollEnabled = mSharedPrefs.getBoolean("ui.fabScroll", false);
+		isLeftHandedEnabled = mSharedPrefs.getBoolean("ui.leftHanded", false);
 		
 		// ? Исчезающие кнопки навигации
 		if (isHideFabOnScrollEnabled) {
 			hideFabOnScroll(true);
 		} else {
 			hideFabOnScroll(false);
+		}
+		
+		// ? Адаптация для левши
+		if (isLeftHandedEnabled) {
+			((FrameLayout.LayoutParams) mFabScrollToTop.getLayoutParams()).gravity = Gravity.LEFT|Gravity.CENTER;
+		} else {
+			((FrameLayout.LayoutParams) mFabScrollToTop.getLayoutParams()).gravity = Gravity.RIGHT|Gravity.CENTER;
 		}
 		
 	}
